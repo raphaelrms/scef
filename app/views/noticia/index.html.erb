@@ -1,0 +1,29 @@
+<h1>Listing noticia</h1>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Subtitulo</th>
+    <th>Tags</th>
+    <th>Corpo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @noticia.each do |noticia| %>
+  <tr>
+    <td><%= noticia.titulo %></td>
+    <td><%= noticia.subtitulo %></td>
+    <td><%= noticia.tags %></td>
+    <td><%= noticia.corpo %></td>
+    <td><%= link_to 'Show', noticia %></td>
+    <td><%= link_to 'Edit', edit_noticia_path(noticia) %></td>
+    <td><%= link_to 'Destroy', noticia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New noticia', new_noticia_path %>

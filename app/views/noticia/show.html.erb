@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Titulo:</b>
+  <%= @noticium.titulo %>
+</p>
+
+<p>
+  <b>Subtitulo:</b>
+  <%= @noticium.subtitulo %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%= @noticium.tags %>
+</p>
+
+<p>
+  <b>Corpo:</b>
+  <%= @noticium.corpo %>
+</p>
+
+
+<%= link_to 'Edit', edit_noticium_path(@noticium) %> |
+<%= link_to 'Back', noticia_path %>
