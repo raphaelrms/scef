@@ -1,8 +1,28 @@
-<h2>Sign in</h2>
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
-  <%= f.input :email, :autofocus => true %>
-  <%= f.input :password %>
-  <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
+
+<br>
+<%= form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal' } do |f| %>
+    <div class="form-group">
+
+  <div class="form-group">
+  <%= f.label :email %>
+  <%= f.text_field :email, :autofocus => true, :class => "form-control",:placeholder => "Digite seu e-mail cadastrado", :style => "width: 20%"%>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :password, "Senha" %>
+  <%= f.password_field :password, :class => "form-control", :placeholder => "Digite sua senha",:style => "width: 20%" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.check_box :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+    <%= f.label :remember_me, "Mantenha-me logado", :style => "margin-top:7px;" %>
+  </div>
+
+
+    </div>
+    <div class="form-actions">
+  <%= f.submit "Acessar", :class => 'btn-primary' %>
+</div>
 <% end %>
+<br>
 <%= render "devise/shared/links" %>
