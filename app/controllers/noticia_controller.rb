@@ -9,7 +9,7 @@ class NoticiaController < ApplicationController
     @noticia = Noticia.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # home.html.erb
       format.json { render json: @noticia }
     end
   end

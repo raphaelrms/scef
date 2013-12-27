@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20131226195625) do
 
   add_index "noticias", ["user_id"], :name => "noticias_user_id_fk"
 
+  create_table "perfils", :force => true do |t|
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "permissions", :force => true do |t|
     t.string   "action"
     t.string   "subject_class"

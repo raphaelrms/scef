@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     @current_permissions = current_user.role.permissions.collect{|i| [i.subject_class, i.action]}
   end
 
+  def home
+    @users = User.all
+  end
+
 end

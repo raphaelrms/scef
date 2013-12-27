@@ -1,11 +1,16 @@
 RailsPadrao::Application.routes.draw do
-  resources :noticia
-  root :to => "home#index"
 
+
+  root :to => 'application#home'
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'application#home'
   end
+
+  resources :noticia
 
   devise_for :users
   resources :users
+
+
+
 end
