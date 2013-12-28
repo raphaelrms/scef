@@ -1,4 +1,10 @@
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Login</li>
+</ol>
 
+<%= painel_titulo("Acesse sua conta").html_safe %>
+<div class="panel-body">
 <br>
 <%= form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal' } do |f| %>
     <div class="form-group">
@@ -26,3 +32,4 @@
 <% end %>
 <br>
 <%= render "devise/shared/links" %>
+</div>

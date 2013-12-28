@@ -14,25 +14,21 @@
 
       <%= render "layouts/navbar"%>
 
-      <%= render "home/login"%>
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#">Acessar conta</a></li>
-      </ul>
-
-      <div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;">
-        <div style="margin-left: 50px;margin-bottom: 10px;">
-
-
+      <!--<div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;">
+        <div style="margin-left: 50px;margin-bottom: 10px;">-->
           <%= yield %>
-        </div>
-      </div>
+        <!--</div>
+      </div>-->
     </div>
-
 
   </div>
-  <div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;margin-top: 20px;">
+  <!--<div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;margin-top: 20px;">-->
+<div class="panel-footer">
   <%= render "layouts/footer"%>
     </div>
+  <!--Fechando div do painel-body -->
+</div>
+
 </div>
 </body>
 </html>

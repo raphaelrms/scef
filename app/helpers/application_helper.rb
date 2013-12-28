@@ -12,4 +12,11 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def painel_titulo(titulo = nil)
+    return '<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">' + titulo + '</h3>
+  </div>'.html_safe
+  end
+
 end
