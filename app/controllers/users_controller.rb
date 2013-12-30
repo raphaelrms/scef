@@ -11,8 +11,26 @@ class UsersController < ApplicationController
   end
 
   def edit
+    #if current_user.overpower?
+    #  @user = User.find(params[:id])
+    #else
+    #  @user = current_user
+    #end
+
     @user = User.find(params[:id])
-    render "registrations/edit"
+    render "devise/registrations/edit"
+  end
+
+  def atualiza_usuario_com_senha
+    @user = User.find(params[:id])
+    if @user.update_with_password(params[:user])
+      # Sign in the user by passing validation in case his password changed
+      sign_in @user, :bypass => true
+      redirect_to root_path
+    else
+      flash.now[:error] = "Senha inválida"
+      render "devise/registrations/edit"
+    end
   end
   
   def update

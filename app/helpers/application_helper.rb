@@ -23,4 +23,37 @@ module ApplicationHelper
     return '<a href="#" title="'+mensagem+'" class="tooltipa"><span title="More" class="glyphicon glyphicon-exclamation-sign">&nbsp</span></a>'.html_safe
   end
 
+  #bacalhau pro devise funcionar o edit decentemente
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def flash_message
+    messages = ""
+    [:notice, :info, :warning, :error].each {|type|
+      if flash[type]
+        case type
+          when "notice"
+            messages += "<p class=\"alert alert-info\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+          when "info"
+            messages += "<p class=\"alert alert-info\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+          when "warning"
+            messages += "<p class=\"alert alert-warning\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+          else
+            messages += "<p class=\"alert alert-danger\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+        end
+
+      end
+    }
+
+    messages
+  end
 end

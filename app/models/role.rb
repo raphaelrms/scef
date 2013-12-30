@@ -5,4 +5,8 @@ class Role < ActiveRecord::Base
   has_and_belongs_to_many :permissions,  :join_table => :permissions_roles
   
   scopify
+
+  def overpower?
+    return true if self.name == "Admin"
+  end
 end

@@ -12,6 +12,7 @@
   <div class="row clearfix">
     <div class="col-md-12 column">
       <%= render 'layouts/navbar'%>
+      <%= flash_message.html_safe %>
       <%= yield %>
     </div>
   </div>
@@ -21,7 +22,6 @@
   </div>
 </div>
 <!--Fechando div do painel-body -->
-</div>
 
 </body>
 </html>

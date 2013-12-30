@@ -1,4 +1,4 @@
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><a href="<%= users_path%>">Usuários</a></li>
@@ -7,9 +7,8 @@
 
 <%= painel_titulo("Editar Conta").html_safe %>
 <div class="panel-body">
-  <p><%= link_to "Cancelar minha conta", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger", :style => "margin-left: 930px;"%></p>
-  <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' } do |f| %>
-
+  <p><%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger", :style => "margin-left: 930px;"%></p>
+  <%= form_for @user, :as => resource_name, :url => atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-vertical' } do |f| %>
       <div class="form-group">
         <%= f.label :name, "Nome*" %>
         <%= f.text_field :name, :autofocus => true,:placeholder => "Insira o nome completo"%><%= tooltip("Insira seu nome completo.").html_safe%>
@@ -42,6 +41,8 @@
         <%= f.submit "Atualizar", :class => 'btn-primary' %>
       </div>
   <% end %>
+</div>
+</div>
 
   <script type="text/javascript">
       $( document ).ready(function() {
