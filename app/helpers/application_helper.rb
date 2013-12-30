@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def tooltip(mensagem = nil)
-    return '<a href="#" title="'+mensagem+'" class="tooltipa"><span title="More" class="glyphicon glyphicon-exclamation-sign"></span></a>'.html_safe
+    return '<a href="#" title="'+mensagem+'" class="tooltipa"><span title="More" class="glyphicon glyphicon-exclamation-sign">&nbsp</span></a>'.html_safe
   end
 
 end

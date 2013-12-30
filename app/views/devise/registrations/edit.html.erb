@@ -11,29 +11,29 @@
   <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' } do |f| %>
 
       <div class="form-group">
-        <%= f.label :name, "Nome" %>
-        <%= f.text_field :name, :autofocus => true,:placeholder => "Insira o nome completo"%>
+        <%= f.label :name, "Nome*" %>
+        <%= f.text_field :name, :autofocus => true,:placeholder => "Insira o nome completo"%><%= tooltip("Insira seu nome completo.").html_safe%>
       </div>
 
       <div class="form-group">
-        <%= f.label :email,  "E-mail", :placeholder => "Insira seu e-mail"%>
-        <%= f.text_field :email%><%= tooltip("E-mail é obrigatório").html_safe%>
+        <%= f.label :email,  "E-mail*", :placeholder => "Insira seu e-mail"%>
+        <%= f.text_field :email%><%= tooltip("Insira seu e-mail. Obrigatório.").html_safe%>
       </div>
 
       <div class="form-group">
-        <%= f.label :password, "Nova senha" %>
-        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :required => false  %>
+        <%= f.label :password, "Nova senha*" %>
+        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :required => false%>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, "Repita a nova senha" %>
+        <%= f.label :password_confirmation, "Repita a nova senha*" %>
         <%= f.password_field :password_confirmation, :required => false, :style => "form-control"  %>
       </div>
 
 
       <hr width="50%" align="left">
       <div class="form-group">
-        <%= f.label :current_password, "Senha atual" %>
+        <%= f.label :current_password, "Senha atual*" %>
         <%= f.password_field :current_password, :title => "Preencha somente se você alterou a senha atual",  :required => true, :style => "form-control"%><%= tooltip("Preencha somente se você alterou a senha atual").html_safe%>
       </div>
 
@@ -48,11 +48,21 @@
               //$("#edit_user").tooltipar();
 
       $( "#edit_user" ).validate({
+
           rules: {
               "user[email]": {
                   required: true,
                   email: true
               }
+          },
+          //O validate acabava alterando o class do input também. Isso faz com que deixe o form consistente, sem alterar
+          //o fundo e borda do input
+          highlight: function(element) {
+              $(element).before().removeClass('error');
+          },
+          //Inserir o erro após o icone do tooltip
+          errorPlacement: function(error, element) {
+              error.insertAfter(element.next());
           }
           });
 
