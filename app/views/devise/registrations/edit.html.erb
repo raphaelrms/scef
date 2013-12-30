@@ -1,14 +1,58 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
-  <%= f.error_notification %>
-  <%= display_base_errors resource %>
-  <%= f.input :name, :autofocus => true %>
-  <%= f.input :email, :required => true %>
-  <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-  <%= f.input :password_confirmation, :required => false %>
-  <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
-  <%= f.button :submit, 'Update', :class => 'btn-primary' %>
-<% end %>
-<h3>Cancel my account</h3>
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-<%= link_to "Back", :back %>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><a href="<%= users_path%>">Usuários</a></li>
+  <li class="active">Editar conta</li>
+</ol>
+
+<%= painel_titulo("Editar Conta").html_safe %>
+<div class="panel-body">
+  <p><%= link_to "Cancelar minha conta", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger", :style => "margin-left: 930px;"%></p>
+  <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' } do |f| %>
+
+      <div class="form-group">
+        <%= f.label :name, "Nome" %>
+        <%= f.text_field :name, :autofocus => true,:placeholder => "Insira o nome completo"%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email,  "E-mail", :placeholder => "Insira seu e-mail"%>
+        <%= f.text_field :email,:title => "aeeeee"%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, "Nova senha" %>
+        <%= f.password_field :password, :autocomplete => "off", :placeholder => "Deixe em branco caso não deseje mudar a senha atual", :required => false  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Repita a nova senha" %>
+        <%= f.password_field :password_confirmation, :required => false, :style => "form-control"  %>
+      </div>
+
+
+      <hr width="50%" align="left">
+      <div class="form-group">
+        <%= f.label :current_password, "Senha atual" %>
+        <%= f.password_field :current_password, :title => "Senha atual para confirmar a alteracão",  :required => true, :style => "form-control"%>
+      </div>
+
+      <br>
+      <div class="form-actions">
+        <%= f.submit "Atualizar", :class => 'btn-primary' %>
+      </div>
+  <% end %>
+  <script type="text/javascript">
+      $( document ).ready(function() {
+              $("#edit_user").tooltip();
+      $( "#edit_user" ).validate({
+          rules: {
+              "user[email]": {
+                  required: true,
+                  email: true
+              }
+          }
+          });
+
+      });
+  </script>

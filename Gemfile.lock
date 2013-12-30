@@ -206,7 +206,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   foreigner
-  jquery-rails
+  jquery-rails (= 3.0.4)
   launchy
   mysql2
   pry

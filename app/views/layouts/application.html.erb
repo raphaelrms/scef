@@ -11,24 +11,19 @@
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
-
-      <%= render "layouts/navbar"%>
-
-      <!--<div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;">
-        <div style="margin-left: 50px;margin-bottom: 10px;">-->
-          <%= yield %>
-        <!--</div>
-      </div>-->
+      <%= render 'layouts/navbar'%>
+      <%= yield %>
     </div>
-
   </div>
   <!--<div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;margin-top: 20px;">-->
-<div class="panel-footer">
-  <%= render "layouts/footer"%>
-    </div>
-  <!--Fechando div do painel-body -->
+  <div class="panel-footer" style="text-align:center;font-size:11px;">
+    <%= render 'layouts/footer'%>
+  </div>
+</div>
+<!--Fechando div do painel-body -->
 </div>
 
-</div>
 </body>
 </html>
+
+

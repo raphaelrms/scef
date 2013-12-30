@@ -14,8 +14,8 @@ module ApplicationHelper
 
   def painel_titulo(titulo = nil)
     return '<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">' + titulo + '</h3>
+  <div class="panel-heading" style="background-color: #6B8AB2;">
+    <h3 class="panel-title" style="color: white;">' + titulo + '</h3>
   </div>'.html_safe
   end
 
