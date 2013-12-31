@@ -1,9 +1,10 @@
 <% if user_signed_in? %>
-    <%= link_to "<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;\"></i>Logout".html_safe ,destroy_user_session_path, method: :delete%>
+    <%= link_to "<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;;margin-left: 69px\"></i>Logout".html_safe ,destroy_user_session_path, method: :delete%>
     <div style="color: white;
             margin-top: -12px;
-            margin-left: 35px;
             font-size: 11px;
+            margin-right: 15px;
+            text-align: right;
             }"><%= current_user.name%></div>
 <%else%>
     <%= link_to("<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;\"></i>Login".html_safe, new_user_session_path)  %>

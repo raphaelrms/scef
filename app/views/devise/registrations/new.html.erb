@@ -6,7 +6,26 @@
   <%= f.input :name, :autofocus => true %>
   <%= f.input :email, :required => true %>
   <%= f.input :password, :required => true %>
-  <%= f.input :password_confirmation, :required => true %>
+  <i <%= f.input :password_confirmation, :required => true %><%= tooltip("Obrigatório.").html_safe%>
   <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
 <% end %>
 <%= render "devise/shared/links" %>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        //$("#edit_user").tooltipar();
+
+        $( "#new_user" ).validate({
+            //O validate acabava alterando o class do input também. Isso faz com que deixe o form consistente, sem alterar
+            //o fundo e borda do input
+            highlight: function(element) {
+                $(element).before().removeClass('error');
+            },
+            //Inserir o erro após o icone do tooltip
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.next());
+            }
+        });
+
+    });
+</script>
