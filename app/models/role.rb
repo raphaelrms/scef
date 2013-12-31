@@ -9,4 +9,6 @@ class Role < ActiveRecord::Base
   def overpower?
     return true if self.name == "Admin"
   end
+
+
 end

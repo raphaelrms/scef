@@ -7,7 +7,6 @@
 <div class="panel-body">
 <br>
 <%= form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal' } do |f| %>
-    <div class="form-group">
 
   <div class="form-group">
   <%= f.label :email %>
@@ -25,12 +24,11 @@
   </div>
 
 
-    </div>
     <div class="form-actions">
   <%= f.submit "Acessar", :class => 'btn-primary' %>
+</div>
 </div>
 <% end %>
 <br>
 <%= render "devise/shared/links" %>
-
 </div>
