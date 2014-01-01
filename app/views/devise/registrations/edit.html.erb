@@ -6,7 +6,7 @@
 </ol>
 <%= painel_titulo("Editar Conta").html_safe %>
 <div class="panel-body">
-  <p><div style="display:inline"><%= exibe_erros(@user).html_safe if @user.errors.any?%><%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger", :style => "margin-left: 700px;"%></div></p>
+  <p><div style="display:inline"><%= exibe_erros(@user).html_safe if @user.errors.any?%><span style="text-align:right"><%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger"%></div></div></p>
   <%= form_for @user, :as => resource_name, :url => atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-vertical' } do |f| %>
 
       <div class="form-group">
@@ -21,19 +21,19 @@
 
       <div class="form-group">
         <%= f.label :password, "Nova senha*" %>
-        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :required => false%>
+        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :required => false%><%= tooltip("Campo destinado para definir uma nova senha.").html_safe%>
       </div>
 
       <div class="form-group">
         <%= f.label :password_confirmation, "Repita a nova senha*" %>
-        <%= f.password_field :password_confirmation, :required => false, :style => "form-control"  %>
+        <%= f.password_field :password_confirmation, :required => false, :style => "form-control", "data-validate" => "validate(confirmacao_senha)"  %><%= tooltip("Confirmacão da nova senha. Obrigatório, se o campo Nova Senha foi preenchido.").html_safe%>
       </div>
 
 
       <hr width="50%" align="left">
       <div class="form-group">
         <%= f.label :current_password, "Senha atual*" %>
-        <%= f.password_field :current_password, "data-validate" => "validate(required,minlength(3))"%><%= tooltip("Preencha somente se você alterou a senha atual").html_safe%>
+        <%= f.password_field :current_password, "data-validate" => "validate(required)"%><%= tooltip("Insira sua senha atual para confirmar as alteracões").html_safe%>
       </div>
 
       <br>
@@ -46,6 +46,17 @@
 
   <script type="text/javascript">
       $( document ).ready(function() {
-      $('#edit_user').ketchup();
+
+          $.ketchup.validation('confirmacao_senha', 'Se a nova senha foi preenchida, o campo de confirmacão é obrigatório.', function(form, el, value) {
+
+              if((value.length > 0) && ($("#user_password").length > 0)) {
+                  return true;
+              } else {
+                  return false;
+              }
+
+            });
+
+          $('#edit_user').ketchup();
       });
   </script>

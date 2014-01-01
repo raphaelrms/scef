@@ -106,7 +106,7 @@ pt-BR:
       accepted: deve ser aceito
       blank: não pode ficar em branco
       present: deve ficar em branco
-      confirmation: não está de acordo com a confirmação
+      confirmation: nova não é igual a confirmacão da nova senha.
       empty: não pode ficar vazio
       equal_to: deve ser igual a %{count}
       even: deve ser par
