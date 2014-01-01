@@ -50,24 +50,3 @@ jQuery.ketchup
     el.ketchup('validate');
   });
 });
-
-$.fn.ketchup.messages = {
-    'required':     'Esse campo é obrigatório.',
-    'select':       'Esse campo é obrigatório.',
-    'minlength':    'Mínimo de $arg1 caracteres.',
-    'maxlength':    'Máximo de $arg1 caracteres.',
-    'rangelength':  'This field must have a length between $arg1 and $arg2.',
-    'min':          'Must be at least $arg1.',
-    'max':          'Can not be greater than $arg1.',
-    'range':        'Must be between $arg1 and $arg2.',
-    'number':       'Somente nÃºmeros.',
-    'digits':       'Must be digits.',
-    'email':        'E-Mail invÃ¡lido.',
-    'url':          'Must be a valid URL.',
-    'username':     'Must be a valid username.',
-    'match':        'Must match the field above.',
-    'date':         'Must be a valid date.',
-    'minselect':    'Select at least $arg1 checkboxes.',
-    'maxselect':    'Select not more than $arg1 checkboxes.',
-    'rangeselect':  'Select between $arg1 and $arg2 checkboxes.'
-};

@@ -323,10 +323,11 @@
               container = opt.createErrorContainer(form, el);
               el.data(dataNames.container, container);
             }
-
-            opt.addErrorMessages(form, el, container, tasty);	        
+              el.parent().parent().removeClass("has-success").addClass("has-error")
+            opt.addErrorMessages(form, el, container, tasty);
             opt.showErrorContainer(form, el, container);
           } else {
+            el.parent().parent().removeClass("has-error").addClass("has-success");
             if(container){
               opt.hideErrorContainer(form, el, container);
             }
@@ -369,7 +370,6 @@
       
       if(el.data(dataNames.validations)) {
         var form = el.parentsUntil('form').last().parent();
-        
         return (this.validateElement(el, form) == true ? true : false);
       } else if(el.data(dataNames.elements)) {
         return this.allFieldsValid(el);
@@ -508,7 +508,7 @@
       if(typeof form == 'function') {
         this.defaults.showErrorContainer = form;
         return this;
-      } else {        
+      } else {
         container.show().animate({
           top    : el.offset().top - container.height(),
           opacity: 1

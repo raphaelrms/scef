@@ -6,38 +6,61 @@
 </ol>
 <%= painel_titulo("Editar Conta").html_safe %>
 <div class="panel-body">
-  <p><div style="display:inline"><%= exibe_erros(@user).html_safe if @user.errors.any?%><span style="text-align:right"><%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger"%></div></div></p>
-  <%= form_for @user, :as => resource_name, :url => atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-vertical' } do |f| %>
+<p class="col-md-pull-1 col-sm-pull-1" >
+    <%= exibe_erros(@user).html_safe if @user.errors.any?%>
+  <div class="col-md-offset-1">
+    <%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger"%>
+  </div>
+</p>
+
+  <%= form_for @user, :as => resource_name, :url => atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-horizontal' } do |f| %>
 
       <div class="form-group">
-        <%= f.label :name, "Nome*" %>
-        <%= f.text_field :name, :autofocus => true,:placeholder => "Insira o nome completo"%><%= tooltip("Insira seu nome completo.").html_safe%>
+        <%= f.label :name, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+        <%= f.text_field :name, :class => "form-control",:required => true, :autofocus => true,:title => "Nome completo deve ser fornecido",:placeholder => "Insira o nome completo"%>
+          <p class="help-block" style="font-size: 11px;">Insira seu nome. Obrigatório.</p>
+        </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :email,  "E-mail*", :placeholder => "Insira seu e-mail"%>
-        <%= f.text_field :email, "data-validate" => "validate(required,minlength(3))"%><%= tooltip("Insira seu e-mail. Obrigatório.").html_safe%>
+        <%= f.label :email,  "E-mail*:", :class => "col-xs-6 col-sm-3 col-md-2 control-label",:placeholder => "Insira seu e-mail"%>
+        <div class="col-sm-2 col-md-3">
+        <%= f.text_field :email, :class => "form-control", "data-validate" => "validate(required,email)"%>
+          <p class="help-block" style="font-size: 11px;">Insira seu e-mail. Obrigatório.</p>
+        </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :password, "Nova senha*" %>
-        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :required => false%><%= tooltip("Campo destinado para definir uma nova senha.").html_safe%>
+        <%= f.label :password, "Nova senha:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+        <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :class => "form-control", :required => false,"data-validate" => "validate(confirmacao_senha)"%>
+          <p class="help-block" style="font-size: 11px;">Digite sua nova senha, caso deseja mudar.</p>
+        </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, "Repita a nova senha*" %>
-        <%= f.password_field :password_confirmation, :required => false, :style => "form-control", "data-validate" => "validate(confirmacao_senha)"  %><%= tooltip("Confirmacão da nova senha. Obrigatório, se o campo Nova Senha foi preenchido.").html_safe%>
+        <%= f.label :password_confirmation, "Repita a nova senha:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+        <%= f.password_field :password_confirmation, :class => "form-control", :required => false, :class => "form-control", "data-validate" => "validate(confirmacao_senha)"  %>
+          <p class="help-block" style="font-size: 11px;">Confirme sua nova senha.</p>
+        </div>
       </div>
 
 
       <hr width="50%" align="left">
       <div class="form-group">
-        <%= f.label :current_password, "Senha atual*" %>
-        <%= f.password_field :current_password, "data-validate" => "validate(required)"%><%= tooltip("Insira sua senha atual para confirmar as alteracões").html_safe%>
+        <%= f.label :current_password, "Senha atual*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+        <%= f.password_field :current_password,:class => "form-control", "data-validate" => "validate(required)"%>
+          <p class="help-block" style="font-size: 11px;">Digite sua senha atual para confirmar as alteracões.</p>
+        </div>
+
       </div>
 
       <br>
       <div class="form-actions">
+
         <%= f.submit "Atualizar", :class => 'btn-primary' %>
       </div>
   <% end %>
@@ -47,15 +70,24 @@
   <script type="text/javascript">
       $( document ).ready(function() {
 
-          $.ketchup.validation('confirmacao_senha', 'Se a nova senha foi preenchida, o campo de confirmacão é obrigatório.', function(form, el, value) {
+          //$("#user_edit").tooltipar();
 
-              if((value.length > 0) && ($("#user_password").length > 0)) {
+          $.ketchup.validation('confirmacao_senha', 'Se a nova senha foi preenchida, o campo de confirmacão é obrigatório.', function(form, el, value) {
+              var a,b;
+              a = value.length;
+              b = $("#user_password").val().length;
+              //Uso de XOR em javascript. É muito mais rápido que outros operadores. #ficadica
+              if(a ^ b == 0) {
                   return true;
+
               } else {
                   return false;
+
               }
 
             });
+
+
 
           $('#edit_user').ketchup();
       });

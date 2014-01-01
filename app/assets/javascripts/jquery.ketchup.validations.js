@@ -38,31 +38,31 @@ jQuery.ketchup
   return this.isNumber(value);
 })
 
-.validation('digits', 'Must be digits.', function(form, el, value) {
+.validation('digits', 'Deve conter apenas dígitos.', function(form, el, value) {
   return /^\d+$/.test(value);
 })
 
-.validation('email', 'Must be a valid E-Mail.', function(form, el, value) {
+.validation('email', 'E-mail inválido.', function(form, el, value) {
   return this.isEmail(value);
 })
 
-.validation('url', 'Must be a valid URL.', function(form, el, value) {
+.validation('url', 'URL inválida.', function(form, el, value) {
   return this.isUrl(value);
 })
 
-.validation('username', 'Must be a valid username.', function(form, el, value) {
+.validation('username', 'Username inválido.', function(form, el, value) {
   return this.isUsername(value);
 })
 
-.validation('match', 'Must be {arg1}.', function(form, el, value, word) {
+.validation('match', 'Valor permitido: {arg1}.', function(form, el, value, word) {
   return (el.val() == word);
 })
 
-.validation('contain', 'Must contain {arg1}', function(form, el, value, word) {
+.validation('contain', 'Deve conter o valor: {arg1}', function(form, el, value, word) {
   return this.contains(value, word);
 })
 
-.validation('date', 'Must be a valid date.', function(form, el, value) {
+.validation('date', 'Formato de data inválido.', function(form, el, value) {
   return this.isDate(value);
 })
 
