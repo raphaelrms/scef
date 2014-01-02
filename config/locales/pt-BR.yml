@@ -106,7 +106,7 @@ pt-BR:
       accepted: deve ser aceito
       blank: não pode ficar em branco
       present: deve ficar em branco
-      confirmation: nova não é igual a confirmacão da nova senha.
+      confirmation: Confirmação da senha não confere.
       empty: não pode ficar vazio
       equal_to: deve ser igual a %{count}
       even: deve ser par
@@ -114,7 +114,7 @@ pt-BR:
       greater_than: deve ser maior que %{count}
       greater_than_or_equal_to: deve ser maior ou igual a %{count}
       inclusion: não está incluído na lista
-      invalid: não confere.
+      invalid: Valor inválido.
       less_than: deve ser menor que %{count}
       less_than_or_equal_to: deve ser menor ou igual a %{count}
       not_a_number: não é um número
@@ -124,7 +124,7 @@ pt-BR:
       restrict_dependent_destroy:
         one: "Não é possível excluir o registro pois existe um %{record} dependente"
         many: "Não é possível excluir o registro pois existem %{record} dependentes"
-      taken: já está em uso
+      taken: Valor já está em uso
       too_long: ! 'é muito longo (máximo: %{count} caracteres)'
       too_short: ! 'é muito curto (mínimo: %{count} caracteres)'
       wrong_length: não possui o tamanho esperado (%{count} caracteres)

@@ -29,6 +29,25 @@ module RailsPadrao
       g.helper_specs false
     end
 
+    ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+      unless html_tag =~ /^<label/
+        %{<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}" class="ketchup-error help-block" style="top: 0px;left: 270px;opacity: 1;width:100%;font-size:12px;color:#D63301;">#{instance.error_message.first}</label></div>}.html_safe
+      else
+        %{<div class="field_with_errors">#{html_tag}</div>}.html_safe
+      end
+    end
+
+
+
+    #ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+    #  if html_tag =~ /\<label/
+    #    html_tag
+    #  else
+    #    errors = Array(instance.error_message).join(',')
+    #    %(#{html_tag}<span class="validation-error">&nbsp;#{errors}</span>).html_safe
+    #  end
+    #end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -8,11 +8,22 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
+  validates :role, :presence => true
 
+  before_validation :grupo_padrao
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role_id
-  
+
+  def grupo_padrao
+    self.role ||= Role.where(:name => "Visitante").first
+  end
+
+
+
+
+
+
 end
 

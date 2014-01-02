@@ -4,8 +4,13 @@
 </ol>
 <%= painel_titulo("Usuário - #{@user.name}").html_safe %>
 <div class="panel-body">
-<p>Nome: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+
+  <div class="form-group">
+    <p><b>Nome:</b> <%= @user.name %></p>
+    <p><b>Email: </b><%= @user.email if @user.email %></p>
+    <p><b>Data de cadastro: </b><%= @user.created_at.to_date %></p>
+    <p><b>Grupo: </b><%= @user.roles.first.name.titleize unless @user.roles.first.nil? %></p>
+  </div>
 
 </div>
 </div>

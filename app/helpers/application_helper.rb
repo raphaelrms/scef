@@ -42,15 +42,15 @@ module ApplicationHelper
       if flash[type]
         case type
           when "notice"
-            messages += "<p class=\"alert alert-info\" style=\"text-align: center;\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+            messages += "<p class=\"alert alert-info alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "info"
-            messages += "<p class=\"alert alert-info\" style=\"text-align: center;\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+            messages += "<p class=\"alert alert-info alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "warning"
-            messages += "<p class=\"alert alert-warning\" style=\"text-align: center;\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+            messages += "<p class=\"alert alert-warning alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "error"
-            messages += "<p class=\"alert alert-danger\" style=\"text-align: center;\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+            messages += "<p class=\"alert alert-danger alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           else
-            messages += "<p class=\"alert alert-warning\" style=\"text-align: center;\"><a href=\"#\" class=\"alert-link\">#{flash[type]}</a></p>"
+            messages += "<p class=\"alert alert-warning alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
         end
 
       end
@@ -61,9 +61,13 @@ module ApplicationHelper
 end
 
 def exibe_erros(objeto)
+  erro = []
   if objeto.errors.any?
-       objeto.errors.full_messages.each do |e|
-         return "<div style=\"color:red;\">Ocorreram os erros: </div><ul class=\"lista_erros\" style=\"\"><li style=\"margin-left:-10px;font-align: center;\">" + e.to_s + "</li></ul>".html_safe
-        end
+    erro = "<div style=\"color:#D63301;\">Verifique os erros abaixo: </div><ul class=\"lista_erros\" style=\"\">"
+    objeto.errors.each do |e,f|
+      erro << "<li style=\"margin-left:-10px;font-align: center;\">" + f.to_s + "</li>"
+    end
   end
+  erro << "</ul>"
+  return erro.html_safe
 end
