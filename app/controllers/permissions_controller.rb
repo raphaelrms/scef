@@ -4,6 +4,7 @@ class PermissionsController < ApplicationController
 
   def index
     @permission = Permission.all
+    @role = Role.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,8 @@ class PermissionsController < ApplicationController
   # GET /Permission/1
   # GET /Permission/1.json
   def show
-    @permission = Permission.find(params[:id])
+    @permission = Permission.find(params[:permission][:id])
+    @role = Role.find(params[:role][:id])
 
     respond_to do |format|
       format.html # show.html.erb

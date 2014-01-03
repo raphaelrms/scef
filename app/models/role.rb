@@ -13,19 +13,31 @@ class Role < ActiveRecord::Base
 
   scopify
 
+  VISITANTE = "Visitante"
+  ADMIN = "Admin"
+
   attr_accessible :name
 
+
+def self.permissoes_associadas
+  Role.find_each do |r| @a = r.permissions end
+  return @a
+end
+
+
   def overpower?
-    return true if self.name == "Admin"
+    return true if self.name == ADMIN
   end
+
+
 
   #Todos os usuários terão seu grupo alterado pra visitante, se um grupo for deletado
   def tratar_usuarios_orfaos
-    UserRole.update_all({:role_id => Role.where(:name => "Visitante").first},{:role_id => self})
+    UserRole.update_all({:role_id => Role.where(:name => VISITANTE).first},{:role_id => self})
   end
 
   def evitar_delecao_visitante
-    
+    return false if self.name == VISITANTE
   end
 
 end

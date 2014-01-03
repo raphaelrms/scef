@@ -19,7 +19,11 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
-  resources :roles
+  resources :roles do
+    collection do
+      get 'associar_permissao'
+    end
+  end
 
 
 

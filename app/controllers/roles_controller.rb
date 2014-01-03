@@ -84,4 +84,13 @@ class RolesController < ApplicationController
       end
     end
   end
+
+  def associar_permissao
+    @permissions = Permission.all
+    @roles = Role.all
+    @rb = PermissionRole.all
+
+  end
+
+
 end
