@@ -9,7 +9,7 @@ class Role < ActiveRecord::Base
   accepts_nested_attributes_for :permissions
 
   validates :name, {:presence => true, :uniqueness => true}
-
+  before_destroy :tratar_usuarios_orfaos,:evitar_delecao_visitante
 
   scopify
 
@@ -19,5 +19,13 @@ class Role < ActiveRecord::Base
     return true if self.name == "Admin"
   end
 
+  #Todos os usuários terão seu grupo alterado pra visitante, se um grupo for deletado
+  def tratar_usuarios_orfaos
+    UserRole.update_all({:role_id => Role.where(:name => "Visitante").first},{:role_id => self})
+  end
+
+  def evitar_delecao_visitante
+    
+  end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131226195625) do
+ActiveRecord::Schema.define(:version => 20140103180819) do
 
   create_table "noticias", :force => true do |t|
     t.string   "titulo"
@@ -25,22 +25,13 @@ ActiveRecord::Schema.define(:version => 20131226195625) do
 
   add_index "noticias", ["user_id"], :name => "noticias_user_id_fk"
 
-  create_table "perfils", :force => true do |t|
-    t.string   "descricao"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "permissions", :force => true do |t|
     t.string   "action"
     t.string   "subject_class"
     t.integer  "subject_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "role_id"
   end
-
-  add_index "permissions", ["role_id"], :name => "permissions_role_id_fk"
 
   create_table "permissions_roles", :id => false, :force => true do |t|
     t.integer "role_id"
@@ -72,12 +63,10 @@ ActiveRecord::Schema.define(:version => 20131226195625) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.integer  "role_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["role_id"], :name => "users_role_id_fk"
 
   create_table "users_roles", :id => false, :force => true do |t|
     t.integer "user_id"
@@ -87,9 +76,5 @@ ActiveRecord::Schema.define(:version => 20131226195625) do
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
   add_foreign_key "noticias", "users", name: "noticias_user_id_fk"
-
-  add_foreign_key "permissions", "roles", name: "permissions_role_id_fk"
-
-  add_foreign_key "users", "roles", name: "users_role_id_fk"
 
 end
