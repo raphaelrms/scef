@@ -3,14 +3,15 @@ class Ability
 
     def initialize(user)
       if !user.nil?
-      can do |action, subject_class, subject|
         user.roles.each do |role|
-          role.permissions.find_all_by_action(aliases_for_action(action.to_s)).any? do |permission|
-          permission.subject_class == subject_class.to_s &&
-              (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
+          role.permissions.each do |permission|
+          if permission.subject_id.nil?
+            can permission.action.to_sym, permission.subject_class.constantize
+          else
+            can permission.action.to_sym, permission.subject_class.constantize, :id => permission.subject_id
+          end
           end
         end
-      end
       else
         user ||= User.new # guest user (not logged in)
       end

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+#    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.all
   end
 

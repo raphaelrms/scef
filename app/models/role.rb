@@ -1,10 +1,16 @@
 class Role < ActiveRecord::Base
-  has_and_belongs_to_many :users, :join_table => :users_roles
+  #has_and_belongs_to_many :users, :join_table => :users_roles
   belongs_to :resource, :polymorphic => true
-  has_many :users
-  has_and_belongs_to_many :permissions,  :join_table => :permissions_roles
+  has_many :user_roles
+  has_many :users, :through => :user_roles
+  accepts_nested_attributes_for :users
+
+
+  has_many :permission_roles
+  has_many :permissions,  :through => :permission_roles
 
   validates :name, {:presence => true, :uniqueness => true}
+
 
   scopify
 

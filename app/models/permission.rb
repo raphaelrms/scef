@@ -1,5 +1,8 @@
 class Permission < ActiveRecord::Base
-  belongs_to :role
+  has_many :permission_roles
+  has_many :roles, :through => :permission_roles
+
+
 
   attr_accessible :action, :subject_class, :subject_id
 end

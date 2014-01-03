@@ -7,6 +7,7 @@ pt-BR:
       not_found: "não encontrado"
       already_confirmed: "já foi confirmado"
       not_locked: "não foi bloqueado"
+      access_denied: "Você não possui permissão para acessar esta página"
       not_saved:
         one: "Não foi possível salvar %{resource}: 1 erro"
         other: "Não foi possível salvar %{resource}: %{count} erros."
