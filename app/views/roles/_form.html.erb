@@ -1,0 +1,16 @@
+# encoding: utf-8
+
+<div class="form-group">
+  <%= f.label :name, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <div class="col-sm-2 col-md-3">
+    <%= f.text_field :name, :value => @role.name,:class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Nome do grupo",:placeholder => "Insira o nome do grupo"%>
+    <p class="help-block" style="font-size: 11px;">Insira seu nome. Obrigatório.</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-sm-2 col-md-offset-3">
+    <%= f.submit 'Cadastrar', :class => 'btn-primary' %>
+  </div>
+
+</div>

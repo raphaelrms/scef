@@ -33,7 +33,7 @@ describe NoticiaController do
   describe "GET index" do
     it "assigns all noticia as @noticia" do
       noticium = Noticium.create! valid_attributes
-      get :index, {}, valid_session
+      get :home, {}, valid_session
       assigns(:noticia).should eq([noticium])
     end
   end

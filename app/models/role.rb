@@ -3,11 +3,10 @@ class Role < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
   has_many :user_roles
   has_many :users, :through => :user_roles
-  accepts_nested_attributes_for :users
-
 
   has_many :permission_roles
   has_many :permissions,  :through => :permission_roles
+  accepts_nested_attributes_for :permissions
 
   validates :name, {:presence => true, :uniqueness => true}
 

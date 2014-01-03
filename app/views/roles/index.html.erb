@@ -1,0 +1,33 @@
+# encoding: utf-8
+
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Grupos</li>
+</ol>
+<%= painel_titulo("Grupos").html_safe %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Data de Cadastro</th>
+          <th>Quantidade de pessoas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @roles.each do |role| %>
+            <tr>
+              <td><%= link_to role.name, role %></td>
+              <td><%= role.created_at.to_date %></td>
+              <td><%= role.users.count%></td>
+              <td><%= link_to("Remover", role_path(role), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?\nSe houver algum usuário associado a este grupo, o mesmo será associado ao grupo Visitante automaticamente." }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

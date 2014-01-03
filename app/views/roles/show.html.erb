@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><%= link_to "Grupos", roles_path%></li>
+  <li class="active">Grupo <%=@role.name%></li>
+</ol>
+<%= painel_titulo("Grupo - #{@role.name}").html_safe %>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-offset-10"> <%= link_to "Remover grupo", role_path(@role), :data => { :confirm => "Tem certeza que deseja excluir este grupo?" }, :method => :delete, :class => "label label-danger "%></div>
+  </div>
+
+  <div class="form-group">
+    <p><b>Nome:</b> <%= @role.name %></p>
+    <p><b>Data de cadastro: </b><%= @role.created_at.to_date %></p>
+  </div>
+
+</div>
+</div>

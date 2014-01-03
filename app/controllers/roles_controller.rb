@@ -6,8 +6,8 @@ class RolesController < ApplicationController
     @role = Role.all
 
     respond_to do |format|
-      format.html # home.html.erb
-      format.json { render json: @role }
+      format.html # index.html.erb
+      format.json { render :json => @role }
     end
   end
 
@@ -18,7 +18,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @role }
+      format.json { render :json =>@role }
     end
   end
 
@@ -28,7 +28,7 @@ class RolesController < ApplicationController
     @role = Role.new
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @role }
+      format.json { render :json =>@role }
     end
   end
 
@@ -44,11 +44,11 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to role_path, notice: 'Role was successfully created.' }
-        format.json { render json: @role, status: :created, location: @role }
+        format.html { redirect_to roles_path, :notice => "Grupo #{@role.name} criado com sucesso." }
+        format.json { render json =>@role, status =>:created, location =>@role }
       else
-        format.html { render action: "new" }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
+        format.html { render :action =>"new" }
+        format.json { render json =>@role.errors, status =>:unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to @role, :notice => "Grupo #{@role.name} atualizado com sucesso."}
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
+        format.html { render :action =>"edit" }
+        format.json { render json =>@role.errors, status =>:unprocessable_entity }
       end
     end
   end
@@ -73,11 +73,15 @@ class RolesController < ApplicationController
   # DELETE /Role/1.json
   def destroy
     @role = Role.find(params[:id])
-    @role.destroy
-
+    nome = @role.name
     respond_to do |format|
-      format.html { redirect_to Role_url }
-      format.json { head :no_content }
+      if @role.destroy
+        format.html { redirect_to roles_path, :notice => "Grupo #{nome} removido com sucesso." }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to roles_path, :alert => "Erro ao remover grupo #{nome}: #{@role.errors.full_messages.to_s}" }
+        format.json { head :no_content }
+      end
     end
   end
 end

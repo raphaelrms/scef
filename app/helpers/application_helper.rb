@@ -38,16 +38,18 @@ module ApplicationHelper
 
   def flash_message
     messages = ""
-    [:notice, :info, :warning, :error].each {|type|
+    [:notice, :alert, :success,:info, :warning, :error].each {|type|
       if flash[type]
-        case type
+        case type.to_s
           when "notice"
-            messages += "<p class=\"alert alert-info alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
+            messages += "<p class=\"alert alert-success alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "info"
             messages += "<p class=\"alert alert-info alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "warning"
             messages += "<p class=\"alert alert-warning alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           when "error"
+            messages += "<p class=\"alert alert-danger alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
+          when "alert"
             messages += "<p class=\"alert alert-danger alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
           else
             messages += "<p class=\"alert alert-warning alert-dismissable\" style=\"text-align: center;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><strong>#{flash[type]}</strong></p>"
