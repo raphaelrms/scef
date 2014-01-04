@@ -25,7 +25,13 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
-  resources :permission_role
+  resources :permission_role do
+    collection do
+      post 'remove_permissao_ajax'
+      post 'adiciona_permissao_ajax'
+    end
+  end
+
 
 
 end

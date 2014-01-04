@@ -33,6 +33,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural(/^(irm|m)ão$/i,  '\1ãos')
   inflect.plural(/^(alem|c|p)ão$/i,  '\1ães')
   inflect.irregular('user_role','users_roles')
+  inflect.irregular('permission_roles','permissions_roles')
   inflect.irregular('permission_role','permissions_roles')
   # Sem acentos...
   inflect.plural(/ao$/i,  'oes')

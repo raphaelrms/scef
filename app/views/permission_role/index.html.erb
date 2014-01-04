@@ -27,14 +27,14 @@
                           <td>
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>" checked><%= permission.action%>
+                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>" checked><%= nome_acao(permission.action)%>
                               </label>
                             </div>
                           </td>
                       <%else%>
                           <td><div class="checkbox">
                             <label>
-                              <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>"><%= permission.action%>
+                              <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>"><%= nome_acao(permission.action)%>
                             </label>
                           </div></td>
                       <%end%>
@@ -54,7 +54,23 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $('input[type=checkbox]').click(function (){
-            if $(this).is(':checked'){
+            var jqxhr;
+            //Fazer post para incluir e excluir a permissão
+            if ($(this).is(':checked')){
+                $.post('<%= adiciona_permissao_ajax_permission_role_index_path%>',{role_id: $(this).attr("role_id"),
+                    permission_id: $(this).attr("permission_id")}, function() {
+                })
+                        .fail(function() {
+                            alert( "Erro ao comunicar com o servidor. Entre em contato com o administrador." );
+                            $(this).attr("checked","false");
+                        })
+            }else{
+                $.post('<%= remove_permissao_ajax_permission_role_index_path%>',{role_id: $(this).attr("role_id"),
+                    permission_id: $(this).attr("permission_id")}, function()   {
+                })
+                        .fail(function() {
+                            alert( "Erro ao comunicar com o servidor. Entre em contato com o administrador." );
+                        })
 
             }
         });

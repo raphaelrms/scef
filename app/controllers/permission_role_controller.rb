@@ -6,7 +6,7 @@ class PermissionRoleController < ApplicationController
   def index
     @roles = Role.all
     @permissions = Permission.all
-    @rb = PermissionRole.all
+    @rb = PermissionRole.sem_redundancias
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,7 +32,7 @@ class PermissionRoleController < ApplicationController
     @permission = Permission.new
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json =>@permission }
+      format.json { render :json => @permission }
     end
   end
 
@@ -72,6 +72,36 @@ class PermissionRoleController < ApplicationController
       end
     end
   end
+
+  def remove_permissao_ajax
+    @role = Role.where(:id => params[:role_id]).first
+    @permission = Permission.where(:id => params[:permission_id]).first
+      respond_to do |format|
+        if PermissionRole.where(:role_id => params[:role_id],:permission_id => params[:permission_id]).any?
+          if @role.permissions.destroy(Permission.where(:id => params[:permission_id]).first).first.save
+            format.json { head :no_content, status => :ok }
+          else
+            format.json { render json =>@role.errors, status =>:unprocessable_entity }
+          end
+        else
+          #Se não existe, é sucesso
+          format.json { head :no_content, status => :ok }
+        end
+    end
+
+  end
+
+  def adiciona_permissao_ajax
+    @pr = PermissionRole.new(:role_id => params[:role_id],:permission_id => params[:permission_id])
+    respond_to do |format|
+      if @pr.save
+        format.json { head :no_content, status => :ok }
+      else
+        format.json { render json =>@role.errors, status =>:unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /Permission/1
   # DELETE /Permission/1.json

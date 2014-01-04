@@ -17,7 +17,7 @@ class Role < ActiveRecord::Base
   ADMIN = "Admin"
 
   attr_accessible :name
-
+  scope :sem_redundancias, lambda {binding.pry}
 
 def self.permissoes_associadas
   Role.find_each do |r| @a = r.permissions end
