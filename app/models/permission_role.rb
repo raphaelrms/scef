@@ -6,7 +6,15 @@ class PermissionRole < ActiveRecord::Base
   before_destroy :consistencia_de_acoes_ao_remover
   after_create :consistencia_de_acoes_ao_adicionar
 
-  scope :sem_redundancias, lambda {binding.pry}
+  scope :sem_redundancias, lambda {
+
+    Role.find_each do |p|
+      p.permissions.find_each do |x|
+        binding.pry
+      end
+    end
+
+  }
 
   def consistencia_de_acoes_ao_remover
     case self.permission.action

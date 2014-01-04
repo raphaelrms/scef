@@ -14,7 +14,7 @@
             <tr>
               <th>Grupo</th>
               <% @permissions.each do |permission| %>
-                  <th><%= permission.subject_class %></th>
+                  <th><%= normaliza_entidades(permission.subject_class) if ((permission.action != "update") && (permission.action != "create"))%></th>
               <%end%>
             </tr>
             </thead>
@@ -23,7 +23,8 @@
                 <tr>
                   <td><%= link_to role.name, role %></td>
                   <% @permissions.each do |permission| %>
-                      <%if @rb.collect {|a| a.permission_id == permission.id && a.role_id == role.id}.include? true%>
+                      <%if (permission.action != "update") && (permission.action != "create") %>
+                      <%if (@rb.collect {|a| a.permission_id == permission.id && a.role_id == role.id}.include? true)%>
                           <td>
                             <div class="checkbox">
                               <label>
@@ -38,6 +39,7 @@
                             </label>
                           </div></td>
                       <%end%>
+                      <%end%>
 
                   <% end %>
                 </tr>
@@ -46,7 +48,6 @@
             </tbody>
           </table>
         </div>
-        <%= link_to 'Novo grupo', new_role_path, :class => 'btn btn-success'  %>
       </div>
     </div>
     </div>

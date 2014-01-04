@@ -6,7 +6,7 @@ class PermissionRoleController < ApplicationController
   def index
     @roles = Role.all
     @permissions = Permission.all
-    @rb = PermissionRole.sem_redundancias
+    @rb = PermissionRole.all
 
     respond_to do |format|
       format.html # index.html.erb
