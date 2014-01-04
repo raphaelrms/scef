@@ -13,7 +13,7 @@ RailsPadrao::Application.routes.draw do
 
   end
   resources :users
-  resource :users, only: [:edit] do
+  resource :users, :only => [:edit] do
     member do
       post ':id/atualizar' => 'users#atualiza_usuario_com_senha', :as => "atualiza_usuario_com_senha"
     end
@@ -25,7 +25,7 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
-
+  resources :permission_role
 
 
 end

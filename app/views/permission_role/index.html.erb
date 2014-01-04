@@ -1,0 +1,63 @@
+# encoding: utf-8
+
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li>Grupos</li>
+  <li class="active">Permissões</li>
+</ol>
+<%= painel_titulo("Associar permissões").html_safe %>
+    <div class="panel-body">
+      <div class="span8">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Grupo</th>
+              <% @permissions.each do |permission| %>
+                  <th><%= permission.subject_class %></th>
+              <%end%>
+            </tr>
+            </thead>
+            <tbody>
+              <% @roles.each do |role| %>
+                <tr>
+                  <td><%= link_to role.name, role %></td>
+                  <% @permissions.each do |permission| %>
+                      <%if @rb.collect {|a| a.permission_id == permission.id && a.role_id == role.id}.include? true%>
+                          <td>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>" checked><%= permission.action%>
+                              </label>
+                            </div>
+                          </td>
+                      <%else%>
+                          <td><div class="checkbox">
+                            <label>
+                              <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>"><%= permission.action%>
+                            </label>
+                          </div></td>
+                      <%end%>
+
+                  <% end %>
+                </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+        </div>
+        <%= link_to 'Novo grupo', new_role_path, :class => 'btn btn-success'  %>
+      </div>
+    </div>
+    </div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('input[type=checkbox]').click(function (){
+            if $(this).is(':checked'){
+
+            }
+        });
+
+    });
+</script>
