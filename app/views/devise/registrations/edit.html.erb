@@ -34,7 +34,7 @@
       <div class="form-group">
         <%= f.label :password, "Nova senha:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :class => "form-control", :required => false,"data-validate" => "validate(confirmacao_senha)"%>
+          <%= f.password_field :password, :autocomplete => "off", :title => "Preencha somente se desejar mudar a senha", :class => "form-control", :required => false,"data-validate" => "validate(confirmacao_senha,minlength(8))"%>
           <p class="help-block" style="font-size: 11px;">Digite sua nova senha, caso deseja mudar.</p>
         </div>
       </div>
@@ -42,7 +42,7 @@
       <div class="form-group">
         <%= f.label :password_confirmation, "Repita a nova senha:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.password_field :password_confirmation, :class => "form-control", :required => false, :class => "form-control", "data-validate" => "validate(confirmacao_senha)"  %>
+          <%= f.password_field :password_confirmation, :class => "form-control", :required => false, :class => "form-control", "data-validate" => "validate(confirmacao_senha,minlength(8))"  %>
           <p class="help-block" style="font-size: 11px;">Confirme sua nova senha.</p>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="form-group">
         <%= f.label :current_password, "Senha atual*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.password_field :current_password,:class => "form-control", "data-validate" => "validate(required)"%>
+          <%= f.password_field :current_password,:class => "form-control", "data-validate" => "validate(required,minlength(8))"%>
           <p class="help-block" style="font-size: 11px;">Digite sua senha atual para confirmar as alteracões.</p>
         </div>
 

@@ -1,7 +1,19 @@
 <% if user_signed_in? %>
-    <%= link_to "<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;;margin-left: 99px\"></i>Logout".html_safe ,destroy_user_session_path, method: :delete%>
+    <li class="dropdown">
+
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= nome_barra.html_safe%><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Visualizar conta", current_user%></li>
+        <li><%= link_to "Editar conta", edit_user_registration_path%></li>
+        <li class="divider"></li>
+        <li><%= link_to "Sair" ,destroy_user_session_path, :method => :delete%></li>
+      </ul>
+    </li>
+
+
     <div class="col-xs-offset-2" style="margin-top: -12px;width: 100%;text-align:right;">
-      <%= link_to current_user.name, current_user,:style => "color: white;margin-top: -12px;font-size: 11px;margin-right: 45px;text-align: left;width: 100%;text-decoration: none;"%></div>
+      </div>
 <%else%>
+    <!--"color: white;margin-top: -12px;font-size: 11px;margin-right: 45px;text-align: left;width: 100%;text-decoration: none;"-->
     <%= link_to("<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;\"></i>Login".html_safe, new_user_session_path)  %>
 <%end%>

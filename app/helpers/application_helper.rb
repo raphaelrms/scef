@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
 
   def display_base_errors resource
@@ -67,9 +68,13 @@ def exibe_erros(objeto)
   if objeto.errors.any?
     erro = "<div style=\"color:#D63301;\">Verifique os erros abaixo: </div><ul class=\"lista_erros\" style=\"\">"
     objeto.errors.each do |e,f|
-      erro << "<li style=\"margin-left:-10px;font-align: center;\">" + f.to_s + "</li>"
+      erro << "<li style=\"margin-left:-10px;font-align: center;\">" + objeto.class.human_attribute_name(e.to_s) + " " + f.to_s + "</li>"
     end
   end
   erro << "</ul>"
   return erro.html_safe
+end
+
+def nome_barra
+  return "<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;;margin-left: 110px\"></i>"
 end
