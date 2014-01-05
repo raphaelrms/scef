@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PermissionRole < ActiveRecord::Base
   attr_accessible :permission_id,:role_id
   belongs_to :permission

@@ -18,7 +18,7 @@ pt-BR:
 
   devise:
     failure:
-      already_authenticated: 'Você já está logado.'
+      already_authenticated: 'Você foi autenticado com sucesso.'
       unauthenticated: 'Faça o login para continuar.'
       unconfirmed: 'Antes de continuar, confirme a sua conta.'
       locked: 'Sua conta encontra-se bloqueada. Entre em contato com o administrador.'
@@ -29,6 +29,7 @@ pt-BR:
     sessions:
       signed_in: 'Login efetuado com sucesso!'
       signed_out: 'Você foi deslogado com sucesso.'
+      timeout: Sua sessão expirou.
     passwords:
       send_instructions: 'Dentro de minutos você receberá um e-mail com instruções para a troca da sua senha.'
       updated: 'Sua senha foi alterada com sucesso.'
