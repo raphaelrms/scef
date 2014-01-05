@@ -3,8 +3,7 @@
 
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= nome_barra.html_safe%><b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><%= link_to "Visualizar conta", current_user%></li>
-        <li><%= link_to "Editar conta", edit_user_registration_path%></li>
+        <li><%= link_to "Meus dados", current_user%></li>
         <li class="divider"></li>
         <li><%= link_to "Sair" ,destroy_user_session_path, :method => :delete%></li>
       </ul>
