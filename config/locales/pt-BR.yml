@@ -216,5 +216,7 @@ pt-BR:
       user:
         password: "Senha nova"
         current_password: "Senha atual"
+        sign_in_count: "Quantidade de vezes que logou"
+        name: "Nome"
     errors:
       <<: *errors
