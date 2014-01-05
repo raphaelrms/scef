@@ -1,0 +1,25 @@
+# encoding: utf-8
+
+<div class="form-group">
+  <%= f.label :action, "Ação*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <div class="col-sm-2 col-md-3">
+    <%= f.text_field :action, :value => @permission.action,:class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Nome do ação",:placeholder => "Insira o nome da ação"%>
+    <p class="help-block" style="font-size: 11px;">Insira nome da ação. Obrigatório.</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :subject_class, "Grupo de entidade*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <div class="col-sm-2 col-md-3">
+    <%= f.text_field :subject_class, :value => @permission.subject_class,:class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Nome do grupo de entidade",:placeholder => "Insira o nome do grupo de entidade"%>
+    <p class="help-block" style="font-size: 11px;">Insira nome do grupo de entidade. Obrigatório.</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :subject_id, "Entidade específica:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <div class="col-sm-2 col-md-3">
+    <%= f.text_field :subject_id, :value => @permission.subject_id,:class => "form-control", :autofocus => true,:title => "ID da entidade específica",:placeholder => "Entidade específica"%>
+    <p class="help-block" style="font-size: 11px;">Entidade específica. Não obrigatório.</p>
+  </div>
+</div>

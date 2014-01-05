@@ -49,9 +49,9 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to users_path, :notice => "Usuário #{user.name} removido."
     else
-      redirect_to users_path, :notice => "Can't delete yourself."
+      redirect_to users_path, :notice => "Você não pode remover seu próprio usuário."
     end
   end
 end

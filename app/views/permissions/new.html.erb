@@ -1,0 +1,36 @@
+# encoding: utf-8
+
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><%= link_to "Grupos", roles_path%></li>
+  <li>Novo grupo</li>
+</ol>
+<%= painel_titulo("Cadastro de grupo").html_safe %>
+<div class="panel-body">
+
+  <div class="row">
+    <div class="col-md-10"> <%= exibe_erros(@role).html_safe if @role.errors.any?%></div>
+  </div>
+  <p>
+    <%= form_for @role, :html => {:class => 'form-horizontal' } do |f| %>
+
+        <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+
+
+
+
+      <div class="form-group">
+        <div class="col-sm-2 col-md-offset-3">
+          <%= f.submit 'Cadastrar', :class => 'btn-primary' %>
+        </div>
+      </div>
+  <% end %>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#new_role').ketchup();
+    });
+</script>

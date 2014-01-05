@@ -1,0 +1,19 @@
+# encoding: utf-8
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Permissões</li>
+</ol>
+<%= painel_titulo("Permissão").html_safe %>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-offset-10"> <%= link_to "Remover permissão", permission_path(@permission), :data => { :confirm => "Tem certeza que deseja excluir esta permissão? Usuários poderão ser afetados." }, :method => :delete, :class => "label label-danger "%></div>
+  </div>
+
+  <div class="form-group">
+    <p><b>Acão:</b> <%= nome_acao(@permission.action) %></p>
+    <p><b>Classe: </b><%= normaliza_entidades(@permission.subject_class) %></p>
+    <p><b>Entidade específica: </b><%= @permission.subject_id %></p>
+  </div>
+
+</div>
+</div>

@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-    <li class="dropdown">
+    <li class="dropdown" style=" margin-bottom: -7px; ">
 
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= nome_barra.html_safe%><b class="caret"></b></a>
       <ul class="dropdown-menu">
@@ -10,7 +10,12 @@
     </li>
 
 
-    <div class="col-xs-offset-2" style="margin-top: -12px;width: 100%;text-align:right;">
+    <div class="col-xs-offset-2" style="position: static    ;
+            width: 90%;
+            text-align: right;
+            top: -9px;
+            margin-left: 10px;">
+      <div style="font-size:10px;color:white;"><%= current_user.name%></div>
       </div>
 <%else%>
     <!--"color: white;margin-top: -12px;font-size: 11px;margin-right: 45px;text-align: left;width: 100%;text-decoration: none;"-->

@@ -1,0 +1,38 @@
+# encoding: utf-8
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Permissões</li>
+</ol>
+<%= painel_titulo("Permissões").html_safe %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Ação</th>
+          <th>Grupo de entidade</th>
+          <th>Entidade específica</th>
+          <th>Data de Cadastro</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @permissions.each do |p| %>
+            <tr>
+              <td><%= link_to nome_acao(p.action.to_s), p %></td>
+              <td><%= p.subject_class%></td>
+              <td><%= p.subject_id%></td>
+              <td><%= p.created_at.to_date if p.created_at %></td>
+              <td><%= link_to("Editar", edit_permission_path(p), :style => "margin-top:-7px;", :class => 'btn btn-xs btn-default')%></td>
+              <td><%= link_to("Remover", permission_path(p), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Nova permissão', new_permission_path, :class => 'btn btn-success'  %>
+    </div>
+  </div>
+</div>
+</div>

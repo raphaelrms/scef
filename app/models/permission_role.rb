@@ -17,28 +17,33 @@ class PermissionRole < ActiveRecord::Base
   }
 
   def consistencia_de_acoes_ao_remover
-    case self.permission.action
+    case
+    self.permission.action
       when "new"
-        PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).first.destroy if PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        permissao = PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create", :subject_class => self.permission.subject_class)).first
+        permissao.delete.save if !permissao.nil?
       when "create"
-        PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "new").first.id).first.destroy if PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        permissao = PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "new", :subject_class => self.permission.subject_class)).first
+        permissao.delete.save if !permissao.nil?
       when "edit"
-        PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update").first.id).first.destroy if PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        permissao = PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update", :subject_class => self.permission.subject_class)).first
+        permissao.delete.save if !permissao.nil?
       when "update"
-        PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "edit").first.id).first.destroy if PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        permissao = PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update", :subject_class => self.permission.subject_class)).first
+        permissao.delete.save if !permissao.nil?
     end
   end
 
   def consistencia_de_acoes_ao_adicionar
     case self.permission.action
       when "new"
-        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create", :subject_class => self.permission.subject_class).first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create", :subject_class => self.permission.subject_class).first).any?
       when "create"
-        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "new").first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "new", :subject_class => self.permission.subject_class).first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "new", :subject_class => self.permission.subject_class).first).any?
       when "edit"
-        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update").first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update", :subject_class => self.permission.subject_class).first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "update", :subject_class => self.permission.subject_class).first).any?
       when "update"
-        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "edit").first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "create").first.id).any?
+        PermissionRole.new(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "edit", :subject_class => self.permission.subject_class).first.id).save if !PermissionRole.where(:role_id => self.role_id,:permission_id => Permission.select(:id).where(:action => "edit", :subject_class => self.permission.subject_class).first).any?
     end
   end
 

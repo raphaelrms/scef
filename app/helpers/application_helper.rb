@@ -78,3 +78,41 @@ end
 def nome_barra
   return "<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;;margin-left: 110px\"></i>"
 end
+
+def nome_acao(acao)
+  case acao
+    when "new"
+    then "Criar"
+    when "index"
+    then "Listar"
+    when "manage"
+    then "Acesso completo"
+    when "edit"
+    then "Editar"
+    when "update"
+    then "Atualizar"
+    when "read"
+    then "Visualizar"
+    when "destroy"
+    then "Remover"
+    when "create"
+    then "Criar"
+    else
+      acao.to_s
+  end
+end
+
+def normaliza_entidades(entidade)
+  case entidade
+    when "User"
+    then "Usuários"
+    when "all"
+    then "Tudo"
+    when "Role"
+    then "Grupo"
+    when "Permission"
+    then "Permissão"
+    else
+      entidade.to_s
+  end
+end

@@ -77,16 +77,13 @@ class PermissionRoleController < ApplicationController
     @role = Role.where(:id => params[:role_id]).first
     @permission = Permission.where(:id => params[:permission_id]).first
       respond_to do |format|
-        if PermissionRole.where(:role_id => params[:role_id],:permission_id => params[:permission_id]).any?
-          if @role.permissions.destroy(Permission.where(:id => params[:permission_id]).first).first.save
+        @pr = PermissionRole.where(:role_id => params[:role_id],:permission_id => params[:permission_id]).first
+
+          if !@pr.nil? && @pr.destroy
             format.json { head :no_content, status => :ok }
           else
-            format.json { render json =>@role.errors, status =>:unprocessable_entity }
+            format.json { render :json => @pr.errors, status =>:unprocessable_entity }
           end
-        else
-          #Se não existe, é sucesso
-          format.json { head :no_content, status => :ok }
-        end
     end
 
   end

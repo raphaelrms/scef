@@ -3,8 +3,7 @@ class PermissionsController < ApplicationController
 
 
   def index
-    @permission = Permission.all
-    @role = Role.all
+    @permissions = Permission.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +14,7 @@ class PermissionsController < ApplicationController
   # GET /Permission/1
   # GET /Permission/1.json
   def show
-    @permission = Permission.find(params[:permission][:id])
-    @role = Role.find(params[:role][:id])
+    @permission = Permission.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -62,7 +60,7 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
-        format.html { redirect_to @permission, :notice => "Permissão #{@permission.name} atualizada com sucesso."}
+        format.html { redirect_to @permission, :notice => "Permissão atualizada com sucesso."}
         format.json { head :no_content }
       else
         format.html { render :action =>"edit" }

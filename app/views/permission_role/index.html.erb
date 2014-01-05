@@ -2,7 +2,7 @@
 
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
-  <li>Grupos</li>
+  <li><%= link_to "Grupos",roles_path%></li>
   <li class="active">Permissões</li>
 </ol>
 <%= painel_titulo("Associar permissões").html_safe %>
@@ -47,6 +47,7 @@
 
             </tbody>
           </table>
+          <%= link_to 'Editar permissões', permissions_path, :class => 'btn btn-default'  %>
         </div>
       </div>
     </div>
