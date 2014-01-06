@@ -20,10 +20,4 @@
 <%else%>
     <!--"color: white;margin-top: -12px;font-size: 11px;margin-right: 45px;text-align: left;width: 100%;text-decoration: none;"-->
     <%= link_to("<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;\"></i>Login".html_safe, new_user_session_path)  %>
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-        <%= link_to "Registrar-se", new_registration_path(resource_name) , :style => "font-size: 10px;
-margin-bottom: -40px;
-top: -25px;
-padding-bottom: 0px;"%><br />
-    <% end -%>
 <%end%>
