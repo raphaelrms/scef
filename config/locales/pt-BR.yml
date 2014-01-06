@@ -218,5 +218,8 @@ pt-BR:
         current_password: "Senha atual"
         sign_in_count: "Quantidade de vezes que logou"
         name: "Nome"
+      permission:
+        action: "Ação"
+        subject_class: "Classe"
     errors:
       <<: *errors

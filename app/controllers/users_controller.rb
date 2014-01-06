@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_with_password(params[:user])
       sign_in @user, :bypass => true
-      redirect_to root_path
+      flash.now[:notice] = "Seus dados foram alterados com sucesso."
+      render "show"
     else
       render "devise/registrations/edit"
     end

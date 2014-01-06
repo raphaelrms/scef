@@ -2,22 +2,19 @@
 
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
-  <li><%= link_to "Grupos", roles_path%></li>
-  <li>Novo grupo</li>
+  <li><%= link_to "Permissões", roles_path%></li>
+  <li>Nova permissão</li>
 </ol>
-<%= painel_titulo("Cadastro de grupo").html_safe %>
+<%= painel_titulo("Cadastro de permissão").html_safe %>
 <div class="panel-body">
 
   <div class="row">
-    <div class="col-md-10"> <%= exibe_erros(@role).html_safe if @role.errors.any?%></div>
+    <div class="col-md-10"> <%= exibe_erros(@permission).html_safe if @permission.errors.any?%></div>
   </div>
   <p>
-    <%= form_for @role, :html => {:class => 'form-horizontal' } do |f| %>
+    <%= form_for @permission, :html => {:class => 'form-horizontal' } do |f| %>
 
         <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
-
-
-
 
       <div class="form-group">
         <div class="col-sm-2 col-md-offset-3">
@@ -31,6 +28,6 @@
 
 <script type="text/javascript">
     $( document ).ready(function() {
-        $('#new_role').ketchup();
+        $('#new_permission').ketchup();
     });
 </script>

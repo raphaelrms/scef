@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
     <li class="dropdown" style=" margin-bottom: -7px; ">
 
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= nome_barra.html_safe%><b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-bottom: -6px"><%= nome_barra.html_safe%><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><%= link_to "Meus dados", current_user%></li>
         <li class="divider"></li>
@@ -15,9 +15,15 @@
             text-align: right;
             top: -9px;
             margin-left: 10px;">
-      <div style="font-size:10px;color:white;"><%= current_user.name%></div>
+      <div style="font-size:10px;color:white;"><%= nome_abreviado(current_user.name)%></div>
       </div>
 <%else%>
     <!--"color: white;margin-top: -12px;font-size: 11px;margin-right: 45px;text-align: left;width: 100%;text-decoration: none;"-->
     <%= link_to("<i class=\"glyphicon glyphicon-user\" style=\"margin-right:5px;\"></i>Login".html_safe, new_user_session_path)  %>
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "Registrar-se", new_registration_path(resource_name) , :style => "font-size: 10px;
+margin-bottom: -40px;
+top: -25px;
+padding-bottom: 0px;"%><br />
+    <% end -%>
 <%end%>

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PermissionsController < ApplicationController
   load_and_authorize_resource
 
@@ -43,7 +44,7 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to roles_path, :notice => "Permissão #{@permission.name} criada com sucesso." }
+        format.html { redirect_to permissions_path, :notice => "Permissão #{@permission.action} - #{@permission.subject_class} criada com sucesso." }
         format.json { render json =>@permission, status =>:created, location =>@permission }
       else
         format.html { render :action =>"new" }

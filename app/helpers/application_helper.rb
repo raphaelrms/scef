@@ -116,3 +116,8 @@ def normaliza_entidades(entidade)
       entidade.to_s
   end
 end
+
+
+def nome_abreviado(nome)
+  return nome.split(' ').first + ' ' + nome.split(' ').last
+end

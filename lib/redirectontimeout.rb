@@ -4,7 +4,7 @@ class Redirectontimeout < Devise::FailureApp
   def redirect
     message = warden.message || warden_options[:message]
     if message == :timeout
-      redirect_to attempted_path, :alert => "Sua sessão expirou"
+      redirect_to attempted_path
     else
       super
     end
