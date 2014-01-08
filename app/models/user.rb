@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   before_validation :grupo_padrao
 
+
+
   delegate :permissions, :to => :roles
 
   # Setup accessible (or protected) attributes for your model
