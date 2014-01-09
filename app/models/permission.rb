@@ -23,7 +23,7 @@ class Permission < ActiveRecord::Base
   end
 
   def acoes_possiveis
-      if !['create','new','read','index','update','destroy'].include? self.action
+      if !['create','new', 'show' ,'read','index','update','destroy'].include? self.action
       errors.add(:action,"só pode ser: create, new, read, index, update, destroy")
       return false
     end

@@ -15,7 +15,7 @@
       <div class="form-group">
         <%= f.label :name, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.text_field :name, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Nome completo deve ser fornecido",:placeholder => "Insira o nome completo"%>
+          <%= f.text_field :name, :class => "form-control","data-validate" => "validate(required,min_dois_nomes)", :autofocus => true,:title => "Nome completo deve ser fornecido",:placeholder => "Insira o nome completo"%>
           <p class="help-block" style="font-size: 11px;">Insira seu nome. Obrigatório.</p>
         </div>
       </div>
@@ -72,6 +72,16 @@
 
 <script type="text/javascript">
     $( document ).ready(function() {
+        $.ketchup.validation('min_dois_nomes', 'Você deve informar pelo menos um sobrenome.', function(form, el, value) {
+            if(value.split(' ').length > 1) {
+                return true;
+
+            } else {
+                return false;
+
+            }
+
+        });
         $('#new_user').ketchup();
     });
 </script>

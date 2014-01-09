@@ -8,7 +8,7 @@ class Ability
           if permission.subject_id.nil?
             can permission.action.to_sym, (permission.subject_class == "all") ? :all : permission.subject_class.constantize
           else
-            can permission.action.to_sym, permission.subject_class.constantize, :id => permission.subject_id
+            can permission.action.to_sym, permission.subject_class.constantize, :id => (permission.subject_id == 0 ? user.id : permission.subject_id )
           end
           end
         end

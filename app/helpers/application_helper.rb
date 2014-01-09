@@ -111,7 +111,7 @@ def normaliza_entidades(entidade)
     when "Role"
     then "Grupo"
     when "Permission"
-    then "Permissão"
+    then "Permissões"
     else
       entidade.to_s
   end
