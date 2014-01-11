@@ -73,13 +73,13 @@ class PermissionsController < ApplicationController
   # DELETE /Permission/1.json
   def destroy
     @permission = Permission.find(params[:id])
-    nome = @permission.name
+    nome = nome_acao(@permission.action.mb_chars.titleize) + " " +  @permission.subject_class.mb_chars.titleize
     respond_to do |format|
       if @permission.destroy
-        format.html { redirect_to roles_path, :notice => "Permissão #{nome} removida com sucesso." }
+        format.html { redirect_to permissions_path, :notice => "Permissão \"#{nome}\" removida com sucesso." }
         format.json { head :no_content }
       else
-        format.html { redirect_to roles_path, :alert => "Erro ao remover grupo #{nome}: #{@permission.errors.full_messages.to_s}" }
+        format.html { redirect_to permissions_path, :alert => "Erro ao remover grupo #{nome}: #{@permission.errors.full_messages.to_s}" }
         format.json { head :no_content }
       end
     end

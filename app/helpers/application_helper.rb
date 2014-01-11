@@ -97,16 +97,18 @@ def nome_acao(acao)
     then "Remover"
     when "create"
     then "Criar"
+    when "show"
+    then "Visualizar dados"
     else
       acao.to_s
   end
 end
 
 def normaliza_entidades(entidade)
-  case entidade
+  case entidade.mb_chars.titleize
     when "User"
     then "Usuários"
-    when "all"
+    when "All"
     then "Tudo"
     when "Role"
     then "Grupo"

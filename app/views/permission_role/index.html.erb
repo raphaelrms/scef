@@ -6,52 +6,53 @@
   <li class="active">Permissões</li>
 </ol>
 <%= painel_titulo("Associar permissões").html_safe %>
-    <div class="panel-body">
-      <div class="span8">
-        <div class="table-responsive">
-          <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-              <th>Grupo</th>
-              <% @permissions.each do |permission| %>
-                  <th><%= normaliza_entidades(permission.subject_class) if ((permission.action != "update") && (permission.action != "create"))%></th>
-              <%end%>
-            </tr>
-            </thead>
-            <tbody>
-              <% @roles.each do |role| %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Permissões</th>
+          <% @roles.each do |role| %>
+              <th><%= link_to role.name, role %></th>
+          <%end%>
+        </tr>
+        </thead>
+        <tbody>
+        <% @permissions.each do |permission| %>
+            <%if (permission.action != "update") && (permission.action != "create") %>
                 <tr>
-                  <td><%= link_to role.name, role %></td>
-                  <% @permissions.each do |permission| %>
-                      <%if (permission.action != "update") && (permission.action != "create") %>
+                  <td><%= nome_acao(permission.action)%></td>
+
+                  <% @roles.each do |role| %>
                       <%if (@rb.collect {|a| a.permission_id == permission.id && a.role_id == role.id}.include? true)%>
                           <td>
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>" checked><%= nome_acao(permission.action)%>
+                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>" checked><%= normaliza_entidades(permission.subject_class) if ((permission.action != "update") && (permission.action != "create"))%>
                               </label>
                             </div>
                           </td>
                       <%else%>
-                          <td><div class="checkbox">
-                            <label>
-                              <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>"><%= nome_acao(permission.action)%>
-                            </label>
-                          </div></td>
+                          <td>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" role_id="<%= role.id%>" permission_id="<%= permission.id%>"><%= normaliza_entidades(permission.subject_class) if ((permission.action != "update") && (permission.action != "create"))%>
+                              </label>
+                            </div>
+                          </td>
                       <%end%>
-                      <%end%>
-
-                  <% end %>
-                </tr>
-              <% end %>
-
-            </tbody>
-          </table>
-          <%= link_to 'Editar permissões', permissions_path, :class => 'btn btn-default'  %>
-        </div>
-      </div>
+                  <%end%>
+            <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Editar permissões', permissions_path, :class => 'btn btn-default'  %>
     </div>
-    </div>
+  </div>
+</div>
+</div>
 
 <script type="text/javascript">
     $( document ).ready(function() {
