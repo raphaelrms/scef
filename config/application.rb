@@ -31,7 +31,7 @@ module RailsPadrao
 
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
       unless html_tag =~ /^<label/
-        %{<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}" class="ketchup-error help-block" style="top: 0px;left: 270px;opacity: 1;width:100%;font-size:12px;color:#D63301;">#{instance.error_message.first}</label></div>}.html_safe
+        %{<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}" class="ketchup-error help-block" style="top: 0px;left: 270px;opacity: 1;width:100%;font-size:12px;color:#D63301;">#{instance.object.class.human_attribute_name(instance.method_name.to_sym)}  #{instance.error_message.first}</label></div>}.html_safe
       else
         %{<div class="field_with_errors">#{html_tag}</div>}.html_safe
       end

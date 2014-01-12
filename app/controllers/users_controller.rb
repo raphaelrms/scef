@@ -55,4 +55,28 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Você não pode remover seu próprio usuário."
     end
   end
+
+  def novo_usuario_manual
+    @user = User.new
+    respond_to do |format|
+      format.html
+      format.json { render :json =>@user }
+    end
+  end
+
+  def cria_usuario_manualmente
+    @user = User.new(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to users_path, :notice => "Usuário \"#{@user.name}\" criado com sucesso." }
+        format.json { render json =>@user, status =>:created, location =>@user }
+      else
+        format.html { render :action =>"novo_usuario_manual" }
+        format.json { render json =>@user.errors, status =>:unprocessable_entity }
+      end
+    end
+  end
 end
+
+

@@ -12,7 +12,14 @@ RailsPadrao::Application.routes.draw do
     put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
 
   end
-  resources :users
+
+  resources :users do
+    collection do
+      get 'novo_usuario_manual'
+      post 'cria_usuario_manualmente'
+    end
+  end
+
   resource :users, :only => [:edit] do
     member do
       post ':id/atualizar' => 'users#atualiza_usuario_com_senha', :as => "atualiza_usuario_com_senha"
