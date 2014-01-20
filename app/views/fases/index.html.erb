@@ -1,0 +1,21 @@
+<h1>Listing fases</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fases.each do |fas| %>
+  <tr>
+    <td><%= link_to 'Show', fas %></td>
+    <td><%= link_to 'Edit', edit_fas_path(fas) %></td>
+    <td><%= link_to 'Destroy', fas, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fase', new_fas_path %>

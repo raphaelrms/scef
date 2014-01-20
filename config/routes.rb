@@ -1,6 +1,21 @@
 RailsPadrao::Application.routes.draw do
 
 
+  resources :categorias
+
+
+  resources :custos
+
+
+  resources :fases
+
+
+  resources :editais
+
+
+  resources :cursos
+
+
   root :to => 'application#home'
   authenticated :user do
     root :to => 'application#home'

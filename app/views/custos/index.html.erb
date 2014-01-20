@@ -1,0 +1,21 @@
+<h1>Listing custos</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @custos.each do |custo| %>
+  <tr>
+    <td><%= link_to 'Show', custo %></td>
+    <td><%= link_to 'Edit', edit_custo_path(custo) %></td>
+    <td><%= link_to 'Destroy', custo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Custo', new_custo_path %>
