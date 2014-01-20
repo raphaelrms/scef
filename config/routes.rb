@@ -10,7 +10,7 @@ RailsPadrao::Application.routes.draw do
   resources :fases
 
 
-  resources :editais
+  resources :arquivos
 
 
   resources :cursos
