@@ -2,11 +2,6 @@ class CategoriasController < ApplicationController
 
   def index
     @categorias = Categoria.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @categorias }
-    end
   end
 
   def show
@@ -20,11 +15,6 @@ class CategoriasController < ApplicationController
 
   def new
     @categoria = Categoria.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @categoria }
-    end
   end
 
   def edit
@@ -32,40 +22,29 @@ class CategoriasController < ApplicationController
   end
 
   def create
-    @categoria = Categoria.new(params[:categoria])
+    @categoria = Categoria.new(params[new_categoria_path])
 
-    respond_to do |format|
-      if @categoria.save
-        format.html { redirect_to @categoria, notice: 'Categoria was successfully created.' }
-        format.json { render json: @categoria, status: :created, location: @categoria }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @categoria.errors, status: :unprocessable_entity }
-      end
+    if @categoria.save
+      redirect_to categorias_path, :notice => "Categoria criada com sucesso"
+    else
+      redirect_to categorias_path, :alert => "Não foi possível criar a categoria '#{@categoria.descricao}'. Erro: #{@categoria.errors.full_message.to_s}"
     end
   end
 
   def update
+    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @categoria = Categoria.find(params[:id])
-
-    respond_to do |format|
-      if @categoria.update_attributes(params[:categoria])
-        format.html { redirect_to @categoria, notice: 'Categoria was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @categoria.errors, status: :unprocessable_entity }
-      end
+    if @categoria.update_attributes(params[:categoria])
+      redirect_to categorias_path, :notice => "Categoria atualizada com sucesso"
+    else
+      redirect_to categorias_path, :alert => "Não foi possível atualizar a categoria '#{@categoria.descricao}'. Erro: #{@categoria.errors.full_message.to_s}"
     end
   end
 
   def destroy
-    @categoria = Categoria.find(params[:id])
-    @categoria.destroy
-
-    respond_to do |format|
-      format.html { redirect_to categorias_url }
-      format.json { head :no_content }
-    end
+    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
+    categoria = Categoria.find(params[:id])
+    categoria.destroy
+    redirect_to categorias_path, :notice => "Categoria '#{categoria.descricao}' removida."
   end
 end

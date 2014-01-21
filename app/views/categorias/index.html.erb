@@ -1,21 +1,37 @@
-<h1>Listing categorias</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @categorias.each do |categoria| %>
-  <tr>
-    <td><%= link_to 'Show', categoria %></td>
-    <td><%= link_to 'Edit', edit_categoria_path(categoria) %></td>
-    <td><%= link_to 'Destroy', categoria, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Categoria', new_categoria_path %>
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Categorias</li>
+</ol>
+<%= painel_titulo("Categorias").html_safe %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Data de Cadastro</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @categorias.each do |categoria| %>
+            <tr>
+              <td><%= categoria.descricao %></td>
+              <td><%= categoria.created_at.to_date %></td>
+              <td>
+                <a data-toggle="modal" class="btn btn-xs btn-default" href="#edit-categoria-<%= categoria.id %>"  type="button">Editar</a>
+                <%= render categoria %>
+              </td>
+              <td><%= link_to("Remover", categoria_path(categoria), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <a data-toggle="modal" class="btn btn-success" href="#new-categoria"  type="button">Nova Categoria</a>
+      <%= render "categorias/new_categoria"%>
+    </div>
+  </div>
+</div>
+</div>
