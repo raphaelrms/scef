@@ -1,21 +1,31 @@
-<h1>Listing cursos</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @cursos.each do |curso| %>
-  <tr>
-    <td><%= link_to 'Show', curso %></td>
-    <td><%= link_to 'Edit', edit_curso_path(curso) %></td>
-    <td><%= link_to 'Destroy', curso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Curso', new_curso_path %>
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Cursos</li>
+</ol>
+<%= painel_titulo("Cursos").html_safe %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Ano</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @cursos.each do |curso| %>
+            <tr>
+              <td><%= link_to curso.nome, curso %></td>
+              <td><%= curso.ano %></td>
+              <td><%= link_to("Remover", curso_path(curso), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Novo curso', new_curso_path, :class => 'btn btn-success'  %>
+    </div>
+  </div>
+</div>
+</div>

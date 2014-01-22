@@ -5,4 +5,11 @@ class Curso < ActiveRecord::Base
 
   attr_accessible :nome, :descricao, :ano
 
+  #accepts_nested_attributes_for :arquivos, :reject_if => :file_field_blank?
+  #validates :arquivos, :length => { :minimum => 1 }
+  #
+  #def file_field_blank?(attributed)
+  #  attributed["arquivo"].blank?
+  #end
+
 end

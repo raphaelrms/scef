@@ -1,30 +1,17 @@
 class CursosController < ApplicationController
 
+  #before_filter :carregar_arquivos,       :only => [:new, :edit, :create, :show]
+
   def index
     @cursos = Curso.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @cursos }
-    end
   end
 
   def show
     @curso = Curso.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @curso }
-    end
   end
 
   def new
     @curso = Curso.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @curso }
-    end
   end
 
   def edit
@@ -36,8 +23,8 @@ class CursosController < ApplicationController
 
     respond_to do |format|
       if @curso.save
-        format.html { redirect_to @curso, notice: 'Curso was successfully created.' }
-        format.json { render json: @curso, status: :created, location: @curso }
+        format.html { redirect_to cursos_path, :notice => "Curso \"#{@curso.nome}\" criado com sucesso." }
+        format.json { render json =>@curso, status =>:created, location =>@curso }
       else
         format.html { render action: "new" }
         format.json { render json: @curso.errors, status: :unprocessable_entity }
@@ -46,26 +33,30 @@ class CursosController < ApplicationController
   end
 
   def update
+    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @curso = Curso.find(params[:id])
-
-    respond_to do |format|
-      if @curso.update_attributes(params[:curso])
-        format.html { redirect_to @curso, notice: 'Curso was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @curso.errors, status: :unprocessable_entity }
-      end
+    if @curso.update_attributes(params[:curso])
+      redirect_to curso_path(@curso.id), :notice => "Curso atualizado com sucesso."
+    else
+      redirect_to curso_path(@curso.id), :alert => "Não foi possível atualizar o curso. Erro: #{@curso.errors.full_message.to_s}"
     end
   end
 
   def destroy
+    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     @curso = Curso.find(params[:id])
     @curso.destroy
-
-    respond_to do |format|
-      format.html { redirect_to cursos_url }
-      format.json { head :no_content }
-    end
+    redirect_to cursos_path, :notice => "Curso '#{@curso.nome}' removido."
   end
+
+  #def carregar_arquivos
+  #  if (!params[:id].nil?)
+  #    @curso = Curso.find(params[:id]) unless !@curso.nil?
+  #    if @curso.arquivos.any?
+  #      @arquivos = @curso.arquivos
+  #    else
+  #      @arquivos = [ @curso.arquivos.build ]
+  #    end
+  #  end
+  #end
 end
