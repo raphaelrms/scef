@@ -19,6 +19,7 @@ class CursosController < ApplicationController
   end
 
   def create
+    binding.pry
     @curso = Curso.new(params[:curso])
 
     respond_to do |format|

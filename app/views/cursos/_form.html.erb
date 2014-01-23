@@ -2,17 +2,8 @@
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Cursos", cursos_path%></li>
-  <% if @curso.new_record?%>
-      <li>Novo curso</li>
-  <% else %>
-      <li>Editar curso</li>
-  <% end%>
+  <li class="active">Editar curso</li>
 </ol>
-<% if @curso.new_record?%>
-    <%= painel_titulo("Registro de curso").html_safe %>
-<% else %>
-    <%= painel_titulo("Edição de curso").html_safe %>
-<% end%>
 <div class="panel-body" id="form">
 
   <div class="row">
@@ -20,14 +11,13 @@
   </div>
   <p>
     <%= form_for @curso, :html => {:class => 'form-horizontal' } do |f| %>
-
+<fieldset>
+  <h2>Dados Cadastrais</h2>
       <div class="form-group">
         <%= f.label :nome, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
           <%= f.text_field :nome, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Nome do curso deve ser fornecido",:placeholder => "Insira o nome do curso", :value => (@curso.nome unless @curso.new_record?)%>
-          <% if @curso.new_record?%>
               <p class="help-block" style="font-size: 11px;">Insira o nome do curso. Obrigatório.</p>
-          <% end%>
         </div>
       </div>
 
@@ -45,65 +35,22 @@
         </div>
       </div>
       <br>
+</fieldset>
 
-      <!--arquivos anexados-->
-      <!--<fieldset>-->
-        <!--<#%if @curso.new_record? %>-->
-            <!--<#%= f.fields_for :arquivos, @arquivos, :html => {:multipart => true} do |arquivo| %>-->
-                <!--<div class="form-group">-->
-                  <!--<#%= #f.label :arquivo, "Anexo:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>-->
-                  <!--<div class="col-sm-2 col-md-3">-->
-                    <!--<#%= #arquivo.file_field :arquivo %>-->
-                    <!--<#% #if !arquivo.object.nil? %>-->
-                        <!--<#% #if arquivo.object.errors.any? %>-->
-                            <!--<label class="message erroForm">-->
-                              <!--<%#= edital_arquivo.object.errors.get :arquivo_file_name %>-->
-                              <!--<#%= #arquivo.object.errors.get :arquivo_file_size %>-->
-                              <!--<#%= #arquivo.object.errors.get :arquivo_content_type %>-->
-                            <!--</label>-->
-                        <!--<#% #end %>-->
-                    <!--<#% #end %>-->
-                    <!--<p class="help-block" style="font-size: 11px;">Apenas arquivos no formato PDF, com no máximo 3.0 MB</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-            <!--<%# end %>-->
-        <!--<%# else %>-->
 
-            <!--<#%= #f.fields_for :arquivos, @curso.arquivos.build, :html => {:multipart => true} do |arquivo| %>-->
-                <!--<fieldset>-->
-
-                  <!--<div id="arq_v" style="display: none" title="" url="">-->
-                    <!--<div id="arq_mensagem" style="margin-bottom: 1px !important; display: block;"></div>-->
-                    <!--<object id="arq_objeto" data="" type="application/pdf" height="864" width="1152" ></object>-->
-                  <!--</div>-->
-
-                  <!--&lt;!&ndash; GERAL &ndash;&gt;-->
-                  <!--<h3 class="headerLinha headerAlt" style="margin-top: 0px !important">-->
-                    <!--Anexos-->
-                  <!--</h3>-->
-                  <!--<span class="descritivo">Arquivos já anexados</span>-->
-                  <!--<%#@curso.arquivos.each do |arq|%>-->
-
-                      <!--<%#if arq.arquivo.exists?%>-->
-                          <!--<div id="arq" class="arq" style="margin-bottom: 1px !important; display: block;" arquivo="<#%= arq.arquivo_file_name%>" url=<#%= root_url + arq.arquivo.url %> ><a href="#"><#%=arq.arquivo_file_name%></a></div>-->
-                      <!--<%#else%>-->
-                          <!--<div title="Arquivo não existe no sistema."><#%=arq.arquivo_file_name%></div>-->
-                      <!--<#% #end %>-->
-                  <!--<#% #end %>-->
-                <!--</fieldset>-->
-            <!--<#% #end %>-->
-        <!--<#% #end%>-->
-      <!--</fieldset>-->
-      <!-- fim arquivos anexados-->
-
-      <div class="form-group">
-        <div class="col-sm-2 col-md-offset-3">
-          <% if @curso.new_record?%>
-              <%= f.submit 'Cadastrar', :class => 'btn-primary' %>
-          <% else %>
-              <%= f.submit 'Salvar', :class => 'btn-primary' %>
-          <% end%>
-        </div>
+<fieldset>
+  <h2>Outros</h2>
+      <%= f.fields_for :arquivo, @arquivo, :html => {:multipart => true} do |f| %>
+          <%= f.label :arquivo,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+          <div class="form-group">
+            <%= f.file_field :arquivo, :class => "col-xs-6 col-sm-3 col-md-3",:placeholder => "Anexe o edital do curso"%>
+          </div>
+      <%end%>
+</fieldset>
+      <br>
+      <div class="well well-sm">
+              <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+        <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
       </div>
   <% end %>
 

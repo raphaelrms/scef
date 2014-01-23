@@ -158,3 +158,10 @@
     margin-right: 11px;
     margin-bottom: -13px;
 }
+
+fieldset h2{
+    border-bottom: 2px dotted #CCC;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #002F6D;
+}
