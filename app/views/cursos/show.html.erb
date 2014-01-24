@@ -1,16 +1,73 @@
+# encoding: utf-8
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
-  <li>Cursos</li>
+  <li><%= link_to "Cursos", cursos_path%></li>
 </ol>
 <%= painel_titulo("Curso - #{@curso.nome}").html_safe %>
-<div class="panel-body">
+<div class="panel-body" id="form">
+      <fieldset>
+        <h2>Dados Cadastrais</h2>
+        <div class="form-group">
+          <p><b>Nome:</b> <%= @curso.nome %></p>
+          <p><b>Descrição: </b><%= @curso.descricao if @curso.descricao %></p>
+          <p><b>Ano: </b><%= @curso.ano %></p>
+        </div>
+        <br>
+      </fieldset>
 
-  <div class="form-group">
-    <p><b>Nome:</b> <%= @curso.nome %></p>
-    <p><b>Descrição: </b><%= @curso.descricao if @curso.descricao %></p>
-    <p><b>Ano: </b><%= @curso.ano %></p>
-  </div>
-  <%= link_to 'Editar', edit_curso_path(@curso), :class => 'btn btn-success'  %>
-  <%= link_to 'Voltar', cursos_path, :class => 'btn btn-warning'  %>
+
+      <fieldset>
+        <h2>Outros</h2>
+        <% unless @curso.arquivos.first.nil? %>
+            <table id="table">
+              <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Data de Upload do Arquivo</th>
+                <th>&nbsp; </th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @curso.arquivos.each do |arquivo| %>
+                  <tr>
+                    <td><%= arquivo.descricao %></td>
+                    <td><%=I18n.l arquivo.created_at, :format => :long_without_hours %></td>
+                    <td><%= link_to "Download", download_edital_path(arquivo), :title => arquivo.arquivo_file_name, :target => :_blank %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        <% else %>
+            <h6>Esse Curso não possui arquivos anexados</h6>
+        <% end %>
+      </fieldset>
+      <br>
+      <div class="well well-sm">
+        <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+        <%= link_to 'Editar', edit_curso_path(@curso), :class => 'btn btn-success'  %>
+      </div>
+
 </div>
 </div>
+
+<script type="text/javascript">
+
+    $(".arq").click(event,function() {
+                $("#arq_v").attr("title","Arquivo - " + this.innerText);
+                $("#arq_objeto").attr("data",this.getAttribute("url"));
+                $("#arq_mensagem").html("Caso não esteja visualizando o arquivo, clique aqui: <a href='" + this.getAttribute("url") + "'>" + this.getAttribute("arquivo") + "</a> ");
+                $("#arq_v").dialog('open'),
+                        $('.ui-dialog-titlebar').css({'text-align':'center', 'background':'#E8F6FF' });
+            }
+    );
+
+    $("#arq_v").dialog({
+        autoOpen: false,
+        height: 864,
+        width: 1152,
+        position: "center",
+        resizable: true,
+        modal: true
+    });
+
+</script>
