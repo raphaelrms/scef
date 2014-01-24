@@ -3,9 +3,9 @@ class Curso < ActiveRecord::Base
   has_many :arquivos, :dependent => :destroy
   has_many :fases
 
-  attr_accessible :nome, :descricao, :ano, :arquivos_attributes
+  attr_accessible :nome, :descricao, :ano, :arquivos_attributes,:arquivos, :descricao
 
-  accepts_nested_attributes_for :arquivos, :reject_if => :file_field_blank?
+  accepts_nested_attributes_for :arquivos
   #validates :arquivos, :length => { :minimum => 1 }
   #
   #def file_field_blank?(attributed)

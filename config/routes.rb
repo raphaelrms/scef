@@ -13,7 +13,11 @@ RailsPadrao::Application.routes.draw do
   resources :arquivos
 
 
-  resources :cursos
+  resources :cursos do
+    member do
+      get :download
+    end
+  end
 
 
   root :to => 'application#home'

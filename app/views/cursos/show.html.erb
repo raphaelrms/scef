@@ -19,9 +19,10 @@
       <fieldset>
         <h2>Outros</h2>
         <% unless @curso.arquivos.first.nil? %>
-            <table id="table">
+            <table class="table table-condensed table-striped table-hover">
               <thead>
               <tr>
+                <th>Nome</th>
                 <th>Descrição</th>
                 <th>Data de Upload do Arquivo</th>
                 <th>&nbsp; </th>
@@ -30,9 +31,10 @@
               <tbody>
               <% @curso.arquivos.each do |arquivo| %>
                   <tr>
+                    <td><%= arquivo.arquivo_file_name %></td>
                     <td><%= arquivo.descricao %></td>
-                    <td><%=I18n.l arquivo.created_at, :format => :long_without_hours %></td>
-                    <td><%= link_to "Download", download_edital_path(arquivo), :title => arquivo.arquivo_file_name, :target => :_blank %></td>
+                    <td><%=I18n.l arquivo.created_at, :format => "%m/%d/%Y" %></td>
+                    <td><%= link_to "Download", download_curso_path(arquivo), :title => arquivo.arquivo_file_name, :target => :_blank %></td>
                   </tr>
               <% end %>
               </tbody>
@@ -49,25 +51,3 @@
 
 </div>
 </div>
-
-<script type="text/javascript">
-
-    $(".arq").click(event,function() {
-                $("#arq_v").attr("title","Arquivo - " + this.innerText);
-                $("#arq_objeto").attr("data",this.getAttribute("url"));
-                $("#arq_mensagem").html("Caso não esteja visualizando o arquivo, clique aqui: <a href='" + this.getAttribute("url") + "'>" + this.getAttribute("arquivo") + "</a> ");
-                $("#arq_v").dialog('open'),
-                        $('.ui-dialog-titlebar').css({'text-align':'center', 'background':'#E8F6FF' });
-            }
-    );
-
-    $("#arq_v").dialog({
-        autoOpen: false,
-        height: 864,
-        width: 1152,
-        position: "center",
-        resizable: true,
-        modal: true
-    });
-
-</script>

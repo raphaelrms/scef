@@ -1,6 +1,6 @@
 class CursosController < ApplicationController
 
-  #before_filter :carregar_arquivos,       :only => [:new, :edit, :create, :show]
+  before_filter :carregar_arquivos, :only => [:new, :edit, :create, :show]
 
   def index
     @cursos = Curso.all
@@ -12,6 +12,7 @@ class CursosController < ApplicationController
 
   def new
     @curso = Curso.new
+    @curso.arquivos.build
   end
 
   def edit
@@ -50,14 +51,21 @@ class CursosController < ApplicationController
     redirect_to cursos_path, :notice => "Curso '#{@curso.nome}' removido."
   end
 
-  #def carregar_arquivos
-  #  if (!params[:id].nil?)
-  #    @curso = Curso.find(params[:id]) unless !@curso.nil?
-  #    if @curso.arquivos.any?
-  #      @arquivos = @curso.arquivos
-  #    else
-  #      @arquivos = [ @curso.arquivos.build ]
-  #    end
-  #  end
-  #end
+  def carregar_arquivos
+    if (!params[:id].nil?)
+      @curso = Curso.find(params[:id]) unless !@curso.nil?
+      if @curso.arquivos.any?
+        @arquivos = @curso.arquivos
+      else
+        @arquivos = [ @curso.arquivos.build ]
+      end
+    end
+  end
+
+  def download
+    #    authorize! :read, @arquivo
+    @arquivo = Arquivo.find params[:id]
+    send_file @arquivo.arquivo.path, :type=> @arquivo.arquivo.content_type, :x_sendfile=>true if @arquivo.arquivo.exists?
+  end
+
 end
