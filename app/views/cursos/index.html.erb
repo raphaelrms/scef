@@ -21,8 +21,8 @@
               <td><%= link_to curso.nome, curso %></td>
               <td><%= curso.ano %></td>
                 <td><%= link_to curso.arquivos.collect(&:arquivo_file_name).join,curso.arquivos.first%></td>
-              <td><%= link_to("Editar", edit_curso_path(curso), :class => 'btn btn-xs btn-default')%></td>
-              <td><%= link_to("Remover", curso_path(curso), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>
+              <td><%= link_to("Editar", edit_curso_path(curso), :class => 'btn btn-xs btn-default')%>
+              <%= link_to("Remover", curso_path(curso), :style => "margin-left:7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>
             </tr>
         <% end %>
         </tbody>
