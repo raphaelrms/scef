@@ -1,6 +1,7 @@
 class Arquivo < ActiveRecord::Base
   attr_accessible :arquivos,:arquivo, :descricao
-  belongs_to :curso, :inverse_of => :arquivos
+  belongs_to :curso,  :inverse_of => :arquivos
+  belongs_to :anexo, :polymorphic => true
 
   ATTACHMENT_SIZE_ERROR = ' O arquivo deve ter, no máximo, 3.0 MB. '
   ATTACHMENT_CONTENT_TYPE = ' O arquivo deve estar no formato PDF. '
