@@ -41,40 +41,25 @@
       <fieldset>
         <h2>Anexos</h2>
         <div class="row">
-
-          <%= f.fields_for f.object.arquivos, :html => {:multipart => true, :class => "form-horizontal", :role => "form"} do |arq| %>
+          <%= link_to_add_fields "   ",f,:arquivos, "btn btn-fields"%>
+          <%= f.fields_for :arquivos, :html => {:multipart => true, :class => "form-horizontal", :role => "form"} do |arq| %>
               <div class="form-group">
                 <%= arq.label :arquivo,:class => "col-md-2 control-label" %>
-                <%= arq.file_field :arquivo, :class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
-                <%= link_to_add_fields "   ",f,:arquivos, "btn btn-fields"%>
 
-                <%if @curso.arquivos.any?%>
-                    <div class="col-md-offset-10" style="margin-top:-25px;margin-right: 30px;">
-                      <span class="descritivo">Arquivos já anexados</span>
 
-                      <% unless @curso.arquivos.first.nil? %>
-                          <ul class="list-group">
-                            <% @curso.arquivos.each do |arquivo| %>
-                                <li class="list-group-item"> <%= link_to arquivo.arquivo_file_name,arquivo, {:id => "arq", "data-toggle" => "tooltip", "data-placement" => "left", "title" => arquivo.descricao}%></li>
-
-                            <% end %>
-                          </ul>
-                      <% else %>
-                          <h6>Esse Curso não possui arquivos anexados</h6>
-                      <% end %>
-                    </div>
+                <%if !arq.object.arquivo_file_name.nil? %>
+                    <div class="col-md-2 form-control-static"><%=arq.object.arquivo_file_name%></div>
+                <%else%>
+                    <%= arq.file_field :arquivos, :value => arq.object.arquivo_file_name,:class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
                 <%end%>
-
-
-              <div style="margin-top:-70px;">
-              <%= arq.label :descricao, "Descrição",:class => "col-md-2 control-label" %>
-              <div class="col-md-3">
-                <%= arq.text_field :descricao, :class => "form-control", :autofocus => true,:placeholder => "Insira uma descrição para o anexo.", :value => nil%>
-              </div>
-              </div>
+                <div style="margin-top:-70px;">
+                  <%= arq.label :descricao, "Descrição",:class => "col-md-2 control-label" %>
+                  <div class="col-md-3">
+                    <%= arq.text_field :descricao,:class => "form-control", :autofocus => true,:placeholder => "Insira uma descrição para o anexo.", :value => arq.object.descricao%>
+                  </div>
+                </div>
 
               </div>
-
           <%end%>
         </div>
       </fieldset>
@@ -92,7 +77,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $('#form').ketchup();
-        $('#form').nestedFields();
-    });
 
+    });
+    $(".tooltita").tooltip("hide");
 </script>

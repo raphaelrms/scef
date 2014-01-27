@@ -1,6 +1,10 @@
+#encoding: utf-8
 <p>
 <div class="form-group">
 <%= f.label :arquivo,:class => "col-md-2 control-label" %>
 <%= f.file_field :arquivo, :class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
+  <div class="col-md-3">
+    <%= f.text_field :descricao,:class => "form-control", :autofocus => true,:placeholder => "Insira uma descrição para o anexo."%>
+  </div>
 </div>
 </p>
