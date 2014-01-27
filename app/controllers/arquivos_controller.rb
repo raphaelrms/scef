@@ -14,7 +14,7 @@ class ArquivosController < ApplicationController
     curso = @arquivo.anexo
     respond_to do |format|
       if @arquivo.destroy
-        format.html { redirect_to curso_path(curso), :notice => "Arquivo \"#{nome}\" removida com sucesso." }
+        format.html { redirect_to curso_path(curso), :notice => "Arquivo \"#{nome}\" removido com sucesso." }
         format.json { head :no_content }
       else
         format.html { redirect_to curso_path(curso), :alert => "Erro ao remover arquivo #{nome}: #{@arquivo.errors.full_messages.to_s}" }
