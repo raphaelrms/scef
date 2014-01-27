@@ -1,5 +1,7 @@
 class CursosController < ApplicationController
 
+
+
   before_filter :carregar_arquivos, :only => [:new, :edit, :create, :show]
 
   def index
@@ -25,10 +27,10 @@ class CursosController < ApplicationController
     respond_to do |format|
       if @curso.save
         format.html { redirect_to cursos_path, :notice => "Curso \"#{@curso.nome}\" criado com sucesso." }
-        format.json { render json =>@curso, status =>:created, location =>@curso }
+        format.json { render :json =>@curso, status =>:created, :location =>@curso }
       else
-        format.html { render action: "new" }
-        format.json { render json: @curso.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @curso.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -46,7 +48,17 @@ class CursosController < ApplicationController
   def destroy
     #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     @curso = Curso.find(params[:id])
-    @curso.destroy
+    nome = @curso.nome
+    respond_to do |format|
+      if @curso.destroy
+        format.html { redirect_to curso_path, :notice => "Curso \"#{nome}\" removida com sucesso." }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to curso_path, :alert => "Erro ao remover curso #{nome}: #{@curso.errors.full_messages.to_s}" }
+        format.json { head :no_content }
+      end
+    end
+
     redirect_to cursos_path, :notice => "Curso '#{@curso.nome}' removido."
   end
 
