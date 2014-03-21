@@ -3,69 +3,50 @@ class FasesController < ApplicationController
   def index
     @fases = Fase.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @fases }
-    end
+    @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
   end
 
   def show
-    @fas = Fase.find(params[:id])
+    @fase = Fase.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @fas }
+      format.json { render json: @fase }
     end
   end
 
   def new
-    @fas = Fase.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @fas }
-    end
+    @fase = Fase.new
   end
 
   def edit
-    @fas = Fase.find(params[:id])
+    @fase = Fase.find(params[:id])
   end
 
   def create
-    @fas = Fase.new(params[:fas])
+    @fase = Fase.new(params[new_fase_path])
 
-    respond_to do |format|
-      if @fas.save
-        format.html { redirect_to @fas, notice: 'Fase was successfully created.' }
-        format.json { render json: @fas, status: :created, location: @fas }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @fas.errors, status: :unprocessable_entity }
-      end
+    if @fase.save
+      redirect_to fases_path, :notice => "Fase criada com sucesso"
+    else
+      redirect_to fases_path, :alert => "Não foi possível criar a fase '#{@fase.descricao}'. Erro: #{@fase.errors.full_message.to_s}"
     end
   end
 
   def update
-    @fas = Fase.find(params[:id])
-
-    respond_to do |format|
-      if @fas.update_attributes(params[:fas])
-        format.html { redirect_to @fas, notice: 'Fase was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @fas.errors, status: :unprocessable_entity }
-      end
+    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
+    @fase = Fase.find(params[:id])
+    if @fase.update_attributes(params[:categoria])
+      redirect_to fases_path, :notice => "Fase atualizada com sucesso"
+    else
+      redirect_to fases_path, :alert => "Não foi possível atualizar a fase '#{@fase.descricao}'. Erro: #{@fase.errors.full_message.to_s}"
     end
   end
 
   def destroy
-    @fas = Fase.find(params[:id])
-    @fas.destroy
-
-    respond_to do |format|
-      format.html { redirect_to fases_url }
-      format.json { head :no_content }
-    end
+    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
+    fase = Fase.find(params[:id])
+    fase.destroy
+    redirect_to fases_path, :notice => "Fase '#{fase.descricao}' removida."
   end
 end

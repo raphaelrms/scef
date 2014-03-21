@@ -1,0 +1,49 @@
+<div id="edit-fase-<%= fase.id %>" aria-hidden="true" role="dialog" aria-labelledby="meuModal_<%= fase.id %>" class="modal" style="display: none;">
+  <%= simple_form_for fase, :url => fase_path(fase), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3 class="modal-title" id="meuModal_<%= categoria.id %>">Editar Fase</h3>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <div class="form-group">
+          <%= f.label :curso_id, "Curso:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+          <div class="col-sm-9">
+            <%= f.select :curso_id, @cursos, :include_blank => true, :selected_text => fase.curso.nome,:class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Curso", :placeholder => "Selecione o curso" %>
+          </div>
+        </div>
+        <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a nova descrição", :value => fase.descricao%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :orcamento, "Orçamento:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :orcamento, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Orçamento",:placeholder => "Insira o novo orçamento", :value => fase.orcamento%>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit "Alterar", :class => "btn" %>
+      <a class="btn" data-dismiss="modal" href="#">Fechar</a>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#edit-fase-<%= fase.id %>').ketchup();
+
+        $("#orcamento").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+
+    });
+</script>

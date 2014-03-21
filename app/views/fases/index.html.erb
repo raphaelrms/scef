@@ -1,21 +1,39 @@
-<h1>Listing fases</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @fases.each do |fas| %>
-  <tr>
-    <td><%= link_to 'Show', fas %></td>
-    <td><%= link_to 'Edit', edit_fas_path(fas) %></td>
-    <td><%= link_to 'Destroy', fas, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Fase', new_fas_path %>
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li class="active">Fases</li>
+</ol>
+<%= painel_titulo("Fases").html_safe %>
+<div class="panel-body">
+  <div class="span8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Curso</th>
+          <th>Descrição</th>
+          <th>Orçamento</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @fases.each do |fase| %>
+            <tr>
+              <td><%= fase.curso.nome %></td>
+              <td><%= fase.descricao %></td>
+              <td>R$<%= fase.orçamento %></td>
+              <td>
+                <a data-toggle="modal" class="btn btn-xs btn-default" href="#edit-fase-<%= fase.id %>"  type="button">Editar</a>
+                <%= render fase %>
+              </td>
+              <td><%= link_to("Remover", fase_path(fase), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <a data-toggle="modal" class="btn btn-success" href="#new-fase"  type="button">Nova Fase</a>
+      <%= render "fases/new_fase"%>
+    </div>
+  </div>
+</div>
+</div>
