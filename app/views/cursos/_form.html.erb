@@ -50,7 +50,7 @@
                 <%if !arq.object.arquivo_file_name.nil? %>
                     <div class="col-md-2 form-control-static"><%=arq.object.arquivo_file_name%></div>
                 <%else%>
-                    <%= arq.file_field :arquivos, :value => arq.object.arquivo_file_name,:class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
+                    <%= arq.file_field :arquivo, :value => arq.object.arquivo_file_name,:class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
                 <%end%>
                 <div style="margin-top:-70px;">
                   <%= arq.label :descricao, "Descrição",:class => "col-md-2 control-label" %>

@@ -6,6 +6,7 @@
             <a class="close" data-dismiss="modal">&#215;</a>
             <h3 class="modal-title" id="meuModal">Nova Fase</h3>
           </div>
+          <br/>
           <div class="modal-body">
             <div class="form-group">
               <%= f.label :curso_id, "Curso:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
@@ -13,19 +14,24 @@
                 <%= f.select :curso_id, @cursos, :include_blank => true, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Curso", :placeholder => "Selecione o curso" %>
               </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
               <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
               <div class="col-sm-9">
                 <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a descrição"%>
               </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
               <%= f.label :orcamento, "Orçamento:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
               <div class="col-sm-9">
-                <%= f.text_field :orcamento, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Orçamento",:placeholder => "Insira o orçamento"%>
+                <%= f.text_field :orcamento, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Orçamento",:placeholder => "Insira o orçamento", :id => "orcamento"%>
               </div>
             </div>
           </div>
+          <br/>
           <div class="modal-footer">
             <%= f.submit "Salvar", :class => "btn" %>
             <a class="btn" data-dismiss="modal" href="#">Fechar</a>
