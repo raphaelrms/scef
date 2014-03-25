@@ -1,8 +1,9 @@
+#encoding: utf-8
 class CursosController < ApplicationController
 
-
-
   before_filter :carregar_arquivos, :only => [:new, :edit, :create, :show]
+
+  load_and_authorize_resource
 
   def index
     @cursos = Curso.all

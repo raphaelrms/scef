@@ -18,12 +18,18 @@
         </tr>
         </thead>
         <tbody>
-        <div id="items">
-
-                </div>
+        <%@fases.each do |fase|%>
+        <tr>
+        <td><%=fase.curso.nome%></td>
+        <td><%=fase.descricao%></td>
+        <td><div id="fase_orcamento_show"><%=fase.orcamento%></div></td>
+        <td><%= link_to("Detalhar", fase_path(fase), :class => 'btn btn-xs btn-default')%></td>
+        </tr>
+        <%end%>
 
         </tbody>
       </table>
+      <div align="right"><%= will_paginate @fases,:remote => true,:renderer => BootstrapPagination::Rails %></div>
       <div class="row">
         <a data-toggle="modal" class="btn btn-success" href="#new-fase-nova"  type="button">Nova Fase</a>
         <%= render "fases/new_fase"%>
@@ -36,13 +42,3 @@
 </div>
 </div>
 
-
-<script type="text/javascript">
-    $(document).ready(function()
-            {
-                $("#products").dataTable({
-                    sPaginationType: "bootstrap"
-                });
-            }
-    );
-</script>

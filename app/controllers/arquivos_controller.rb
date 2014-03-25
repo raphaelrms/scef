@@ -1,6 +1,6 @@
 class ArquivosController < ApplicationController
 
-
+  load_and_authorize_resource
 
   def show
     @arquivo = Arquivo.find params[:id]

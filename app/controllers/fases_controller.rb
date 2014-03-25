@@ -1,8 +1,10 @@
 #encoding: utf-8
 class FasesController < ApplicationController
 
+  load_and_authorize_resource
+
   def index
-    @fases = Fase.all
+    @fases = Fase.paginate(:page => params[:page], :per_page => 20)
     @fase_nova = Fase.new
     @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
     respond_to do |format|

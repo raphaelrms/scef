@@ -1,4 +1,7 @@
 pt-BR:
+  will_paginate:
+    next_label: Próxima
+    previous_label: Anterior
   devise:
     failure:
       user:

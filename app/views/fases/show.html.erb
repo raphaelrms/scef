@@ -1,5 +1,38 @@
-<p id="notice"><%= notice %></p>
+# encoding: utf-8
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><%= link_to "Fases", fases_path%></li>
+</ol>
+<%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
+<div class="panel-body" id="form">
+  <div class="row">
+    <div class="col-md-offset-10"> <%= link_to "Editar fase", edit_fase_path(@fase), :class => "label label-primary "%></div>
+  </div>
+  <fieldset>
+    <div class="form-group">
+      <p><b>Descrição:</b> <%= @fase.descricao %></p>
+      <p><b>Curso: </b><%= @fase.curso.nome%></p>
+      <b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span>
+    </div>
+  </fieldset>
+  <div class="well well-sm">
+    <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+  </div>
+
+</div>
+</div>
 
 
-<%= link_to 'Edit', edit_fase_path(@fase) %> |
-<%= link_to 'Back', fases_path %>
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+
+        $("[id=fase_orcamento_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+    });
+</script>

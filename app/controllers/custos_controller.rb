@@ -1,4 +1,7 @@
+#encoding: utf-8
 class CustosController < ApplicationController
+
+  load_and_authorize_resource
 
   def index
     @custos = Custo.joins(:fase,:categoria).all
