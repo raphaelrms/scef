@@ -1,11 +1,11 @@
 class CustosController < ApplicationController
 
   def index
-    @custos = Custo.all
+    @custos = Custo.joins(:fase,:categoria).all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @custos }
+      format.json { render :json => @custos }
     end
   end
 
@@ -14,7 +14,7 @@ class CustosController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @custo }
+      format.json { render :json =>  @custo }
     end
   end
 
@@ -23,7 +23,7 @@ class CustosController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @custo }
+      format.json { render :json =>  @custo }
     end
   end
 
@@ -36,11 +36,11 @@ class CustosController < ApplicationController
 
     respond_to do |format|
       if @custo.save
-        format.html { redirect_to @custo, notice: 'Custo was successfully created.' }
-        format.json { render json: @custo, status: :created, location: @custo }
+        format.html { redirect_to @custo, :notice =>  'Custo was successfully created.' }
+        format.json { render :json =>  @custo, :status =>   :created, :location =>  @custo }
       else
-        format.html { render action: "new" }
-        format.json { render json: @custo.errors, status: :unprocessable_entity }
+        format.html { render :action =>  "new" }
+        format.json { render :json =>  @custo.errors, :status =>   :unprocessable_entity }
       end
     end
   end
@@ -50,11 +50,11 @@ class CustosController < ApplicationController
 
     respond_to do |format|
       if @custo.update_attributes(params[:custo])
-        format.html { redirect_to @custo, notice: 'Custo was successfully updated.' }
+        format.html { redirect_to @custo, :notice =>  'Custo was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @custo.errors, status: :unprocessable_entity }
+        format.html { render :action =>  "edit" }
+        format.json { render :json =>  @custo.errors, :status =>   :unprocessable_entity }
       end
     end
   end

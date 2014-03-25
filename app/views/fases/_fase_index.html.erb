@@ -1,0 +1,15 @@
+#encoding: utf-8
+<% @fases.each do |fase| %>
+    <tr>
+      <td><%= fase.curso.nome %></td>
+      <td><%= fase.descricao %></td>
+      <td><div id="fase_orcamento_show"><%= fase.orcamento %></div></td>
+      <td>
+        <a data-toggle="modal" class="btn btn-xs btn-default" href="#edit-fase-<%= fase.id %>"  type="button">Editar</a>
+        <%= render fase%>
+      </td>
+      <td><%= link_to("Remover", fases_path(fase), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
+    </tr>
+<% end %>
+  <%= will_paginate @fases,:renderer => BootstrapPagination::Rails%>
+

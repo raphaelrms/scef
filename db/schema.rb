@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140126011431) do
+ActiveRecord::Schema.define(:version => 20140322202856) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20140126011431) do
     t.integer  "fase_id",      :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "descricao"
   end
 
   create_table "editais", :force => true do |t|
@@ -55,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20140126011431) do
   create_table "fases", :force => true do |t|
     t.string   "descricao"
     t.integer  "curso_id",   :null => false
-    t.float    "orçamento"
+    t.integer  "orcamento"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

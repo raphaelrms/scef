@@ -6,10 +6,6 @@ RailsPadrao::Application.routes.draw do
 
   resources :custos
 
-
-  resources :fases
-
-
   resources :arquivos
 
 
@@ -60,6 +56,6 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
-
+  resources :fases
 
 end

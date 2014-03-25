@@ -4,6 +4,7 @@ class CreateCustos < ActiveRecord::Migration
       t.float :valor
       t.integer :categoria_id, :null => false, :references => [:categorias, :id]
       t.integer :fase_id, :null => false, :references => [:fases, :id]
+      t.string  :descricao
       t.timestamps
     end
   end

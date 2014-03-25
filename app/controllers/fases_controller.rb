@@ -1,9 +1,14 @@
+#encoding: utf-8
 class FasesController < ApplicationController
 
   def index
     @fases = Fase.all
-
+    @fase_nova = Fase.new
     @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
+    respond_to do |format|
+      format.html
+      format.js { render :partial => 'fase_index' }
+    end
   end
 
   def show
@@ -17,6 +22,7 @@ class FasesController < ApplicationController
 
   def new
     @fase = Fase.new
+
   end
 
   def edit
@@ -24,8 +30,9 @@ class FasesController < ApplicationController
   end
 
   def create
-    @fase = Fase.new(params[new_fase_path])
-
+    #Não consegui achar forma melhor de tirar o
+    params[:fase][:orcamento] = params[:fase][:orcamento].split('.').join.split(',').join
+    @fase = Fase.new(params[:fase])
     if @fase.save
       redirect_to fases_path, :notice => "Fase criada com sucesso"
     else
@@ -36,7 +43,7 @@ class FasesController < ApplicationController
   def update
     #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @fase = Fase.find(params[:id])
-    if @fase.update_attributes(params[:categoria])
+    if @fase.update_attributes(params[:fase])
       redirect_to fases_path, :notice => "Fase atualizada com sucesso"
     else
       redirect_to fases_path, :alert => "Não foi possível atualizar a fase '#{@fase.descricao}'. Erro: #{@fase.errors.full_message.to_s}"

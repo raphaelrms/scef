@@ -1,3 +1,4 @@
+#encoding: utf-8
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li class="active">Fases</li>
@@ -17,23 +18,31 @@
         </tr>
         </thead>
         <tbody>
-        <% @fases.each do |fase| %>
-            <tr>
-              <td><%= fase.curso.nome %></td>
-              <td><%= fase.descricao %></td>
-              <td>R$<%= fase.orçamento %></td>
-              <td>
-                <a data-toggle="modal" class="btn btn-xs btn-default" href="#edit-fase-<%= fase.id %>"  type="button">Editar</a>
-                <%= render fase %>
-              </td>
-              <td><%= link_to("Remover", fase_path(fase), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
-            </tr>
-        <% end %>
+        <div id="items">
+
+                </div>
+
         </tbody>
       </table>
-      <a data-toggle="modal" class="btn btn-success" href="#new-fase"  type="button">Nova Fase</a>
-      <%= render "fases/new_fase"%>
+      <div class="row">
+        <a data-toggle="modal" class="btn btn-success" href="#new-fase-nova"  type="button">Nova Fase</a>
+        <%= render "fases/new_fase"%>
+        <div class="col-md-offset-8">
+
+        </div>
+      </div>
     </div>
   </div>
 </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function()
+            {
+                $("#products").dataTable({
+                    sPaginationType: "bootstrap"
+                });
+            }
+    );
+</script>

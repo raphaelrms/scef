@@ -6,4 +6,6 @@ class Custo < ActiveRecord::Base
 
   attr_accessible :valor, :fase_id, :categoria_id
 
+
+
 end

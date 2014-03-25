@@ -1,5 +1,8 @@
 pt-BR:
   devise:
+    failure:
+      user:
+        not_found_in_database: Usuário ou senha inválidos.
     sessions:
       user:
         signed_in: Você foi autenticado com sucesso.
@@ -135,7 +138,7 @@ pt-BR:
         other: ! 'Não foi possível gravar %{model}: %{count} erros.'
   helpers:
     select:
-      prompt: Por favor selecione
+      prompt: Selecione uma opção
     submit:
       create: Criar %{model}
       submit: Salvar %{model}

@@ -1,10 +1,65 @@
-<%= simple_form_for(@fas) do |f| %>
-  <%= f.error_notification %>
+<%
+   @fase = f.object
+   %>
+# encoding: utf-8
+    <fieldset>
+      <h2>Dados Cadastrais</h2>
 
-  <div class="form-inputs">
-  </div>
+      <div class="form-group">
+        <%= f.label :descricao, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-7">
+          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@fase.descricao if (!@fase.nil? && !@fase.new_record?))%>
+          <p class="help-block" style="font-size: 11px;">Insira o nome da fase. Obrigatório.</p>
+        </div>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+      <%#= f.fields_for :curso do |f| %>
+      <div class="form-group">
+        <%= f.label :curso,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-7">
+          <%= f.collection_select :curso_id,Curso.all,:id,:nome,{ :prompt => true },{:class => "form-control"} %>
+          <p class="help-block" style="font-size: 11px;">Insira o curso do custo. Obrigatório.</p>
+        </div>
+      </div>
+      <%#end%>
+      <div class="form-group">
+        <%= f.label :orcamento,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <div class="col-sm-7">
+          <%= f.text_field :orcamento, :class => "form-control","data-validate" => "validate(required)", :title => "O orçamento deve ser inserido", :value => (@fase.orcamento if (!@fase.nil? && !@fase.new_record?))%>
+          <p class="help-block" style="font-size: 11px;">Insira o orçamento do custo. Obrigatório.</p>
+        </div>
+      </div>
+
+
+      <br>
+
+      <div class="col-sm-2 col-md-11">
+        <div class="well well-sm">
+          <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+          <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    </fieldset>
+
+
+
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+
+        $("[id=fase_orcamento]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: ".",
+            clearPrefix: true
+        });
+
+        $("[id=fase_orcamento_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+    });
+</script>

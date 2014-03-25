@@ -1,5 +1,41 @@
-<h1>New fas</h1>
+# encoding: utf-8
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><%= link_to "Fases", custos_path%></li>
+  <li>Novo fase</li>
+</ol>
+<%= painel_titulo("Cadastro de Fases").html_safe %>
+<div class="panel-body">
 
-<%= render 'form' %>
+  <div class="row">
+    <div class="col-md-10"> <%= exibe_erros(@fase).html_safe if @fase.errors.any?%></div>
+  </div>
+  <p>
+    <%= form_for @fase, :html => {:class => 'form-horizontal' } do |f| %>
 
-<%= link_to 'Back', fases_path %>
+        <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+
+      <div class="form-group">
+        <div class="col-sm-2 col-md-offset-3">
+          <%= f.submit 'Cadastrar', :class => 'btn-primary' %>
+        </div>
+      </div>
+  <% end %>
+
+
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#new_fase').ketchup();
+
+
+    });
+
+    $("#fase_orcamento").priceFormat({
+        prefix: "R$ ",
+        centsSeparator: ",",
+        thousandsSeparator: "." ,
+        clearPrefix: true
+    });
+</script>

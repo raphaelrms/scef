@@ -1,10 +1,51 @@
+# encoding: utf-8
 <%= simple_form_for(@custo) do |f| %>
-  <%= f.error_notification %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-  </div>
+    <fieldset>
+      <h2>Dados Cadastrais</h2>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+
+
+
+      <div class="form-group">
+        <%= f.label :descricao, "Nome:",:class => "col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@custo.descricao unless @custo.new_record?)%>
+          <p class="help-block" style="font-size: 11px;">Insira a descrição do custo. Obrigatório.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :categoria,:class => "col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+          <%= f.select :categoria, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+          <p class="help-block" style="font-size: 11px;">Insira a categoria do custo. Obrigatório.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :fase,:class => "col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+          <%= f.select :fases, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+          <p class="help-block" style="font-size: 11px;">Insira a fase do custo. Obrigatório.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :descricao, "Nome:",:class => "col-md-2 control-label" %>
+        <div class="col-sm-2 col-md-3">
+          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@custo.descricao unless @custo.new_record?)%>
+          <p class="help-block" style="font-size: 11px;">Insira a descrição do custo. Obrigatório.</p>
+        </div>
+      </div>
+      <br>
+
+      <div class="col-sm-2 col-md-11">
+        <div class="well well-sm">
+          <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+          <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
+        </div>
+        </div>
+      </fieldset>
 <% end %>

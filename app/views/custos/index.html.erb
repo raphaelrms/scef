@@ -1,21 +1,28 @@
-<h1>Listing custos</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul class="nav nav-list">
+  <li class="nav-header"  data-toggle="collapse" data-target="#test">
+    <div class="row">
+      Listing custos <span class="col-md-offset-4">x</span>
+    </div>
 
-<% @custos.each do |custo| %>
-  <tr>
-    <td><%= link_to 'Show', custo %></td>
-    <td><%= link_to 'Edit', edit_custo_path(custo) %></td>
-    <td><%= link_to 'Destroy', custo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
 
+  <ul class="nav nav-list collapse" id="test">
+<%# @custos.each do |custo| %>
+
+        <li><a href="/ticket_list.cfm" title="Show list of tickets">Open Tickets</a>
+    </li>
+
+        <li><a href="/account/" title="Edit user accounts">Accounts / Community</a>
+    </li>
+
+    <%#= link_to 'Show', custo %>
+    <%#= link_to 'Edit', edit_custo_path(custo) %>
+    <%#= link_to 'Destroy', custo, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </ul>
+<%# end %>
+
+  </li>
+</ul>
 <br />
 
 <%= link_to 'New Custo', new_custo_path %>

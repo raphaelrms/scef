@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require jquery.ketchup
 //= require jquery.nested-fields
+//= require dataTables/jquery.dataTables.bootstrap3
 //= require_tree .
 
 function add_fields(link, association, content) {

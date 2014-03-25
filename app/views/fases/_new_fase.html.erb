@@ -1,55 +1,25 @@
-<div id="new-fase" aria-hidden="true" role="dialog" aria-labelledby="meuModal" class="modal" style="display: none;">
-  <%= simple_form_for (new_categoria_path) do |f| %>
+<div id="new-fase-nova" aria-hidden="true" role="dialog" aria-labelledby="meuModal_nova" class="modal" style="display: none;">
+  <%#= simple_form_for(@fase_nova, :url => fase_path(@fase_nova),:html => {:class => 'form-horizontal' })  do |f| %>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal">&#215;</a>
-            <h3 class="modal-title" id="meuModal">Nova Fase</h3>
+            <h3 class="modal-title" id="meuModal_nova">Nova Fase</h3>
           </div>
-          <br/>
-          <div class="modal-body">
-            <div class="form-group">
-              <%= f.label :curso_id, "Curso:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-              <div class="col-sm-9">
-                <%= f.select :curso_id, @cursos, :include_blank => true, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Curso", :placeholder => "Selecione o curso" %>
-              </div>
-            </div>
-            <br/>
-            <br/>
-            <div class="form-group">
-              <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-              <div class="col-sm-9">
-                <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a descrição"%>
-              </div>
-            </div>
-            <br/>
-            <br/>
-            <div class="form-group">
-              <%= f.label :orcamento, "Orçamento:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-              <div class="col-sm-9">
-                <%= f.text_field :orcamento, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Orçamento",:placeholder => "Insira o orçamento", :id => "orcamento"%>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div class="modal-footer">
-            <%= f.submit "Salvar", :class => "btn" %>
-            <a class="btn" data-dismiss="modal" href="#">Fechar</a>
-          </div>
-        </div>
-      </div>
-  <% end %>
+            <%= form_for @fase_nova, :html => {:class => 'form-horizontal' } do |f| %>
+              <div class="modal-body">
+                <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+                </div>
+            <% end %>
+
+  <%# end %>
+  </div>
+  </div>
 </div>
 
 <script type="text/javascript">
     $( document ).ready(function() {
-        $('#new-fase').ketchup();
-
-        $("#orcamento").priceFormat({
-            prefix: "R$ ",
-            centsSeparator: ",",
-            thousandsSeparator: "."
-        });
-
+        $('#new-fase-nova').ketchup();
     });
+
 </script>

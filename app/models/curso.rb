@@ -4,7 +4,7 @@ class Curso < ActiveRecord::Base
 
   has_many :fases
 
-  attr_accessible :nome, :descricao, :ano, :descricao, :anexo_attributes,:arquivos_attributes
+  attr_accessible :nome, :descricao, :ano, :descricao, :anexo_attributes,:arquivos_attributes,:fases_attributes
 
   accepts_nested_attributes_for :arquivos
 

@@ -1,6 +1,6 @@
 #encoding: utf-8
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '1.9.3'
 gem 'rails', '3.2.16'
 gem 'mysql2'
 group :assets do
@@ -11,6 +11,7 @@ end
 gem 'jquery-rails','3.0.4'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem "awesome_nested_fields"
+gem 'jquery-datatables-rails'
 gem 'paperclip'
 gem 'cancan'
 gem 'foreigner'

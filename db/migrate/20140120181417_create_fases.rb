@@ -3,7 +3,7 @@ class CreateFases < ActiveRecord::Migration
     create_table :fases do |t|
       t.string :descricao
       t.integer :curso_id, :null => false, :references => [:cursos, :id]
-      t.float :orcamento
+      t.integer :orcamento
       t.timestamps
     end
   end
