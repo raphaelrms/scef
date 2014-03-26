@@ -6,7 +6,8 @@
 <%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
 <div class="panel-body" id="form">
   <div class="row">
-    <div class="col-md-offset-10"> <%= link_to "Editar fase", edit_fase_path(@fase), :class => "label label-primary "%></div>
+    <div class="col-md-offset-10"> <%= link_to "Editar fase", edit_fase_path(@fase), :class => "label label-primary "%>
+    <%= link_to "Excluir", fase_path(@fase), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => (@fase.custos.count > 0 ? "Existem custos atrelados a esta fase. Tem certeza que deseja exclui-la?" : "Tem certeza que deseja excluir esta fase?")}%></div>
   </div>
   <fieldset>
     <div class="form-group">

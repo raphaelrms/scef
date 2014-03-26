@@ -2,9 +2,9 @@
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Cursos", cursos_path%></li>
-  <li class="active">Editar curso</li>
+  <li class="active"><%=@curso.id.nil? ? "Cadastrar curso" : "Editar curso"%></li>
 </ol>
-<%= painel_titulo("Curso - #{@curso.nome}").html_safe %>
+<%= painel_titulo(@curso.id.nil? ? "Novo curso" : "Curso - #{@curso.nome}").html_safe%>
 <div class="panel-body" id="form">
 
   <div class="row">

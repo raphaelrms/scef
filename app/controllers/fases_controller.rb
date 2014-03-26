@@ -43,7 +43,6 @@ class FasesController < ApplicationController
   end
 
   def update
-    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @fase = Fase.find(params[:id])
     if @fase.update_attributes(params[:fase])
       redirect_to fases_path, :notice => "Fase atualizada com sucesso"
@@ -53,9 +52,11 @@ class FasesController < ApplicationController
   end
 
   def destroy
-    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
+
     fase = Fase.find(params[:id])
+
     fase.destroy
     redirect_to fases_path, :notice => "Fase '#{fase.descricao}' removida."
+
   end
 end

@@ -5,6 +5,9 @@
 </ol>
 <%= painel_titulo("Curso - #{@curso.nome}").html_safe %>
 <div class="panel-body" id="form">
+  <div class="row">
+    <div class="col-md-offset-10"> <%= link_to 'Editar', edit_curso_path(@curso), :class => 'label label-primary'  %>
+  </div>
       <fieldset>
         <h2>Dados Cadastrais</h2>
         <div class="form-group">
@@ -47,7 +50,6 @@
       <br>
       <div class="well well-sm">
         <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
-        <%= link_to 'Editar', edit_curso_path(@curso), :class => 'btn btn-success'  %>
       </div>
 
 </div>
