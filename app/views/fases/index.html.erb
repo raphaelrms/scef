@@ -24,8 +24,8 @@
         <td><%=link_to fase.descricao, fase%></td>
         <td><div id="fase_orcamento_show"><%=fase.orcamento%></div></td>
         <td><%= link_to("Detalhar", fase_path(fase), :class => 'btn btn-xs btn-default')%>
-          <%= link_to "Editar fase", edit_fase_path(fase), :class => "label label-primary ", :style => "margin-left:7px;"%>
-          <%= link_to "Excluir", fase_path(fase), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => (fase.custos.count > 0 ? "Existem custos atrelados a esta fase. Tem certeza que deseja excluir a fase <strong>#{fase.descricao.mb_chars.upcase}</strong>?" : "Tem certeza que deseja excluir a fase <strong>#{fase.descricao.mb_chars.upcase}</strong>?")}%></td>
+          <%= link_to "Editar fase", edit_fase_path(fase), :class => "btn btn-xs btn-primary ", :style => "margin-left:7px;"%>
+          <%= link_to "Excluir", fase_path(fase), :method => "delete", :class => "btn btn-xs btn-danger ", :style => "margin-left:7px;", :data => {:confirm => (fase.custos.count > 0 ? "Existem custos atrelados a esta fase. Tem certeza que deseja excluir a fase <strong>#{fase.descricao.mb_chars.upcase}</strong>?" : "Tem certeza que deseja excluir a fase <strong>#{fase.descricao.mb_chars.upcase}</strong>?")}%></td>
         </tr>
         <%end%>
 

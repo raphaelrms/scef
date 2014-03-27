@@ -21,10 +21,10 @@
               <td><%= categoria.descricao %></td>
               <td><%= categoria.created_at.to_date %></td>
               <td>
-                <a data-toggle="modal" class="btn btn-xs btn-default" href="#edit-categoria-<%= categoria.id %>"  type="button">Editar</a>
+                <a data-toggle="modal" class="btn btn-xs btn-primary" href="#edit-categoria-<%= categoria.id %>"  type="button">Editar</a>
                 <%= render categoria %>
               </td>
-              <td><%= link_to("Remover", categoria_path(categoria), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
+              <td><%= link_to("Remover", categoria_path(categoria), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza que deseja excluir a categoria <strong>"+categoria.descricao+"</strong>?" }, :method => :delete, :class => 'btn btn-xs btn-danger') %></td>
             </tr>
         <% end %>
         </tbody>

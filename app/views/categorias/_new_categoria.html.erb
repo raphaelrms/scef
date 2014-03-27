@@ -10,12 +10,12 @@
             <div class="form-group">
               <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
               <div class="col-sm-9">
-                <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a descrição"%>
+                <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)",:title => "Descrição",:placeholder => "Insira a descrição"%>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <%= f.submit "Salvar", :class => "btn" %>
+            <%= f.submit "Salvar", :class => "btn btn-primary" %>
             <a class="btn" data-dismiss="modal" href="#">Fechar</a>
           </div>
         </div>

@@ -4,7 +4,8 @@ class CustosController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @custos = Custo.joins(:fase,:categoria).all
+    @custos = Custo.paginate(:page => params[:page], :per_page => 10)
+    @custo_novo = Custo.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,28 +38,19 @@ class CustosController < ApplicationController
   def create
     @custo = Custo.new(params[:custo])
 
-    respond_to do |format|
-      if @custo.save
-        format.html { redirect_to @custo, :notice =>  'Custo was successfully created.' }
-        format.json { render :json =>  @custo, :status =>   :created, :location =>  @custo }
-      else
-        format.html { render :action =>  "new" }
-        format.json { render :json =>  @custo.errors, :status =>   :unprocessable_entity }
-      end
+    if @custo.save
+      redirect_to custos_path, :notice => "Custo criado com sucesso"
+    else
+      redirect_to custos_path, :alert => "Não foi possível criar o custo. Erro: #{@custo.errors.full_message.to_s}"
     end
   end
 
   def update
     @custo = Custo.find(params[:id])
-
-    respond_to do |format|
-      if @custo.update_attributes(params[:custo])
-        format.html { redirect_to @custo, :notice =>  'Custo was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render :action =>  "edit" }
-        format.json { render :json =>  @custo.errors, :status =>   :unprocessable_entity }
-      end
+    if @custo.update_attributes(params[:custo])
+      redirect_to custos_path, :notice => "Custo atualizado com sucesso"
+    else
+      redirect_to custos_path, :alert => "Não foi possível atualizar o custo da categoria '#{@custo.categoria.descricao}'. Erro: #{@custo.errors.full_message.to_s}"
     end
   end
 

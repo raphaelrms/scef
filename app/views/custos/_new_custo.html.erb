@@ -1,0 +1,25 @@
+<div id="new_custo" aria-hidden="true" role="dialog" aria-labelledby="meuModal_novo" class="modal" style="display: none;">
+  <%#= simple_form_for(@fase_nova, :url => fase_path(@fase_nova),:html => {:class => 'form-horizontal' })  do |f| %>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal">&#215;</a>
+            <h3 class="modal-title" id="meuModal_nova">Novo Custo</h3>
+          </div>
+            <%= form_for @custo_novo, :html => {:class => 'form-horizontal' } do |f| %>
+              <div class="modal-body">
+                <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+                </div>
+            <% end %>
+
+  <%# end %>
+  </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#new_custo').ketchup();
+    });
+
+</script>

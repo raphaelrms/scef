@@ -1,42 +1,38 @@
 # encoding: utf-8
-<%= simple_form_for(@custo) do |f| %>
-    <%= f.error_notification %>
-
+<%
+   @custo = f.object
+%>
     <fieldset>
       <h2>Dados Cadastrais</h2>
 
-
-
-
       <div class="form-group">
-        <%= f.label :descricao, "Nome:",:class => "col-md-2 control-label" %>
+        <%= f.label :categoria_id, "Categoria:",:class => "col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@custo.descricao unless @custo.new_record?)%>
-          <p class="help-block" style="font-size: 11px;">Insira a descrição do custo. Obrigatório.</p>
+          <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+          <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :categoria,:class => "col-md-2 control-label" %>
+        <%= f.label :fase_id, "Fase:",:class => "col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.select :categoria, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
-          <p class="help-block" style="font-size: 11px;">Insira a categoria do custo. Obrigatório.</p>
+          <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+          <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :fase,:class => "col-md-2 control-label" %>
+        <%= f.label :valor, "Valor:",:class => "col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.select :fases, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
-          <p class="help-block" style="font-size: 11px;">Insira a fase do custo. Obrigatório.</p>
+          <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
+          <p class="help-block" style="font-size: 11px;">Insira o valor do custo. Obrigatório.</p>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :descricao, "Nome:",:class => "col-md-2 control-label" %>
+        <%= f.label :observacoes, "Observações:",:class => "col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@custo.descricao unless @custo.new_record?)%>
-          <p class="help-block" style="font-size: 11px;">Insira a descrição do custo. Obrigatório.</p>
+          <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecido", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
         </div>
       </div>
       <br>
@@ -48,4 +44,24 @@
         </div>
         </div>
       </fieldset>
-<% end %>
+
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+
+        $("[id=custo_valor]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: ".",
+            clearPrefix: true
+        });
+
+        $("[id=custo_valor_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+    });
+</script>

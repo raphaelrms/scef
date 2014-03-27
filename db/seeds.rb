@@ -20,3 +20,7 @@ user.add_role :admin
 Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'
 
 Permission.find_or_create_by_action_and_subject_class_and_subject_id :action => 'show', :subject_class => 'user', :subject_id => 'current_user.id'
+
+puts 'Criando categoria "SEM CATEGORIA"'
+categoria = Categoria.find_or_create_by_descricao :descricao => "SEM CATEGORIA"
+puts "Categoria '#{categoria}' criada com sucesso."

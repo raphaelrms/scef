@@ -34,7 +34,6 @@ class CategoriasController < ApplicationController
   end
 
   def update
-    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @categoria = Categoria.find(params[:id])
     if @categoria.update_attributes(params[:categoria])
       redirect_to categorias_path, :notice => "Categoria atualizada com sucesso"
@@ -44,8 +43,10 @@ class CategoriasController < ApplicationController
   end
 
   def destroy
-    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     categoria = Categoria.find(params[:id])
+    sem_categoria = Categoria.where(:descricao=>"SEM CATEGORIA").first
+    @custos = Custo.where(:categoria_id=>categoria.id).first
+    @custos.update_attributes(:categoria_id=>sem_categoria.id) unless @custos.nil?
     categoria.destroy
     redirect_to categorias_path, :notice => "Categoria '#{categoria.descricao}' removida."
   end

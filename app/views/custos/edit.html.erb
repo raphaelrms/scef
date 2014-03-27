@@ -1,6 +1,21 @@
-<h1>Editing custo</h1>
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li><%= link_to "Custos", custos_path%></li>
+  <li class="active">Editar Custo</li>
+</ol>
+<%= painel_titulo("Custo - #{@custo.categoria.descricao}").html_safe%>
+<div class="panel-body" id="form">
 
-<%= render 'form' %>
+  <div class="row">
+    <div class="col-md-10"> <%= exibe_erros(@custo).html_safe if @custo.errors.any?%></div>
+  </div>
+  <p>
 
-<%= link_to 'Show', @custo %> |
-<%= link_to 'Back', custos_path %>
+    <%= form_for @custo, :html => {:class => 'form-horizontal' } do |f| %>
+
+        <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+
+    <%end%>
+
+  </p>
+</div>
