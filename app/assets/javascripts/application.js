@@ -15,7 +15,6 @@
 //= require bootstrap
 //= require jquery.ketchup
 //= require jquery.nested-fields
-//= require dataTables/jquery.dataTables.bootstrap3
 //= require_tree .
 
 function add_fields(link, association, content) {
@@ -24,3 +23,54 @@ function add_fields(link, association, content) {
     debugger;
     $(link).parent().after(content.replace(regexp, new_id));
 }
+
+//OVERRRIDE - CONFIRM DIALOG - INICIO
+$.rails.confirm = function(message,element)
+{
+    html ="<div id=\"showConfirmDialog\" aria-hidden=\"true\" role=\"dialog\" aria-labelledby=\"showConfirmDialog\" class=\"modal\">" +
+        "<div class=\"modal-dialog\">" +
+        "<div class=\"modal-content\">" +
+        "<div class=\"modal-header\">" +
+        "<a class=\"close\" data-dismiss=\"modal\">&#215;</a>" +
+        "<h4 class=\"modal-title\">Confirmação</h4></div><div class=\"modal-body\">" +
+        "<p>"+message+"</p></div>" +
+        "<div class=\"modal-footer\">" +
+        "<a data-dismiss=\"modal\" class=\"btn\">Cancelar</a>" +
+        "<a data-dismiss=\"modal\" class=\"btn btn-primary confirm\">Confirmar</a>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
+    $(html).modal();
+    $("#showConfirmDialog .confirm").click(function(){$.rails.confirmed(element)});
+
+};
+
+$.rails.confirmed = function(element){
+    element.removeAttr('data-confirm');
+    element.trigger('click.rails');
+};
+
+$.rails.allowAction = function(element){
+    if( undefined === element.attr('data-confirm') ){
+        return true;
+    }
+
+    $.rails.confirm(element.attr('data-confirm'),element);
+    return false;
+};
+
+$.rails.handleLink = function(link)
+{
+    if (link.data('remote') !== undefined)
+    {
+        $.rails.handleRemote(link);
+    }
+    else if (link.data('method'))
+    {
+        $.rails.handleMethod(link);
+    }
+
+    return false;
+};
+//OVERRRIDE - CONFIRM DIALOG - FIM
