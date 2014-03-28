@@ -29,6 +29,7 @@
         <% end %>
         </tbody>
       </table>
+      <div align="right"><%= will_paginate @fases,:remote => true,:renderer => BootstrapPagination::Rails %></div>
       <a data-toggle="modal" class="btn btn-success" href="#new-categoria"  type="button">Nova Categoria</a>
       <%= render "categorias/new_categoria"%>
     </div>

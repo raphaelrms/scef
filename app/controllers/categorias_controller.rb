@@ -3,7 +3,7 @@ class CategoriasController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @categorias = Categoria.all
+    @categorias = Categoria.paginate(:page => params[:page], :per_page => 5)
   end
 
   def show

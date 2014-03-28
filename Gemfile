@@ -1,6 +1,6 @@
 #encoding: utf-8
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.0.0'
 gem 'rails', '3.2.16'
 gem 'mysql2'
 group :assets do
@@ -18,6 +18,7 @@ gem 'foreigner'
 gem 'devise'
 gem 'figaro'
 gem 'rolify'
+gem 'will_paginate-bootstrap'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 group :development do
