@@ -6,7 +6,7 @@
 
       <div class="form-group">
         <%= f.label :descricao, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-        <div class="col-sm-2 col-md-3">
+        <div class="col-sm-7">
           <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required) on(submit)", :title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@fase.descricao if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira o nome da fase. Obrigatório.</p>
         </div>

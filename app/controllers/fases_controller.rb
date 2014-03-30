@@ -44,6 +44,7 @@ class FasesController < ApplicationController
 
   def update
     @fase = Fase.find(params[:id])
+    params[:fase][:orcamento] = params[:fase][:orcamento].split('.').join.split(',').join
     if @fase.update_attributes(params[:fase])
       redirect_to fases_path, :notice => "Fase atualizada com sucesso"
     else
