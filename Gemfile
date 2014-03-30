@@ -14,6 +14,7 @@ gem "awesome_nested_fields"
 gem 'jquery-datatables-rails'
 gem 'paperclip'
 gem 'money-rails'
+gem 'masked_input-rails'
 gem 'cancan'
 gem 'foreigner'
 gem 'devise'

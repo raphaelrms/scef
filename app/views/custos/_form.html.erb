@@ -20,6 +20,14 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :dt_referencia, "Data de Referência:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecido",:placeholder => "Insira a data de referência do custo", :value => (@custo.dt_referencia unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :valor, "Valor:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
       <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
@@ -46,7 +54,7 @@
 
 <script type="text/javascript">
     $( document ).ready(function() {
-
+        $("#custo_dt_referencia").mask("99/99/9999");
         $("[id=custo_valor]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",

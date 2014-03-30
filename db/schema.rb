@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140327200737) do
+ActiveRecord::Schema.define(:version => 20140330200216) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20140327200737) do
     t.date     "data_referencia"
     t.integer  "valor_centavos",  :default => 0,     :null => false
     t.string   "valor_currency",  :default => "BRL", :null => false
+    t.integer  "quantidade"
+    t.date     "dt_referencia"
   end
 
   create_table "editais", :force => true do |t|

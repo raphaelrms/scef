@@ -15,12 +15,12 @@
 //= require bootstrap
 //= require jquery.ketchup
 //= require jquery.nested-fields
+//= require jquery.maskedinput
 //= require_tree .
 
 function add_fields(link, association, content) {
     var new_id = new Date().getTime();
     var regexp = new RegExp("new_" + association, "g");
-    debugger;
     $(link).parent().after(content.replace(regexp, new_id));
 }
 
