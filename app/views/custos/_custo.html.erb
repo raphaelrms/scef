@@ -10,12 +10,13 @@
           <div class="modal-body">
             <%= form_for custo, :html => {:class => 'form-horizontal' } do |f| %>
                 <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+                <div class="modal-footer">
+                  <%= f.submit "Alterar", :class => "btn" %>
+                  <a class="btn" data-dismiss="modal" href="#">Fechar</a>
+                </div>
             <% end %>
 
-            <div class="modal-footer">
-              <%= f.submit "Alterar", :class => "btn" %>
-              <a class="btn" data-dismiss="modal" href="#">Fechar</a>
-            </div>
+
   <% end %>
   </div>
   </div>
