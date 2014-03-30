@@ -47,10 +47,12 @@ class CustosController < ApplicationController
 
   def update
     @custo = Custo.find(params[:id])
+    params[:custo][:valor] = params[:custo][:valor].normaliza_valor
     if @custo.update_attributes(params[:custo])
       redirect_to custos_path, :notice => "Custo atualizado com sucesso"
     else
-      redirect_to custos_path, :alert => "Não foi possível atualizar o custo da categoria '#{@custo.categoria.descricao}'. Erro: #{@custo.errors.full_message.to_s}"
+      #flash.now[:error] = "Não foi possível atualizar o custo da categoria #{@custo.descricao}. Erro: #{@custo.errors.full_message}"
+      redirect_to custos_path
     end
   end
 
@@ -62,5 +64,9 @@ class CustosController < ApplicationController
       format.html { redirect_to custos_url }
       format.json { head :no_content }
     end
+  end
+
+  def normaliza_valor(valor)
+    valor.gsub('R$','').split('.').join.split(',').join.strip
   end
 end

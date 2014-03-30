@@ -2,60 +2,55 @@
 <%
    @custo = f.object
 %>
-    <fieldset>
-      <h2>Dados Cadastrais</h2>
+<fieldset>
+  <div class="form-group">
+    <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+      <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
+    </div>
+  </div>
 
-      <div class="form-group">
-        <%= f.label :categoria_id, "Categoria:",:class => "col-md-2 control-label" %>
-        <div class="col-sm-2 col-md-3">
-          <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
-          <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
-        </div>
-      </div>
+  <div class="form-group">
+    <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+      <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+    </div>
+  </div>
 
-      <div class="form-group">
-        <%= f.label :fase_id, "Fase:",:class => "col-md-2 control-label" %>
-        <div class="col-sm-2 col-md-3">
-          <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
-          <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
-        </div>
-      </div>
+  <div class="form-group">
+    <%= f.label :valor, "Valor:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira o valor do custo. Obrigatório.</p>
+    </div>
+  </div>
 
-      <div class="form-group">
-        <%= f.label :valor, "Valor:",:class => "col-md-2 control-label" %>
-        <div class="col-sm-2 col-md-3">
-          <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
-          <p class="help-block" style="font-size: 11px;">Insira o valor do custo. Obrigatório.</p>
-        </div>
-      </div>
+  <div class="form-group">
+    <%= f.label :observacoes, "Observações:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecido", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira observações sobre o custo.</p>
+    </div>
+  </div>
 
-      <div class="form-group">
-        <%= f.label :observacoes, "Observações:",:class => "col-md-2 control-label" %>
-        <div class="col-sm-2 col-md-3">
-          <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecido", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
-        </div>
-      </div>
-      <br>
+  <div class="col-md-11">
+    <div class="well well-sm">
+      <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+      <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
+    </div>
+  </div>
 
-      <div class="col-sm-2 col-md-11">
-        <div class="well well-sm">
-          <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
-          <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
-        </div>
-        </div>
-      </fieldset>
+</fieldset>
 
 <script type="text/javascript">
-
-
-
     $( document ).ready(function() {
 
         $("[id=custo_valor]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",
-            thousandsSeparator: ".",
-            clearPrefix: true
+            thousandsSeparator: "."
         });
 
         $("[id=custo_valor_show]").priceFormat({
@@ -63,5 +58,6 @@
             centsSeparator: ",",
             thousandsSeparator: "."
         });
+
     });
 </script>
