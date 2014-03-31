@@ -10,6 +10,7 @@
       <table class="table table-condensed table-striped table-hover">
         <thead>
         <tr>
+          <th>Número</th>
           <th>Fase</th>
           <th>Categoria</th>
           <th>Valor</th>
@@ -20,6 +21,7 @@
         <tbody>
         <% @custos.each do |custo| %>
             <tr>
+              <td><%= link_to custo.id, custo %></td>
               <td><%= link_to custo.fase.descricao, custo.fase %></td>
               <td><%= link_to custo.categoria.descricao, custo.categoria %></td>
               <td><div id="custo_valor"><%=custo.valor%></div></td>

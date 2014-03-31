@@ -12,9 +12,11 @@ gem 'jquery-rails','3.0.4'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem "awesome_nested_fields"
 gem 'jquery-datatables-rails'
+gem 'groupdate'
 gem 'paperclip'
 gem 'money-rails'
 gem 'masked_input-rails'
+gem "chartkick"
 gem 'cancan'
 gem 'foreigner'
 gem 'devise'

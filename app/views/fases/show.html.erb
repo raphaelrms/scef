@@ -1,7 +1,9 @@
 # encoding: utf-8
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Fases", fases_path%></li>
+  <li class="active"><%= @fase.descricao%></li>
 </ol>
 <%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
 <div class="panel-body" id="form">
@@ -20,10 +22,12 @@
   <fieldset>
     <h2>Custos</h2>
     <%if @fase.custos.any?%>
+        <%= line_chart @fase.custos.count %>
         <div class="table-responsive">
           <table class="table table-condensed table-striped table-hover">
             <thead>
             <tr>
+              <th>Número</th>
               <th>Categoria</th>
               <th>Valor</th>
             </tr>
@@ -31,6 +35,7 @@
             <tbody>
             <%@fase.custos.each do |custo|%>
                 <tr>
+                  <td><%=link_to custo.id, custo%></td>
                   <td><%=link_to custo.categoria.descricao, custo.categoria%></td>
                   <td><div id="fase_orcamento_show"><%=custo.valor%></div></td>
                 </tr>
@@ -38,10 +43,10 @@
 
             </tbody>
           </table>
-          <div align="right"><%= will_paginate @fase.custos,:remote => true,:renderer => BootstrapPagination::Rails %></div>
+          <div align="right"><%= will_paginate @custos_associados,:remote => true,:renderer => BootstrapPagination::Rails %></div>
         </div>
     <%else%>
-        <h6>Essa Fase ainda não possui custos.</h6>
+        <h6>Esta fase do projeto xainda não possui custos associados.</h6>
     <%end%>
   </fieldset>
   </br>

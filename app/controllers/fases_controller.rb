@@ -15,10 +15,10 @@ class FasesController < ApplicationController
 
   def show
     @fase = Fase.find(params[:id])
-
+    @custos_associados = @fase.custos.paginate(:page => params[:page], :per_page => 5)
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @fase }
+      format.json { render :json => @fase }
     end
   end
 
