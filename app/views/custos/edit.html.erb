@@ -1,9 +1,9 @@
-<ol class="breadcrumb">
+<ol class="breadcrumb" xmlns="http://www.w3.org/1999/html">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Custos", custos_path%></li>
   <li class="active">Editar Custo</li>
 </ol>
-<%= painel_titulo("Custo - #{@custo.categoria.descricao}").html_safe%>
+<%= painel_titulo("Custo - #{@custo.id}").html_safe%>
 <div class="panel-body" id="form">
 
   <div class="row">
@@ -14,8 +14,22 @@
     <%= form_for @custo, :html => {:class => 'form-horizontal' } do |f| %>
 
         <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+      <div class="col-sm-2 col-md-11">
+        <div class="well well-sm">
+          <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+          <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
+        </div>
+      </div>
+      </fieldset>
 
     <%end%>
 
   </p>
 </div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#edit_custo_<%= @custo.id %>').ketchup();
+    });
+
+</script>

@@ -3,54 +3,42 @@
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Custos", custos_path%></li>
 </ol>
-<%= painel_titulo("Custo - #{@custo.descricao}").html_safe %>
+<%= painel_titulo("Custo - #{@custo.id}").html_safe %>
 <div class="panel-body" id="form">
   <div class="row">
-    <div class="col-md-offset-10"> <%= link_to 'Editar', edit_custo_path(@custo), :class => 'label label-primary'  %>
-    </div>
-    <fieldset>
-      <h2>Dados Cadastrais</h2>
-      <div class="form-group">
-        <p><b>Nome:</b> <%= @curso.nome %></p>
-        <p><b>Descrição: </b><%= @curso.descricao if @curso.descricao %></p>
-        <p><b>Ano: </b><%= @curso.ano %></p>
-      </div>
-      <br>
-    </fieldset>
-
-
-    <fieldset>
-      <h2>Anexos</h2>
-      <% if @curso.arquivos.any? %>
-          <table class="table table-condensed table-striped table-hover">
-            <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Data de envio</th>
-              <th>&nbsp; </th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @curso.arquivos.each do |arquivo| %>
-                <tr>
-                  <td><%= arquivo.arquivo_file_name %></td>
-                  <td><%= arquivo.descricao %></td>
-                  <td><%=I18n.l arquivo.created_at, :format => "%m/%d/%Y" %></td>
-                  <td><%= link_to "Download", download_curso_path(arquivo), :title => arquivo.arquivo_file_name, :target => :_blank , :class => "btn-xs btn-primary"%>
-                    <%= link_to("Remover", arquivo_path(arquivo), :style => "margin-left:7px;", :data => { :confirm => "Você tem certeza?" }, :method => :delete, :class => 'btn-xs btn-danger')%></td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-      <% else %>
-          <h6>Esse Curso não possui arquivos anexados</h6>
-      <% end %>
-    </fieldset>
-    <br>
-    <div class="well well-sm">
-      <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
-    </div>
-
+    <div class="col-md-offset-10"> <%= link_to "Editar", edit_fase_path(@custo), :class => "label label-primary "%>
+      <%= link_to "Excluir", custo_path(@custo), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => "Tem certeza que deseja excluir o custo <strong>#{@custo.id}</strong>?"}%></div>
   </div>
+  <fieldset>
+    <div class="form-group">
+      <p><b>Categoria::</b> <%= @custo.categoria.descricao %></p>
+      <p><b>Fase: </b><%= @custo.fase.descricao%></p>
+      <p><b>Data de Referência: </b><%= @custo.dt_referencia%></p>
+      <p><b>Quantidade: </b><%= @custo.quantidade%></p>
+      <b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></br></br>
+      <b>Valor Total:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></br></br>
+      <p><b>Observações: </b><%= @custo.observacoes%></p>
+    </div>
+  </fieldset>
+  </br>
+  <div class="well well-sm">
+    <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+  </div>
+
 </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+
+        $("[id=fase_orcamento_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+    });
+</script>

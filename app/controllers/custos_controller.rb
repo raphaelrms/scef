@@ -36,6 +36,7 @@ class CustosController < ApplicationController
   end
 
   def create
+    params[:custo][:valor] = normaliza_valor(params[:custo][:valor])
     @custo = Custo.new(params[:custo])
 
     if @custo.save
@@ -60,10 +61,7 @@ class CustosController < ApplicationController
     @custo = Custo.find(params[:id])
     @custo.destroy
 
-    respond_to do |format|
-      format.html { redirect_to custos_url }
-      format.json { head :no_content }
-    end
+    redirect_to custos_path, :notice => "Custo '#{@custo.id}' da fase '#{@custo.fase.descricao}' removido com sucesso."
   end
 
   def normaliza_valor(valor)

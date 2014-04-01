@@ -22,13 +22,21 @@
   <div class="form-group">
     <%= f.label :dt_referencia, "Data de Referência:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecido",:placeholder => "Insira a data de referência do custo", :value => (@custo.dt_referencia unless @custo.new_record?)%>
-      <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecida",:placeholder => "Insira a data de referência do custo", :value => ( (l @custo.dt_referencia) unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira a data de referência do custo. Obrigatório.</p>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :valor, "Valor:",:class => "col-md-3 control-label" %>
+    <%= f.label :quantidade, "Quantidade:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :quantidade, :class => "form-control","data-validate" => "validate(required)",:title => "A quantidade de itens deve ser fornecida", :style => "width: initial;",:placeholder => "Quantidade", :value => (@custo.quantidade unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira a quantidade. Obrigatório.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :valor, "Valor Unitário:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
       <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
       <p class="help-block" style="font-size: 11px;">Insira o valor do custo. Obrigatório.</p>
@@ -38,28 +46,19 @@
   <div class="form-group">
     <%= f.label :observacoes, "Observações:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecido", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
+      <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecida", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
       <p class="help-block" style="font-size: 11px;">Insira observações sobre o custo.</p>
     </div>
   </div>
 
-  <!--<div class="col-md-11">-->
-    <!--<div class="well well-sm">-->
-      <%#= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
-      <%#= f.submit 'Salvar', :class => 'btn btn-primary' %>
-    <!--</div>-->
-  <!--</div>-->
-
-</fieldset>
-
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#custo_dt_referencia").mask("99/99/9999");
         $("[id=custo_valor]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",
             thousandsSeparator: "."
         });
+        $("[id=custo_dt_referencia]").mask("99/99/9999");
 
         $("[id=custo_valor_show]").priceFormat({
             prefix: "R$ ",
