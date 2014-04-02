@@ -22,7 +22,7 @@
   <fieldset>
     <h2>Custos</h2>
     <%if @fase.custos.any?%>
-        <%= line_chart @fase.custos.count %>
+        <%= pie_chart @fase.custos.joins(:categoria).order(:categoria_id).group("categorias.descricao").count %>
         <div class="table-responsive">
           <table class="table table-condensed table-striped table-hover">
             <thead>

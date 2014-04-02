@@ -5,6 +5,6 @@ class Custo < ActiveRecord::Base
 
   has_many :arquivos, :as => :anexo, :dependent => :destroy
 
-  attr_accessible :valor, :fase_id, :categoria_id, :observacoes, :dt_referencia
+  attr_accessible :valor, :fase_id, :categoria_id, :observacoes, :dt_referencia, :quantidade
 
 end
