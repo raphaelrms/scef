@@ -8,4 +8,8 @@ class Fase < ActiveRecord::Base
 
   attr_accessible :orcamento,:descricao,:curso_id,:curso
 
+  def self.total_custos(fase_id)
+    Custo.select("sum(valor*quantidade) as total").where(:fase_id=>fase_id)
+  end
+
 end

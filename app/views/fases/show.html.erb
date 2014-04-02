@@ -5,7 +5,11 @@
   <li><%= link_to "Fases", fases_path%></li>
   <li class="active"><%= @fase.descricao%></li>
 </ol>
+<%if @custo_excedido%>
+    <div class="alert alert-warning">Atenção! A fase está com o orçamento estourado.</div>
+<%end%>
 <%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
+
 <div class="panel-body" id="form">
   <div class="row">
     <div class="col-md-offset-10"> <%= link_to "Editar", edit_fase_path(@fase), :class => "label label-primary "%>
@@ -15,7 +19,11 @@
     <div class="form-group">
       <p><b>Descrição:</b> <%= @fase.descricao %></p>
       <p><b>Curso: </b><%= @fase.curso.nome%></p>
-      <b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span>
+      <%if @custo_excedido%>
+          <b>Orçamento:</b> <span id="fase_orcamento_show" style="color: #ff0000"><%= @fase.orcamento%></span>
+      <%else%>
+          <b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span>
+      <%end%>
     </div>
   </fieldset>
   </br>
