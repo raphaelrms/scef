@@ -34,6 +34,7 @@
         <% end %>
         </tbody>
       </table>
+      <div align="right"><%= will_paginate @custos,:remote => true,:renderer => BootstrapPagination::Rails %></div>
       <a data-toggle="modal" class="btn btn-success" href="#new_custo"  type="button">Novo Custo</a>
       <%= render "custos/new_custo"%>
     </div>

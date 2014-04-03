@@ -15,8 +15,11 @@ class FasesController < ApplicationController
 
   def show
     @fase = Fase.find(params[:id])
-    @custos_associados = @fase.custos.paginate(:page => params[:page], :per_page => 5)
-    @custo_excedido = @fase.custos.sum('valor') > @fase.orcamento ? true : false
+    @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
+    @custo_total = @fase.custos.sum('valor*quantidade')
+    @custo_excedido = @custo_total > @fase.orcamento ? true : false
+    @valor_excedido = (@custo_total - @fase.orcamento).to_s
+    @valor_excedido = @valor_excedido[0,@valor_excedido.length-2]+","+@valor_excedido[@valor_excedido.length-2,2]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @fase }
