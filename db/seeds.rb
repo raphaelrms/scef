@@ -17,9 +17,10 @@ puts 'Criando usu�rio padr�o'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
-Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'
 
+perm = Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'
 Permission.find_or_create_by_action_and_subject_class_and_subject_id :action => 'show', :subject_class => 'user', :subject_id => 'current_user.id'
+PermissionRole.find_or_create_by_permission_id_and_role_id :permission_id => perm.id, :role_id => :admin
 
 puts 'Criando categoria "SEM CATEGORIA"'
 categoria = Categoria.find_or_create_by_descricao :descricao => "SEM CATEGORIA"
