@@ -16,6 +16,7 @@
 //= require jquery.ketchup
 //= require jquery.nested-fields
 //= require jquery.maskedinput
+//= require jquery-tablesorter
 //= require_tree .
 
 function add_fields(link, association, content) {

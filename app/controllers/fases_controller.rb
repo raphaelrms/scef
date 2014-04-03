@@ -16,7 +16,7 @@ class FasesController < ApplicationController
   def show
     @fase = Fase.find(params[:id])
     @custos_associados = @fase.custos.paginate(:page => params[:page], :per_page => 5)
-    @custo_excedido = custo_excedido?
+    @custo_excedido = @fase.custos.sum('valor') > @fase.orcamento ? true : false
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @fase }
@@ -60,16 +60,6 @@ class FasesController < ApplicationController
     fase.destroy
     redirect_to fases_path, :notice => "Fase '#{fase.descricao}' removida."
 
-  end
-
-  def custo_excedido?
-    @custo_total = Fase.total_custos(@fase.id).first.total
-
-    if @custo_total > @fase.orcamento
-      return true
-    else
-      return false
-    end
   end
 
 end

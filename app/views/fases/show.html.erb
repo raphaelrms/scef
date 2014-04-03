@@ -6,7 +6,7 @@
   <li class="active"><%= @fase.descricao%></li>
 </ol>
 <%if @custo_excedido%>
-    <div class="alert alert-warning">Atenção! A fase está com o orçamento estourado.</div>
+    <div class="alert alert-warning">Atenção! O orçamento previsto para esta fase do projeto foi ultrapassado.</div>
 <%end%>
 <%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
 
@@ -16,23 +16,23 @@
     <%= link_to "Excluir", fase_path(@fase), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => (@fase.custos.count > 0 ? "Existem custos atrelados a esta fase. Tem certeza que deseja excluir a fase <strong>#{@fase.descricao}</strong>?" : "Tem certeza que deseja excluir a fase <strong>#{@fase.descricao}</strong>?")}%></div>
   </div>
   <fieldset>
-    <div class="form-group">
+    <h2>Dados</h2>
       <p><b>Descrição:</b> <%= @fase.descricao %></p>
       <p><b>Curso: </b><%= @fase.curso.nome%></p>
-      <%if @custo_excedido%>
-          <b>Orçamento:</b> <span id="fase_orcamento_show" style="color: #ff0000"><%= @fase.orcamento%></span>
-      <%else%>
-          <b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span>
-      <%end%>
-    </div>
   </fieldset>
   </br>
   <fieldset>
     <h2>Custos</h2>
+    <%if @custo_excedido%>
+        <p><b>Orçamento:</b> <span id="fase_orcamento_show" style="color: #ff0000"><%= @fase.orcamento%></span></p>
+    <%else%>
+        <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span></p>
+    <%end%>
+    <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor')%></span></p>
     <%if @fase.custos.any?%>
         <%= pie_chart @fase.custos.joins(:categoria).order(:categoria_id).group("categorias.descricao").count %>
-        <div class="table-responsive">
-          <table class="table table-condensed table-striped table-hover">
+        <div class="table-responsive" >
+          <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
             <thead>
             <tr>
               <th>Número</th>
@@ -45,6 +45,7 @@
                 <tr>
                   <td><%=link_to custo.id, custo%></td>
                   <td><%=link_to custo.categoria.descricao, custo.categoria%></td>
+                  <td><div id="fase_orcamento_show"><%=custo.valor%></div></td>
                   <td><div id="fase_orcamento_show"><%=custo.valor%></div></td>
                 </tr>
             <%end%>
@@ -71,6 +72,7 @@
 
 
     $( document ).ready(function() {
+        $(".tabela").tablesorter();
 
         $("[id=fase_orcamento_show]").priceFormat({
             prefix: "R$ ",

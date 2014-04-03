@@ -15,6 +15,7 @@ gem 'jquery-datatables-rails'
 gem 'groupdate'
 gem 'paperclip'
 gem 'money-rails'
+gem 'jquery-tablesorter'
 gem 'masked_input-rails'
 gem "chartkick"
 gem 'cancan'
