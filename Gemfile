@@ -27,6 +27,7 @@ gem 'rolify'
 gem 'will_paginate-bootstrap'
 gem 'activerecord-postgresql-adapter'
 gem 'simple_form'
+gem 'better_errors'
 gem 'therubyracer', :platform=>:ruby
 group :development do
   gem 'better_errors'
