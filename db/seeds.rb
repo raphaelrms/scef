@@ -21,7 +21,7 @@ user.add_role :admin
 perm = Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'
 Permission.find_or_create_by_action_and_subject_class_and_subject_id :action => 'show', :subject_class => 'user', :subject_id => 'current_user.id'
 puts perm.action
-PermissionRole.find_or_create_by_permission_id_and_role_id :permission_id => perm.id, :role_id => user.roles.first
+PermissionRole.find_or_create_by_permission_id_and_role_id :permission_id => perm, :role_id => user.roles.first.id
 
 
 
