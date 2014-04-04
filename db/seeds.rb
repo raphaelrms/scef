@@ -26,4 +26,4 @@ PermissionRole.find_or_create_by_permission_id_and_role_id :permission_id => per
 
 puts 'Criando categoria "SEM CATEGORIA"'
 categoria = Categoria.find_or_create_by_descricao :descricao => "SEM CATEGORIA"
-puts "Categoria '#{categoria}' criada com sucesso."
+puts "Categoria '#{categoria.descricao}' criada com sucesso."
