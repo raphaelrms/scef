@@ -18,7 +18,8 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 user.add_role :admin
 Permission.find_or_create_by_action_and_subject_class_and_subject_id :action => 'show', :subject_class => 'user', :subject_id => 'current_user.id'
-PermissionRole.find_or_create_by_permission_id_and_role_id :permission => (Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'), :role_id => user.roles.first.id
+
+PermissionRole.find_or_create_by_permission_id_and_role_id :permission => (Permission.find_or_create_by_action_and_subject_class :action => 'manage', :subject_class => 'all'), :role => user.roles.first.id
 
 
 
