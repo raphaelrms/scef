@@ -17,10 +17,8 @@ puts 'Criando usu�rio padr�o'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
-Permission.find_or_create_by_action_and_subject_class_and_subject_id :action => 'show', :subject_class => 'user', :subject_id => 'current_user.id'
-perm = Permission.where(:action => 'manage', :subject_class => 'all').first
-puts perm
-puts '###############'
+Permission.find_or_create_by_action_and_subject_class_and_subject_id(:action => 'show', :subject_class => 'user', :subject_id => 'current_user.id')
+perm = Permission.find_or_create_by_action_and_subject_class(:action => 'manage', :subject_class => 'all')
 prole = PermissionRole.new :permission_id => perm.id, :role_id => user.roles.first.id
 prole.save!
 
