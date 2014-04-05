@@ -70,8 +70,6 @@ jQuery.ketchup
         return this.isDate(value.substr(6,4),value.substr(3,2),value.substr(0,2));
 })
 
-$("#custo_dt_referencia").val().substr(6,4)
-
 .validation('minselect', 'Select at least {arg1} checkboxes.', function(form, el, value, min) {
   return (min <= this.inputsWithName(form, el).filter(':checked').length);
 }, function(form, el) {

@@ -6,7 +6,6 @@
 </ol>
 <%= painel_titulo(@curso.id.nil? ? "Novo curso" : "Curso - #{@curso.nome}").html_safe%>
 <div class="panel-body" id="form">
-
   <div class="row">
     <div class="col-md-10"> <%= exibe_erros(@curso).html_safe if @curso.errors.any?%></div>
   </div>
@@ -41,28 +40,30 @@
 
       <fieldset>
         <h2>Anexos</h2>
-        <div class="row">
-          <%= link_to_add_fields "   ",f,:arquivos, "btn btn-fields"%>
-          <%= f.fields_for :arquivos, :html => {:multipart => true, :class => "form-horizontal", :role => "form"} do |arq| %>
-              <div class="form-group">
-                <%= arq.label :arquivo,:class => "col-md-2 control-label" %>
+        <%= link_to_add_fields "   ",f,:arquivos, "btn btn-fields"%>
+        <br>
+        <%= f.fields_for :arquivos, :html => {:multipart => true,:class => "form-vertical", :role => "form"} do |arq| %>
 
-
-                <%if !arq.object.arquivo_file_name.nil? %>
-                    <div class="col-md-2 form-control-static"><%=arq.object.arquivo_file_name%></div>
-                <%else%>
-                    <%= arq.file_field :arquivo, :value => arq.object.arquivo_file_name,:class => "col-md-3",:placeholder => "Anexe o edital do curso"%>
-                <%end%>
-                <div style="margin-top:-70px;">
+            <div id="<%=arq.object.id%>">
+              <div class="well">
+                <div class="form-group">
+                  <%= arq.label :arquivo,:class => "col-md-2 control-label" %>
+                  <%if arq.object.arquivo.exists? %>
+                      <div class="col-md-2 form-control-static"><%=arq.object.arquivo_file_name%> <%=link_to "<span class=\"glyphicon glyphicon-trash remover\"></span>".html_safe, arq.object,:data => { :confirm => "Você tem certeza que deseja excluir o arquivo <strong>"+arq.object.arquivo_file_name+"</strong>?" }, :method => :delete%></div>
+                  <%else%>
+                      <%= arq.file_field :arquivo, :value => arq.object.arquivo_file_name,:class => "col-md-3",:placeholder => "Anexe o edital do curso"%><span onclick="$(this).parent().parent().remove();" class="glyphicon glyphicon-trash" style="cursor: pointer;"></span>
+                  <%end%>
+                </div>
+                <!--<div style="margin-top:-70px;">-->
+                <div class="form-group">
                   <%= arq.label :descricao, "Descrição",:class => "col-md-2 control-label" %>
-                  <div class="col-md-3">
+                  <div class="col-sm-4">
                     <%= arq.text_field :descricao,:class => "form-control", :autofocus => true,:placeholder => "Insira uma descrição para o anexo.", :value => arq.object.descricao%>
                   </div>
                 </div>
-
               </div>
-          <%end%>
-        </div>
+            </div>
+        <%end%>
       </fieldset>
 
       <br>
@@ -79,7 +80,9 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $('#form').ketchup();
-
     });
+
+
+
     $(".tooltita").tooltip("hide");
 </script>
