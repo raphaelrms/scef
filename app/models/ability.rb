@@ -6,7 +6,6 @@ class Ability
         user.roles.each do |role|
           role.permissions.each do |permission|
           if permission.subject_id.nil?
-            binding.pry
             can permission.action.to_sym, (permission.subject_class.mb_chars.downcase.to_s== "all") ? :all : permission.subject_class.constantize
           else
             can permission.action.to_sym, permission.subject_class.constantize, :id => (permission.subject_id == 0 ? user.id : permission.subject_id )

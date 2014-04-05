@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140330200216) do
+ActiveRecord::Schema.define(:version => 20140401182542) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -40,23 +40,15 @@ ActiveRecord::Schema.define(:version => 20140330200216) do
   end
 
   create_table "custos", :force => true do |t|
-    t.integer  "valor"
-    t.integer  "categoria_id",                       :null => false
-    t.integer  "fase_id",                            :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.float    "valor"
+    t.integer  "categoria_id",  :null => false
+    t.integer  "fase_id",       :null => false
     t.string   "descricao"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "observacoes"
-    t.date     "data_referencia"
-    t.integer  "valor_centavos",  :default => 0,     :null => false
-    t.string   "valor_currency",  :default => "BRL", :null => false
     t.integer  "quantidade"
     t.date     "dt_referencia"
-  end
-
-  create_table "editais", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "fases", :force => true do |t|
@@ -77,14 +69,6 @@ ActiveRecord::Schema.define(:version => 20140330200216) do
     t.integer  "user_id"
   end
 
-  add_index "noticias", ["user_id"], :name => "noticias_user_id_fk"
-
-  create_table "perfils", :force => true do |t|
-    t.string   "descricao"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "permissions", :force => true do |t|
     t.string   "action"
     t.string   "subject_class"
@@ -93,8 +77,6 @@ ActiveRecord::Schema.define(:version => 20140330200216) do
     t.datetime "updated_at",    :null => false
     t.integer  "role_id"
   end
-
-  add_index "permissions", ["role_id"], :name => "permissions_role_id_fk"
 
   create_table "permissions_roles", :force => true do |t|
     t.integer "role_id"
@@ -131,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20140330200216) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["role_id"], :name => "users_role_id_fk"
 
   create_table "users_roles", :id => false, :force => true do |t|
     t.integer "user_id"
