@@ -10,7 +10,6 @@ class CursosController < ApplicationController
   end
 
   def show
-    binding.pry
     @curso = Curso.find(params[:id])
     @arquivos = @curso.arquivos
   end
