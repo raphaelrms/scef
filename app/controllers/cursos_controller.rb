@@ -1,7 +1,7 @@
 #encoding: utf-8
 class CursosController < ApplicationController
 
-  before_filter :carregar_arquivos, :only => [:new, :edit, :create, :show]
+  #before_filter :carregar_arquivos, :only => [:new, :edit, :create, :show]
 
   load_and_authorize_resource
 
@@ -10,7 +10,9 @@ class CursosController < ApplicationController
   end
 
   def show
+    binding.pry
     @curso = Curso.find(params[:id])
+    @arquivos = @curso.arquivos
   end
 
   def new
@@ -52,20 +54,18 @@ class CursosController < ApplicationController
     nome = @curso.nome
     respond_to do |format|
       if @curso.destroy
-        format.html { redirect_to curso_path, :notice => "Curso \"#{nome}\" removida com sucesso." }
+        format.html { redirect_to cursos_path, :notice => "Curso \"#{nome}\" removido com sucesso." }
         format.json { head :no_content }
       else
-        format.html { redirect_to curso_path, :alert => "Erro ao remover curso #{nome}: #{@curso.errors.full_messages.to_s}" }
+        format.html { redirect_to cursos_path, :alert => "Erro ao remover curso #{nome}: #{@curso.errors.full_messages.to_s}" }
         format.json { head :no_content }
       end
     end
-
-    redirect_to cursos_path, :notice => "Curso '#{@curso.nome}' removido."
   end
 
   def carregar_arquivos
     if (!params[:id].nil?)
-      @curso = Curso.find(params[:id]) unless !@curso.nil?
+      @curso = Curso.find(params[:id]) if !@curso.nil?
       if @curso.arquivos.any?
         @arquivos = @curso.arquivos
       else
