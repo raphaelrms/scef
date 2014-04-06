@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140401182542) do
+ActiveRecord::Schema.define(:version => 20140406033748) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20140401182542) do
   end
 
   create_table "custos", :force => true do |t|
-    t.float    "valor"
+    t.integer  "valor"
     t.integer  "categoria_id",  :null => false
     t.integer  "fase_id",       :null => false
     t.string   "descricao"

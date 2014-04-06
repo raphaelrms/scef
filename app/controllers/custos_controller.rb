@@ -49,6 +49,7 @@ class CustosController < ApplicationController
   def update
     @custo = Custo.find(params[:id])
     params[:custo][:valor] = normaliza_valor(params[:custo][:valor])
+    binding.pry
     if @custo.update_attributes(params[:custo])
       redirect_to custos_path, :notice => "Custo atualizado com sucesso"
     else
