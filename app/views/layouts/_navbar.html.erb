@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default"  role="navigation" style="background-color: #002F6D;">
   
   <!--######################################-->
-  <!--NÃO MEXA NO NAVBAR-HEADER. SE NÃO SOUBER O QUE ESTÁ FAZENDO, IRÁ FERRAR COM A VISUALIZACÃO EM CELULARES.-->
+  <!--NÃO MEXA NO NAVBAR-HEADER. SE NÃO SOUBER O QUE ESTÁ FAZENDO, IRÁ FERRAR COM A VISUALIZACÃO EM DISPOSITIVOS MÓVEIS.-->
   <!--######################################-->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navinho">
@@ -20,27 +20,17 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cursos<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="<%= cursos_path%>">Listagem de Cursos</a></li>
-          <li><a href="<%= fases_path%>">Fases</a></li>
+          <li><a href="<%= new_curso_path%>">Cadastrar curso</a></li>
+          <li><a href="<%= cursos_path%>">Cursos</a></li>
+          <li class="divider"></li>
+          <li><a href="<%= fases_path%>">Fases do projeto</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Custos<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="<%= custos_path%>">Listagem de Custos</a></li>
-          <li><a href="<%= categorias_path%>">Categorias</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-          <li class="divider"></li>
-          <li><a href="#">One more separated link</a></li>
+          <li><a href="<%= new_custo_path%>">Lançar custo</a></li>
+          <li><a href="<%= custos_path%>">Custos lançados</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -49,6 +39,7 @@
           <li><a href="<%= users_path%>">Usuários</a></li>
           <li><a href="<%= roles_path%>">Grupos</a></li>
           <li><a href="<%= permission_role_index_path%>">Permissões</a></li>
+          <li><a href="<%= custos_path%>">Categorias de custos</a></li>
         </ul>
       </li>
     </ul>

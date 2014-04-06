@@ -553,7 +553,6 @@
   
   $.fn.ketchup = function(options, fields) {
     var el = $(this);
-    
     if(typeof options == 'string') {
       switch(options) {
         case 'validate':

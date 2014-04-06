@@ -4,9 +4,17 @@
 %>
 <fieldset>
   <div class="form-group">
+    <%= f.label :descricao, "Descrição", :class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)",:title => "Insira uma descrição do custo",:placeholder => "Insira a data de referência do custo", :value =>  ( (l @custo.descricao if @custo.descricao) unless (@custo.new_record? && !@custo.descricao.nil?) )%>
+      <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)" ,:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
     </div>
   </div>
@@ -14,7 +22,7 @@
   <div class="form-group">
     <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{ :include_blank => true }, {:class => "form-control"} %>
+      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
     </div>
   </div>
