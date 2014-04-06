@@ -24,13 +24,13 @@
   <fieldset>
     <h2>Custos</h2>
     <%if @custo_excedido%>
-        <p><b>Orçamento:</b> <span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em R$ <%= @valor_excedido%>"><%= @fase.orcamento%></span></p>
+        <p><b>Orçamento:</b><span id="fase_orcamento_show"><%= @fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p>
     <%else%>
         <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span></p>
     <%end%>
     <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor*quantidade')%></span></p>
     <%if @fase.custos.any?%>
-        <%= pie_chart @fase.custos.joins(:categoria).order(:categoria_id).group("categorias.descricao").count %>
+        <%= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count %>
         <div class="table-responsive" >
           <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
             <thead>
@@ -83,6 +83,6 @@
             centsSeparator: ",",
             thousandsSeparator: "."
         });
-        $('#fase_orcamento_show1').popover('show')
+        $('#fase_orcamento_show1').popover('toggle')
     });
 </script>

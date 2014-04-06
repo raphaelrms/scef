@@ -42,7 +42,7 @@ class CustosController < ApplicationController
     if @custo.save
       redirect_to custos_path, :notice => "Custo criado com sucesso"
     else
-      redirect_to custos_path, :alert => "Não foi possível criar o custo. Erro: #{@custo.errors.full_message.to_s}"
+      redirect_to custos_path, :alert => "Não foi possível criar o custo. Erro: #{@custo.errors.full_messages.to_s}"
     end
   end
 
