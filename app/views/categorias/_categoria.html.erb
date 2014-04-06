@@ -12,8 +12,9 @@
                 <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
             <% end %>
             <div class="modal-footer">
-              <%= f.submit "Alterar", :class => "btn" %>
               <a class="btn" data-dismiss="modal" href="#">Fechar</a>
+              <%= f.submit "Alterar", :class => "btn" %>
+
             </div>
   <% end %>
   </div>
@@ -23,7 +24,7 @@
   <script type="text/javascript">
       $( document ).ready(function() {
           $('#edit-categoria-<%= categoria.id %>').ketchup();
-          $('#edit-categoria-<%= categoria.id %>').on('hidden.bs.modal', function () {
+          $('.modal').on('hidden.bs.modal', function () {
               $(".ketchup-error").hide();
           })
       });

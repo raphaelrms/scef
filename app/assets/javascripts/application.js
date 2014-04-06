@@ -75,3 +75,5 @@ $.rails.handleLink = function(link)
     return false;
 };
 //OVERRRIDE - CONFIRM DIALOG - FIM
+
+

@@ -11,7 +11,10 @@
                 <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
                 <div class="col-md-11">
                   <div class="well well-sm">
+                    <div class="modal-footer">
+                    <a class="btn" data-dismiss="modal" href="#">Fechar</a>
                     <%= f.submit 'Cadastrar', :class => 'btn btn-primary' %>
+                  </div>
                   </div>
                 </div>
 
@@ -28,6 +31,13 @@
     $( document ).ready(function() {
         $("#custo_dt_referencia").mask("99/99/9999");
         $('#new_custo').ketchup();
+
+
+
     });
 
+    $('#new_custo').on('hidden.bs.modal', function () {
+        debugger;
+        $(".ketchup-error").hide();
+    });
 </script>
