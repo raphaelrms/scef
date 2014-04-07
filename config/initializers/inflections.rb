@@ -34,8 +34,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural(/^(irm|m)ão$/i,  '\1ãos')
   inflect.plural(/^(alem|c|p)ão$/i,  '\1ães')
   inflect.irregular('user_role','users_roles')
-  inflect.irregular('permission_roles','permissions_roles')
-  inflect.irregular('permission_role','permissions_roles')
+
   # Sem acentos...
   inflect.plural(/ao$/i,  'oes')
   inflect.plural(/^(irm|m)ao$/i,  '\1aos')
@@ -67,4 +66,11 @@ ActiveSupport::Inflector.inflections do |inflect|
   # Irregulares
   inflect.irregular "país", "países"
   inflect.irregular "fase","fases"
+
+  inflect.irregular('noticia_permissao','noticias_permissoes')
+  inflect.irregular('noticias_permissao','noticias_permissoes')
+  #inflect.plural('NoticiasPermissao','NoticiaPermissoes')
+
+  inflect.irregular('permission_roles','permissions_roles')
+  inflect.irregular('permission_role','permissions_roles')
 end

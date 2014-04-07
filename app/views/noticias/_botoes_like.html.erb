@@ -1,0 +1,18 @@
+<div class="like">
+  Curtiu?
+  <% if current_user.voted_up_on?(@noticia) || current_user.voted_down_on?(@noticia) %>
+      <%= form_tag remover_voto_noticia_path(@noticia), :method => :get, :remote => true do %>
+          <%= submit_tag @noticia.likes.size, :class => "liked_button" %>
+      <% end %>
+      <%= form_tag remover_voto_noticia_path(@noticia), :method => :get, :remote => true do %>
+          <%= submit_tag @noticia.dislikes.size, :class => "disliked_button" %>
+      <% end %>
+  <% else %>
+      <%= form_tag like_noticia_path(@noticia), :method => :get, :remote => true do %>
+          <%= submit_tag @noticia.likes.size, :class => "like_button" %>
+      <% end %>
+      <%= form_tag dislike_noticia_path(@noticia), :method => :get, :remote => true do %>
+          <%= submit_tag @noticia.dislikes.size, :class => "dislike_button" %>
+      <% end %>
+  <% end %>
+</div>

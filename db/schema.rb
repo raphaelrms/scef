@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140406033748) do
+ActiveRecord::Schema.define(:version => 20140407004405) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -69,6 +69,13 @@ ActiveRecord::Schema.define(:version => 20140406033748) do
     t.integer  "user_id"
   end
 
+  create_table "noticias_permissoes", :force => true do |t|
+    t.integer  "noticia_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "role_id"
+  end
+
   create_table "permissions", :force => true do |t|
     t.string   "action"
     t.string   "subject_class"
@@ -122,6 +129,8 @@ ActiveRecord::Schema.define(:version => 20140406033748) do
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
   add_foreign_key "noticias", "users", name: "noticias_user_id_fk"
+
+  add_foreign_key "noticias_permissoes", "roles", name: "noticias_permissoes_role_id_fk"
 
   add_foreign_key "permissions", "roles", name: "permissions_role_id_fk"
 

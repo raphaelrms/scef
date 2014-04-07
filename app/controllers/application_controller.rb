@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   def home
-    @users = User.all
+    #@users = User.all
+    @noticias = Noticia.paginate(:page => params[:page])
   end
 
 end

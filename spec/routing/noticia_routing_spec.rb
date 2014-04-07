@@ -4,31 +4,31 @@ describe NoticiaController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/noticia").should route_to("noticia#index")
+      get("/noticias").should route_to("noticias#index")
     end
 
     it "routes to #new" do
-      get("/noticia/new").should route_to("noticia#new")
+      get("/noticias/new").should route_to("noticias#new")
     end
 
     it "routes to #show" do
-      get("/noticia/1").should route_to("noticia#show", :id => "1")
+      get("/noticias/1").should route_to("noticias#show", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/noticia/1/edit").should route_to("noticia#edit", :id => "1")
+      get("/noticias/1/edit").should route_to("noticias#edit", :id => "1")
     end
 
     it "routes to #create" do
-      post("/noticia").should route_to("noticia#create")
+      post("/noticias").should route_to("noticias#create")
     end
 
     it "routes to #update" do
-      put("/noticia/1").should route_to("noticia#update", :id => "1")
+      put("/noticias/1").should route_to("noticias#update", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/noticia/1").should route_to("noticia#destroy", :id => "1")
+      delete("/noticias/1").should route_to("noticias#destroy", :id => "1")
     end
 
   end

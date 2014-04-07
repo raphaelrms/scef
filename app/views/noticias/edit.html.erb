@@ -1,0 +1,7 @@
+<fieldset>
+  <%= tinymce %>
+  <h1>Editar Notícia</h1><br/>
+  <%= link_to "Apagar Notícia", @noticia,:method => :delete, :confirm => "Você tem certeza?",:class => "red botaoSimples" %>
+  <br>
+  <%= render "form" %>
+</fieldset>

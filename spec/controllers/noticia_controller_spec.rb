@@ -31,10 +31,10 @@ describe NoticiaController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all noticia as @noticia" do
+    it "assigns all noticias as @noticias" do
       noticium = Noticium.create! valid_attributes
       get :home, {}, valid_session
-      assigns(:noticia).should eq([noticium])
+      assigns(:noticias).should eq([noticium])
     end
   end
 
@@ -102,7 +102,7 @@ describe NoticiaController do
     describe "with valid params" do
       it "updates the requested noticium" do
         noticium = Noticium.create! valid_attributes
-        # Assuming there are no other noticia in the database, this
+        # Assuming there are no other noticias in the database, this
         # specifies that the Noticium created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -150,7 +150,7 @@ describe NoticiaController do
       }.to change(Noticium, :count).by(-1)
     end
 
-    it "redirects to the noticia list" do
+    it "redirects to the noticias list" do
       noticium = Noticium.create! valid_attributes
       delete :destroy, {:id => noticium.to_param}, valid_session
       response.should redirect_to(noticia_url)

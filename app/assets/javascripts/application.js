@@ -17,7 +17,10 @@
 //= require jquery.nested-fields
 //= require jquery.maskedinput
 //= require jquery-tablesorter
+//= require tinymce-jquery
+//= require jquery.tokeninput
 //= require_tree .
+
 
 function add_fields(link, association, content) {
     var new_id = new Date().getTime();

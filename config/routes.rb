@@ -20,7 +20,19 @@ RailsPadrao::Application.routes.draw do
   authenticated :user do
     root :to => 'application#home'
   end
-  resources :noticia
+  resources :noticias do
+    member do
+      get :like
+      get :dislike
+      get :remover_voto
+      post :criar_comentario
+    end
+
+    collection do
+      get :feed
+      get :buscar_tag
+    end
+  end
 
   devise_for :users do
     get 'users/:id/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'

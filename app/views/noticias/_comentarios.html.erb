@@ -1,0 +1,29 @@
+<fieldset>
+  <h3>Comentários:</h3>
+  <% if @noticia.comentarios.any? %>
+      <ul class="comentarios">
+        <% @noticia.comentarios.each do |comentario| %>
+            <li style="color: #000053">
+              <%= comentario.autor %>
+              <br>
+              <div style="color:red;font-size:10px;"> <%= exibir_postagem_comentario(comentario) %></div>
+              <br/>
+              <%= comentario.corpo %>
+            </li>
+        <% end %>
+      </ul>
+  <% else %>
+      Ninguém comentou nessa notícia ainda.
+  <% end %>
+
+  <h4 style="margin-top: 50px">Escreva seu Comentário</h4>
+  <%= form_tag criar_comentario_noticia_path(@noticia) do %>
+      <%= hidden_field_tag :vinculacao_id, usuario_atual.id %>
+      <%= hidden_field_tag :noticia_id, @noticia.id %>
+      <%= text_area_tag :corpo %>
+      <br/>
+      <%= submit_tag "Salvar" %>
+      <h3 style="text-align: center;margin-top: 35px;font-size: 14px;color:red;"> Atenção:<br> O STI e PROPPi não se responsabilizam pelos comentários realizados acima. Eles expressam unicamente a opinião do autor da mensagem.
+      </h3>
+  <% end %>
+</fieldset>
