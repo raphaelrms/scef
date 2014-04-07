@@ -2,24 +2,16 @@
     <div class="form-group">
         <%= f.label :titulo, "Título*:", :class => "col-md-3 control-label" %>
       <div class="col-md-7">
-        <%= f.text_field :titulo, :class => "form-control","data-validate" => "validate(required)",:title => "Insira uma descrição do custo",:placeholder => "Insira a data de referência do custo"%>
-      <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
-    </div>
-    </div>
-
-    <div class="form-group">
-        <%= f.label :subtitulo, "Subtítulo:", :class => "col-md-3 control-label" %>
-      <div class="col-md-7">
-        <%= f.text_field :subtitulo, :class => "form-control" %>
-      <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
+        <%= f.text_field :titulo, :class => "form-control","data-validate" => "validate(required)",:title => "Insira um título para a notícia",:placeholder => "Insira um título para a notícia"%>
+      <p class="help-block" style="font-size: 11px;">Insira um título para a notícia. Obrigatório.</p>
     </div>
     </div>
 
       <div class="form-group">
         <%= f.label :tags, "Tags:", :class => "col-md-3 control-label" %>
         <div class="col-md-7">
-        <%= f.text_field :tags, :class => "form-control" %>
-        <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
+        <%= f.text_field :tags, :class => "form-control",:placeholder => "Insira um título para a notícia" %>
+        <p class="help-block" style="font-size: 11px;">Insira tags para classificar a notícia. Não obrigatório.</p>
       </div>
 
         <div class="form-group">
@@ -40,13 +32,15 @@
     <div class="form-group">
         <%= f.label :corpo, "Corpo da notícia:", :class => "col-md-3 control-label"  %>
       <div class="col-md-7">
-        <%= f.text_area :corpo, :class => "tinymce form-control", :rows => 40, :cols => 100 %>
+        <%= f.text_area :corpo, :class => "tinymce form-control","data-validate" => "validate(required)", :rows => 40, :cols => 100 %>
       <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
     </div>
     </div>
       </div>
+      </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#new_noticia").ketchup();
         $("[id*=_tags]").tokenInput('<%= buscar_tag_noticias_path %>', {
             tokenLimit: 5,
             theme: "facebook",

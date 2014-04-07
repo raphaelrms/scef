@@ -10,10 +10,9 @@
   <div class="noticia">
     <h2><%= @noticia.titulo %>
       <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_noticia_path(@noticia) %></h2>
-    <h4><%= @noticia.subtitulo %></h4>
-    <p>Autor: <span class="autor"><%= @noticia.autor %></span></p>
-    <p><%= l @noticia.created_at.to_date %></p>
-    <p>Tags: <%= @noticia.tags %></p>
+    <small>Autor: <span class="autor"><%= @noticia.autor %></span></small>
+    <small><%= l @noticia.created_at.to_date %></small>
+    <p><small>Tags: <%= @noticia.tags %></small></p>
 
     <div class="corpo">
       <%= @noticia.corpo.html_safe %>

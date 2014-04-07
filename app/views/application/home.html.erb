@@ -24,11 +24,13 @@
             </p>
         <% end %>
       </ul>
-    </div>
 
+    </div>
     <%= will_paginate @noticias %>
 <% else %>
     <p>Nenhuma notÃ­cia postada atÃ© o momento.</p>
 <% end %>
+  <%= link_to "Adicionar aviso", new_noticia_path, :class => "btn btn-success"%>
                         </div>
+
                         </div>
