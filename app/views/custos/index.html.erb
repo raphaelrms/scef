@@ -29,7 +29,7 @@
               <td><%= link_to("Detalhar", custo_path(custo), :class => 'btn btn-xs btn-default')%>
                 <!--<a data-toggle="modal" class="btn btn-xs btn-primary" href="#edit-custo-<%#= custo.id %>"  type="button">Editar</a>-->
                 <%= link_to "Editar", edit_custo_path(custo), :class => "btn btn-xs btn-primary ", :style => "margin-left:7px;"%>
-                <%= link_to "Excluir", custo_path(custo), :method => "delete", :class => "btn btn-xs btn-danger ", :style => "margin-left:7px;", :data => {:confirm => "Tem certeza que deseja excluir o custo <strong>#{custo.id}</strong>?"}%></td>
+                <%= link_to "Excluir", custo_path(custo), :method => "delete", :class => "btn btn-xs btn-danger ", :style => "margin-left:7px;", :data => {:confirm => "Tem certeza que deseja excluir o custo <strong>#{custo.id}</strong> - <strong>Fase</strong> #{custo.fase.descricao} - <strong>Curso</strong> #{custo.fase.curso.nome}?"}%></td>
             </tr>
         <% end %>
         </tbody>
