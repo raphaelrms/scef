@@ -7,7 +7,7 @@
 <div class="panel-body" id="form">
   <div class="row">
     <div class="col-md-offset-10"> <%= link_to "Editar", edit_custo_path(@custo), :class => "label label-primary "%>
-      <%= link_to "Excluir", custo_path(@custo), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => "Tem certeza que deseja excluir o custo <strong>#{custo.id}</strong> - <strong>Fase</strong> #{custo.fase.descricao} - <strong>Curso</strong> #{custo.fase.curso.nome}?"}%></div>
+      <%= link_to "Excluir", custo_path(@custo), :method => "delete", :class => "label label-danger ", :style => "margin-left:7px;", :data => {:confirm => "Tem certeza que deseja excluir o custo <strong>#{@custo.id}</strong> - <strong>Fase</strong> #{@custo.fase.descricao} - <strong>Curso</strong> #{@custo.fase.curso.nome}?"}%></div>
   </div>
   <fieldset>
     <div class="form-group">

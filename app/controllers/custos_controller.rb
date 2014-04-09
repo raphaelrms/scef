@@ -17,8 +17,9 @@ class CustosController < ApplicationController
     @custo = Custo.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {}# show.html.erb
       format.json { render :json =>  @custo }
+      format.pdf { render :pdf => "file_name" }
     end
   end
 

@@ -17,6 +17,8 @@ gem 'acts_as_votable'
 gem 'paperclip'
 gem 'money-rails'
 gem 'jquery-tablesorter'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 gem 'masked_input-rails'
 gem "chartkick"
 gem 'cancan'
