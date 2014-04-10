@@ -11,6 +11,7 @@
         <thead>
         <tr>
           <th>Descrição</th>
+          <th>Observações</th>
           <th>Data de Cadastro</th>
           <th></th>
           <th></th>
@@ -20,6 +21,7 @@
         <% @categorias.each do |categoria| %>
             <tr>
               <td><%= categoria.descricao %></td>
+              <td><%= categoria.observacoes %></td>
               <td><%= categoria.created_at.to_date %></td>
               <td>
                 <a data-toggle="modal" class="btn btn-xs btn-primary" href="#edit-categoria-<%= categoria.id %>"  type="button">Editar</a>
