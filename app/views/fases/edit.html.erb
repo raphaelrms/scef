@@ -11,7 +11,7 @@
   </div>
   <p>
 
-<%= form_for @fase, :html => {:class => 'form-horizontal' } do |f| %>
+<%= form_for @fase, :html => {:class => 'form-horizontal',:role => 'form' } do |f| %>
 
     <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
 
@@ -19,3 +19,11 @@
 
 </p>
 </div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        //$("#custos_table").createFilter();
+        $('[role=form]').ketchup();
+        $("[id*=periodo]").mask("99/99/9999");
+    });
+</script>
