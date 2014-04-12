@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140410035148) do
+ActiveRecord::Schema.define(:version => 20140412115708) do
 
   create_table "arquivos", :force => true do |t|
     t.string   "descricao"
@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(:version => 20140410035148) do
 
   create_table "fases", :force => true do |t|
     t.string   "descricao"
-    t.integer  "curso_id",   :null => false
+    t.integer  "curso_id",       :null => false
     t.integer  "orcamento"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.date     "inicio_periodo"
+    t.date     "fim_periodo"
   end
 
   create_table "noticias", :force => true do |t|

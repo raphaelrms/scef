@@ -3,14 +3,19 @@ class FasesController < ApplicationController
 
   load_and_authorize_resource
 
+  before_filter :carrega_dados, :only => [:index,:pesquisar]
+
   def index
     @fases = Fase.paginate(:page => params[:page], :per_page => 2)
-    @fase_nova = Fase.new
-    @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
     respond_to do |format|
       format.html
       format.js { render :partial => 'fase_index' }
     end
+  end
+
+  def carrega_dados
+    @fase_nova = Fase.new
+    @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
   end
 
   def show
@@ -68,10 +73,11 @@ class FasesController < ApplicationController
     valor = params[:filtro].split('.').join.split(',').join
     if !(valor.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/)).nil?
       @fases = Fase.joins(:curso).where("fases.orcamento = ?",valor).paginate(:page => params[:page], :per_page => 2)
+    elsif valor.blank?
+      @fases = Fase.paginate(:page => params[:page], :per_page => 2)
     else
       @fases = Fase.joins(:curso).where("cursos.nome like ? or fases.descricao like ?",'%'+valor+'%','%'+valor+'%').paginate(:page => params[:page], :per_page => 2)
     end
-    @fase_nova = Fase.new
     @termo = params[:filtro]
     respond_to do |format|
       format.html { render "index"}

@@ -8,15 +8,29 @@
   <div class="span8">
     <div class="well">
     <%= form_tag pesquisar_fases_path,:method => :get, :class => 'form-horizontal' , :role => 'form' do |f| %>
+          <div class="row">
         <div class="form-group">
           <%= label_tag :filtro, "Filtro:",:class => "col-xs-3 control-label" %>
-          <div class="col-xs-3">
-            <%= text_field_tag :filtro, (@termo if @termo),{:placeholder => "Insira um termo para pesquisar", :class => "form-control"}%>
+          <div class="col-xs-4">
+            <%= text_field_tag :filtro, (@termo if @termo),{:placeholder => "Insira um termo para pesquisar", :class => "form-control","data-validate" => "validate(minlength(0))"}%>
           </div>
-          <div class="col-xs-2">
-            <%= submit_tag 'Pesquisar', :class => 'btn btn-primary' %>
           </div>
         </div>
+          <div class="row">
+          <div class="form-group">
+            <%= label_tag :inicio_periodo, "Período:",:class => "col-xs-3 control-label" %>
+          <div class="col-xs-2">
+            <%= text_field_tag :inicio_periodo, (@inicio_periodo if @inicio_periodo),{:placeholder => "Periodo início", :class => "form-control","data-validate" => "validate(dateBR)"}%>
+          </div>
+          <div class="col-xs-2">
+            <%= text_field_tag :fim_periodo, (@fim_periodo if @fim_periodo),{:placeholder => "Período fim", :class => "form-control","data-validate" => "validate(dateBR)"}%>
+          </div>
+
+          <div class="col-xs-3">
+            <%= submit_tag 'Pesquisar', :class => 'btn btn-primary' %>
+          </div>
+          </div>
+          </div>
     <%end%>
     </div>
 
@@ -66,6 +80,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
           //$("#custos_table").createFilter();
-
+        $('[role=form]').ketchup();
+        $("[id*=periodo]").mask("99/99/9999");
         });
 </script>

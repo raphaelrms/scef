@@ -73,7 +73,12 @@ this.bindBrothers(form, el);
 })
 
 .validation('dateBR', 'Formato de data inválido.', function(form, el, value) {
-        return this.isDate(value.substr(6,4),value.substr(3,2),value.substr(0,2));
+        if (!(/^(?=.*\d).+$/.test(value))){
+            return true;
+        }else{
+            return this.isDate(value.substr(6,4),value.substr(3,2),value.substr(0,2));
+        }
+
 })
 
 .validation('minselect', 'Select at least {arg1} checkboxes.', function(form, el, value, min) {
