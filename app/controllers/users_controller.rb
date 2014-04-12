@@ -58,6 +58,7 @@ class UsersController < ApplicationController
 
   def novo_usuario_manual
     @user = User.new
+    @user.roles.build
     respond_to do |format|
       format.html
       format.json { render :json =>@user }
@@ -66,7 +67,7 @@ class UsersController < ApplicationController
 
   def cria_usuario_manualmente
     @user = User.new(params[:user])
-
+    @user.roles << Role.find(params[:role])
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_path, :notice => "Usuário \"#{@user.name}\" criado com sucesso." }

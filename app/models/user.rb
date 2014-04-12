@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role_id
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role_id,:roles_attributes  ,:user_roles_attributes, :user_roles
 
   def grupo_padrao
     self.roles  << Role.where(:name => "Visitante").first if !self.roles.any?

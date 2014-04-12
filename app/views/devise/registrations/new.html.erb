@@ -36,21 +36,6 @@
         </div>
       </div>
 
-      <!--############################################################-->
-      <!--Input já pronto de como cadastrar o grupo de alguém. Não descomentar, pois o usuário não escolhe qual grupo entrar.-->
-      <!--############################################################-->
-      <!--<div class="form-group">-->
-        <!--<%#= f.fields_for :role do |r| %>-->
-        <!--<%#= r.label "Grupo", :class => "col-xs-6 col-sm-3 col-md-2 control-label" %>-->
-            <!--<div class="col-sm-2 col-md-3">-->
-        <!--<%#= r.select :role,options_for_select(Role.all.collect {|p| [ p.name, p.id ] }, :selected => @user.role_id),{prompt: "Selecione um grupo"}, {class: "form-control"} %>-->
-              <!--<p class="help-block" style="font-size: 11px;">Selecione o grupo do usu.</p>-->
-            <!--</div>-->
-        <!--<%#end%>-->
-
-        <!--</div>-->
-      <%#= f.input :role_ids, :collection => Role.all, :as => :radio_buttons, :label_method => lambda {|t| t.name.titleize}, :label => false, :item_wrapper_class => 'inline', :checked => user.role_ids.first %>
-
       <div class="form-group">
         <%= f.label :password_confirmation, "Confirme sua senha*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
