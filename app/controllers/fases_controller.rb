@@ -5,8 +5,10 @@ class FasesController < ApplicationController
 
   before_filter :carrega_dados, :only => [:index,:pesquisar]
 
+
+
   def index
-    @fases = Fase.paginate(:page => params[:page], :per_page => 2)
+    @fases = Fase.paginate(:page => params[:page], :per_page => 25)
     respond_to do |format|
       format.html
       format.js { render :partial => 'fase_index' }
@@ -76,19 +78,19 @@ class FasesController < ApplicationController
     if params[:inicio_periodo] || params[:fim_periodo]
        @fases = Fase.comecando(params[:inicio_periodo].to_date.to_s).scoped if !params[:inicio_periodo].blank?
        @fases = Fase.finalizando(params[:fim_periodo].to_date.to_s).scoped if !params[:fim_periodo].blank?
-       @fases = @fases.paginate(:page => params[:page], :per_page => 2) if @fases.any?
+       @fases = @fases.paginate(:page => params[:page], :per_page => 25) if @fases.any?
 
     else
     #Busca por VALOR
     #Se for numero, procura no orcamento.
     if !(valor.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/)).nil?  && !valor.blank?
-      @fases = Fase.joins(:curso).where("fases.orcamento = ?",valor).paginate(:page => params[:page], :per_page => 2)
+      @fases = Fase.joins(:curso).where("fases.orcamento = ?",valor).paginate(:page => params[:page], :per_page => 25)
     #VALOR E DATAS em branco?! Então busco todos.
     elsif valor.blank? && (params[:inicio_periodo].blank? && params[:fim_periodo].blank?)
-      @fases = Fase.paginate(:page => params[:page], :per_page => 2)
+      @fases = Fase.paginate(:page => params[:page], :per_page => 25)
     else
       #É um valor valido para procurar
-      @fases = Fase.joins(:curso).where("cursos.nome like ? or fases.descricao like ?",'%'+valor+'%','%'+valor+'%').paginate(:page => params[:page], :per_page => 2)
+      @fases = Fase.joins(:curso).where("cursos.nome like ? or fases.descricao like ?",'%'+valor+'%','%'+valor+'%').paginate(:page => params[:page], :per_page => 25)
     end
 
     end
