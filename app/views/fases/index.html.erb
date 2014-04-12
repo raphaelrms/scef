@@ -57,6 +57,8 @@
         <td><%=link_to fase.curso.nome, fase.curso%></td>
         <td><%= fase.descricao%></td>
         <td><div id="fase_orcamento_show"><%=fase.orcamento%></div></td>
+          <% p fase.inicio_periodo if fase.inicio_periodo%>
+          <% p fase.fim_periodo if fase.fim_periodo%>
         <td><%=l fase.inicio_periodo.to_date if fase.inicio_periodo%></td>
         <td><%=l fase.fim_periodo.to_date if fase.fim_periodo%></td>
         <td><%= link_to("Detalhar", fase_path(fase), :class => 'btn btn-xs btn-default')%>
