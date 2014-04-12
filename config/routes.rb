@@ -68,6 +68,12 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
-  resources :fases
+  resources :fases do
+    collection do
+      post 'pesquisar'
+    end
+
+  end
+
 
 end

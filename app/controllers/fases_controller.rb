@@ -4,7 +4,7 @@ class FasesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @fases = Fase.paginate(:page => params[:page], :per_page => 5)
+    Fase.paginate(:page => params[:page], :per_page => 5)
     @fase_nova = Fase.new
     @cursos = Curso.ordenado_por_nome.all.collect { |u| [u.nome, u.id] }
     respond_to do |format|
@@ -61,6 +61,21 @@ class FasesController < ApplicationController
 
     fase.destroy
     redirect_to fases_path, :notice => "Fase '#{fase.descricao}' removida."
+
+  end
+
+  def pesquisar
+    valor = params[:filtro].split('.').join.split(',').join
+    if !(valor.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/)).nil?
+      @fases = Fase.joins(:curso).where("fases.orcamento = ?",valor).paginate(:page => params[:page], :per_page => 5)
+    else
+      @fases = Fase.joins(:curso).where("cursos.nome like ? or fases.descricao like ?",'%'+valor+'%','%'+valor+'%').paginate(:page => valor, :per_page => 5)
+    end
+    @fase_nova = Fase.new
+    @termo = params[:filtro]
+    respond_to do |format|
+      format.html { render "index"}
+    end
 
   end
 

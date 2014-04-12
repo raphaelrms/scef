@@ -4,10 +4,10 @@
 %>
 <fieldset>
   <div class="form-group">
-    <%= f.label :descricao, "Descrição", :class => "col-md-3 control-label" %>
+    <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)",:title => "Insira uma descrição do custo",:placeholder => "Insira a data de referência do custo", :value =>  ( (@custo.descricao if @custo.descricao) unless (@custo.new_record? && !@custo.descricao.nil?) )%>
-      <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
+      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
+      <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
     </div>
   </div>
 
@@ -19,18 +19,19 @@
     </div>
   </div>
 
+
   <div class="form-group">
-    <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
+    <%= f.label :descricao, "Descrição", :class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
-      <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+      <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)",:title => "Insira uma descrição do custo",:placeholder => "Insira a data de referência do custo", :value =>  ( (@custo.descricao if @custo.descricao) unless (@custo.new_record? && !@custo.descricao.nil?) )%>
+      <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :dt_referencia, "Data de Referência:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecida",:placeholder => "Insira a data de referência do custo", :value =>  ( (l @custo.dt_referencia if @custo.dt_referencia) unless (@custo.new_record? && !@custo.dt_referencia.nil?) )%>
+      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecida",:placeholder => "A data de referência do custo", :value =>  ( (l @custo.dt_referencia if @custo.dt_referencia) unless (@custo.new_record? && !@custo.dt_referencia.nil?) )%>
       <p class="help-block" style="font-size: 11px;">Insira a data de referência do custo. Obrigatório.</p>
     </div>
   </div>
@@ -38,8 +39,8 @@
   <div class="form-group">
     <%= f.label :quantidade, "Quantidade:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :quantidade, :class => "form-control","data-validate" => "validate(required)",:title => "A quantidade de itens deve ser fornecida", :style => "width: initial;",:placeholder => "Quantidade", :value => (@custo.quantidade unless @custo.new_record?)%>
-      <p class="help-block" style="font-size: 11px;">Insira a quantidade. Obrigatório.</p>
+      <%= f.text_field :quantidade, :class => "form-control","data-validate" => "validate(required)",:title => "A quantidade de itens deve ser fornecida", :style => "width: initial;",:placeholder => "Forneça a quantidade adquirida", :value => (@custo.quantidade unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira a quantidade adquirida. Obrigatório.</p>
     </div>
   </div>
 
@@ -47,18 +48,18 @@
     <%= f.label :valor, "Valor Unitário:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
       <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
-      <p class="help-block" style="font-size: 11px;">Insira o valor do custo. Obrigatório.</p>
+      <p class="help-block" style="font-size: 11px;">Insira o valor unitário do custo. Obrigatório.</p>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :observacoes, "Observações:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :observacoes, :class => "form-control",:title => "Descrição do custo deve ser fornecida", :style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
+      <%= f.text_field :observacoes, :class => "form-control",:style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
       <p class="help-block" style="font-size: 11px;">Insira observações sobre o custo.</p>
     </div>
   </div>
-
+  </fieldset>
 <script type="text/javascript">
     $( document ).ready(function() {
         $("[id=custo_valor]").priceFormat({

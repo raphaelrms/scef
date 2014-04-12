@@ -1,13 +1,19 @@
-//Tooltiping
-$.fn.tooltipar = function () {
-$("form input").focus(function (){
-    //Verifico se há o atributo title e o aviso de erro de form não esteja aqui (senao fica uma salada)
-    if ((this.getAttribute("title")) && !($(this).next().attr("class") == "error"))
-    {
-        $( this ).after('<a href="#" title="'+this.getAttribute("title")+'" class="tooltipa"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span></a>');
+//Ficar "wrappado" dentro de function - Jquery dá escopo privado ao plugin, evitando conflitos com outros plugins.
+(function($){
+    $.tableFilter = {
+
+
+
+
     }
-});
-$("form input").focusout(function (){
-    $( this ).next().remove();
-});
-}
+
+
+
+    $.fn.tableFilter = function(){
+        return this.each(function(){
+        });
+    }
+
+
+
+})(jQuery);

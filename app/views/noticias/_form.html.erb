@@ -1,6 +1,7 @@
 #encoding: utf-8
     <div class="form-group">
         <%= f.label :titulo, "Título*:", :class => "col-md-3 control-label" %>
+
       <div class="col-md-7">
         <%= f.text_field :titulo, :class => "form-control","data-validate" => "validate(required)",:title => "Insira um título para a notícia",:placeholder => "Insira um título para a notícia"%>
       <p class="help-block" style="font-size: 11px;">Insira um título para a notícia. Obrigatório.</p>
