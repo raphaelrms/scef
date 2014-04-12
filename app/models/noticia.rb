@@ -30,21 +30,11 @@ class Noticia < ActiveRecord::Base
   def corpo_resumido
     corpo_texto = ActionView::Base.full_sanitizer.sanitize(corpo)
     #corpo_texto = CGI.unescapeHTML(corpo_texto)
-    if corpo_texto.size <= 200
+    if corpo_texto.size <= 50
       return corpo_texto.html_safe
     else
-      return "#{corpo_texto[0, 200]} [...]".html_safe
+      return "#{corpo_texto[0, 50]} [...]".html_safe
     end
-  end
-
-  def postagem_e_atualizacao
-    "Postado: <span class='data'>#{created_at} Ã s #{created_at.hour}:#{created_at.min}</span> - Atualizado: <span class='data'>#{updated_at} Ã s #{updated_at.hour}:#{updated_at.min}</span>"
-  end
-
-  def criar_ou_atualizar_permissoes(params)
-    criar_ou_atualizar_permissao_admin(params[:permissao_admin])
-    criar_ou_atualizar_permissao_coord(params[:permissao_coord])
-    criar_ou_atualizar_permissao_visit(params[:permissao_visit])
   end
 
   def criar_ou_atualizar_permissao_admin(parametro)
