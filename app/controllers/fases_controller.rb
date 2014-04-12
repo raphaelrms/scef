@@ -82,11 +82,9 @@ class FasesController < ApplicationController
     #Busca por VALOR
     #Se for numero, procura no orcamento.
     if !(valor.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/)).nil?  && !valor.blank?
-      binding.pry
       @fases = Fase.joins(:curso).where("fases.orcamento = ?",valor).paginate(:page => params[:page], :per_page => 2)
     #VALOR E DATAS em branco?! Então busco todos.
     elsif valor.blank? && (params[:inicio_periodo].blank? && params[:fim_periodo].blank?)
-      binding.pry
       @fases = Fase.paginate(:page => params[:page], :per_page => 2)
     else
       #É um valor valido para procurar
