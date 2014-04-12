@@ -7,7 +7,7 @@
 <div class="panel-body">
   <div class="span8">
     <div class="well">
-    <%= form_tag pesquisar_fases_path, :class => 'form-horizontal' , :role => 'form' do |f| %>
+    <%= form_tag pesquisar_fases_path,:method => :get, :class => 'form-horizontal' , :role => 'form' do |f| %>
         <div class="form-group">
           <%= label_tag :filtro, "Filtro:",:class => "col-xs-3 control-label" %>
           <div class="col-xs-3">

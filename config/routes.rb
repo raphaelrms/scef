@@ -70,7 +70,7 @@ RailsPadrao::Application.routes.draw do
 
   resources :fases do
     collection do
-      post 'pesquisar'
+      get 'pesquisar'
     end
 
   end
