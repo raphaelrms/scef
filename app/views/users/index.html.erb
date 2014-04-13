@@ -44,6 +44,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#tabela").tablesorter({theme : "bootstrap",
+            dateFormat: 'uk',
             widthFixed: true,
             headers: {
                 // set "sorter : false" (no quotes) to disable the column
@@ -63,10 +64,12 @@
                     sorter: "text"
                 },
                 5: {
-                    sorter: false
+                    sorter: false,
+                    filter: false
                 },
                 6: {
-                    sorter: false
+                    sorter: false,
+                    filter: false
                 }
             },
             headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
