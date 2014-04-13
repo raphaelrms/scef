@@ -19,8 +19,8 @@
     <h2>Dados</h2>
       <p><b>Descrição:</b> <%= @fase.descricao %></p>
       <p><b>Curso: </b><%= @fase.curso.nome%></p>
-      <p><b>Data Início Prevista: </b><%= @fase.inicio_periodo%></p>
-      <p><b>Data Fim Prevista: </b><%= @fase.fim_periodo%></p>
+      <p><b>Data Início Prevista: </b><%= l @fase.inicio_periodo.to_date if @fase.inicio_periodo%></p>
+      <p><b>Data Fim Prevista: </b><%= l @fase.fim_periodo.to_date if @fase.inicio_periodo%></p>
   </fieldset>
   </br>
   <fieldset>
@@ -33,6 +33,10 @@
     <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor*quantidade')%></span></p>
     <%if @fase.custos.any?%>
         <%= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count %>
+        <%= line_chart @fase.custos.map{|fase|
+          binding.pry
+          {:name => fase.categoria.descricao, :data => fase.joins(:categoria).where(:custo => fase).group("custos.created_at").count}
+            } %>
         <div class="table-responsive" >
           <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
             <thead>
