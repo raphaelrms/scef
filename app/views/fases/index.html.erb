@@ -36,7 +36,7 @@
 
 
     <div class="table-responsive">
-      <table class="table table-condensed table-striped table-hover" id="custos_table">
+      <table class="table table-condensed table-striped table-hover" id="fase_table">
         <thead>
         <tr>
           <th>Número</th>
@@ -86,6 +86,45 @@
 <script type="text/javascript">
     $( document ).ready(function() {
           //$("#custos_table").createFilter();
+        $( document ).ready(function() {
+            $("#fase_table").tablesorter({theme : "bootstrap",
+                dateFormat: 'uk',
+                widthFixed: true,
+                headers: {
+                    // set "sorter : false" (no quotes) to disable the column
+                    0: {
+                        sorter: "digit"
+                    },
+                    1: {
+                        sorter: "text"
+                    },
+                    2: {
+                        sorter: "text"
+                    },
+                    3: {
+                        sorter: "text"
+                    },
+                    4: {
+                        sorter: "shortDate"
+                    },
+                    5: {
+                        sorter: "shortDate"
+                    },
+                    6: {
+                        sorter: false
+                    },
+                    7: {
+                        sorter: false
+                    }
+                },
+                headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+                widgets : [ "uitheme", "filter" ],
+                ignoreCase: true,
+                widgetOptions : {
+                    zebra : ["even", "odd"],
+                    filter_reset : ".reset"
+                }            });
+        });
         $('[role=form]').ketchup();
         $("[id*=periodo]").mask("99/99/9999");
         });

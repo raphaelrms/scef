@@ -75,17 +75,17 @@
 </div>
 
 <script type="text/javascript">
-    $( document ).ready(function() {
-//        $.ketchup.validation('min_dois_nomes', 'Você deve informar pelo menos um sobrenome.', function(form, el, value) {
-//            if(value.split(' ').length > 1) {
-//                return true;
-//
-//            } else {
-//                return false;
-//
-//            }
-//
-//        });
-//        $('#new_user').ketchup();
+   $( document ).ready(function() {
+        $.ketchup.validation('min_dois_nomes', 'Você deve informar pelo menos um sobrenome.', function(form, el, value) {
+            if(value.split(' ').length > 1) {
+                return true;
+
+            } else {
+                return false;
+
+            }
+
+        });
+        $('#new_user').ketchup();
     });
 </script>

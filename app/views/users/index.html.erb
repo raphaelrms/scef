@@ -6,7 +6,7 @@
 <div class="panel-body">
 <div class="span8">
 <div class="table-responsive">
-<table class="table table-condensed table-striped table-hover">
+<table class="table table-condensed table-striped table-hover" id="tabela">
   <thead>
     <tr>
       <th>Usuário</th>
@@ -40,3 +40,42 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#tabela").tablesorter({theme : "bootstrap",
+            widthFixed: true,
+            headers: {
+                // set "sorter : false" (no quotes) to disable the column
+                0: {
+                    sorter: "text"
+                },
+                1: {
+                    sorter: "text"
+                },
+                2: {
+                    sorter: "text"
+                },
+                3: {
+                    sorter: "date"
+                },
+                4: {
+                    sorter: "text"
+                },
+                5: {
+                    sorter: false
+                },
+                6: {
+                    sorter: false
+                }
+            },
+            headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+            widgets : [ "uitheme", "filter" ],
+            ignoreCase: true,
+            widgetOptions : {
+                zebra : ["even", "odd"],
+                filter_reset : ".reset"
+            }            });
+    });
+</script>
+
