@@ -3,6 +3,7 @@ class CategoriasController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @categoria_nova = Categoria.new
     @categorias = Categoria.paginate(:page => params[:page], :per_page => 5)
   end
 
@@ -24,7 +25,8 @@ class CategoriasController < ApplicationController
   end
 
   def create
-    @categoria = Categoria.new(params[new_categoria_path])
+    binding.pry
+    @categoria = Categoria.new(params[:categoria])
 
     if @categoria.save
       redirect_to categorias_path, :notice => "Categoria criada com sucesso"

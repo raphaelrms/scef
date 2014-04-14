@@ -32,11 +32,19 @@
     <%end%>
     <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor*quantidade')%></span></p>
     <%if @fase.custos.any?%>
+
+        <%#= high_chart("my_id2", @chart2) %>
+        <%#= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count
+        Custo.where(:categoria_id => custo.categoria.id).order('dt_referencia asc').group("categoria_id,dt_referencia").count%>
         <%= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count %>
-        <%= line_chart @fase.custos.map{|fase|
-          binding.pry
-          {:name => fase.categoria.descricao, :data => fase.joins(:categoria).where(:custo => fase).group("custos.created_at").count}
-            } %>
+
+
+        <%= line_chart @fase.custos.collect(&:categoria).uniq.map{|c|
+             {:name => c.descricao, :data => c.custos.group("to_char(dt_referencia,'DD/MM/YYYY')").count}
+           }
+        %>
+        <fieldset>
+          <h2>Lista de custos</h2>
         <div class="table-responsive" >
           <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
             <thead>
@@ -50,6 +58,7 @@
             <%@fase.custos.each do |custo|%>
                 <tr>
                   <td><%=link_to custo.id, custo%></td>
+                  <td><%=l custo.dt_referencia.to_date%></td>
                   <td><%=link_to custo.categoria.descricao, custo.categoria%></td>
                   <td><div id="fase_orcamento_show"><%=custo.valor * custo.quantidade%></div></td>
                 </tr>
@@ -57,6 +66,7 @@
 
             </tbody>
           </table>
+        </fieldset>
           <div align="right"><%= will_paginate @custos_associados,:remote => true,:renderer => BootstrapPagination::Rails %></div>
         </div>
     <%else%>
@@ -91,4 +101,9 @@
         });
         $('#fase_orcamento_show1').popover('toggle')
     });
+
+
+    });
+
+
 </script>

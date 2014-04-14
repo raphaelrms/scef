@@ -1,4 +1,5 @@
 #encoding:utf-8
+<fieldset>
 <div class="form-group">
   <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
   <div class="col-sm-9">
@@ -11,3 +12,4 @@
     <%= f.text_field :observacoes, :class => "form-control",:title => "Observações",:placeholder => "Observações adicionais desta categoria.", :value => (f.object.observacoes if (f.object && !f.object.new_record?))%>
   </div>
 </div>
+</fieldset>

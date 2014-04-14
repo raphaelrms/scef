@@ -24,6 +24,7 @@ class FasesController < ApplicationController
     @fase = Fase.find(params[:id])
     @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
     @custo_total = @fase.custos.sum('valor*quantidade')
+#    carregarGraficos
     @custo_excedido = @custo_total.to_i > @fase.orcamento.to_i ? true : false
     @valor_excedido = @custo_total.to_i - @fase.orcamento.to_i
     respond_to do |format|
@@ -100,6 +101,25 @@ class FasesController < ApplicationController
     end
 
 
+  end
+
+  def carregarGraficos
+    @categorias = @fase.custos.each do |c| l c.dt_referencia.to_date end
+    @chart2 = LazyHighCharts::HighChart.new('column') do |f|
+      f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
+      f.xAxis(:categories => [@categorias.collect{|c| p ("'" + (l c.dt_referencia.to_date).to_s + "'")}])
+      binding.pry
+      @resultado = @fase.custos.select("categoria_id,count(1) as qtd").group("categoria_id")
+      f.series(:name => @fase.custos.select("categoria_id,count(1) as qtd").group("categoria_id"), :data => @resultado)
+
+      f.yAxis [
+                  {:title => {:text => "GDP in Billions", :margin => 70} },
+                  {:title => {:text => "Population in Millions"}, :opposite => true},
+              ]
+
+      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
+      f.chart({:defaultSeriesType=>"column"})
+    end
   end
 
 end

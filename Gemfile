@@ -19,6 +19,7 @@ gem 'money-rails'
 gem 'jquery-tablesorter'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
+#gem 'lazy_high_charts'
 gem 'masked_input-rails'
 gem "chartkick"
 gem 'cancan'

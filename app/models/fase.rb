@@ -3,6 +3,7 @@ class Fase < ActiveRecord::Base
 
   belongs_to :curso
   has_many :custos, :dependent => :destroy
+  has_many :categorias
 
   validates :curso,  :presence => true
 
