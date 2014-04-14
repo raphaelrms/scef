@@ -66,9 +66,9 @@
 
             </tbody>
           </table>
+            </div>
         </fieldset>
           <div align="right"><%= will_paginate @custos_associados,:remote => true,:renderer => BootstrapPagination::Rails %></div>
-        </div>
     <%else%>
         <h6>Esta fase do projeto ainda não possui custos associados.</h6>
     <%end%>
@@ -87,13 +87,14 @@
 
 
     $( document ).ready(function() {
-        $(".tabela").tablesorter();
-
         $("[id=fase_orcamento_show]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",
             thousandsSeparator: "."
         });
+        $(".tabela").tablesorter();
+
+
         $("#fase_orcamento_show1").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",
@@ -103,7 +104,6 @@
     });
 
 
-    });
 
 
 </script>
