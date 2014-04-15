@@ -8,7 +8,7 @@ class FasesController < ApplicationController
 
 
   def index
-    @fases = Fase.paginate(:page => params[:page], :per_page => 25)
+    @fases = Fase.paginate(:page => params[:page], :per_page => 25) if @fases.nil?
     respond_to do |format|
       format.html
       format.js { render :partial => 'fase_index' }
@@ -76,7 +76,7 @@ class FasesController < ApplicationController
     valor = params[:filtro].split('.').join.split(',').join
 
     #Busca por Datas
-    if params[:inicio_periodo] || params[:fim_periodo]
+    if !params[:inicio_periodo].blank? || !params[:fim_periodo].blank?
        @fases = Fase.comecando(params[:inicio_periodo].to_date.to_s).scoped if !params[:inicio_periodo].blank?
        @fases = Fase.finalizando(params[:fim_periodo].to_date.to_s).scoped if !params[:fim_periodo].blank?
        @fases = @fases.paginate(:page => params[:page], :per_page => 25) if @fases.any?
