@@ -4,6 +4,11 @@
 </ol>
 <%= painel_titulo("Quadro de avisos").html_safe %>
 <div class="panel-body">
+  <div class="row">
+    <div class="col-md-offset-10"> <%= link_to "Adicionar aviso", new_noticia_path, :class => "btn btn-success col-xs-9"%>
+    </div>
+  </div>
+
 <% if @noticias %>
     <div class="noticia">
       <ul class="list-unstyled">
@@ -16,7 +21,7 @@
                   <h2 contenteditable="false"><%=noticia.titulo%></h2>
                   <small contenteditable="false">Postado em: <%= l noticia.created_at.to_date %></small>
                   <p contenteditable="false"><%= noticia.corpo_resumido.html_safe %></p>
-                  <p><a class="btn" href="#" contenteditable="false"><%= link_to "[Saiba mais]", noticia %></a></p>
+                  <a class="btn" href="#" contenteditable="false"><%= link_to "[Saiba mais]", noticia %></a>
                 </div>
             </div>
               </div>
@@ -30,8 +35,7 @@
 <% else %>
     <p>Nenhuma notícia postada até o momento.</p>
 <% end %>
-  <br>
-  <p><%= link_to "Adicionar aviso", new_noticia_path, :class => "btn btn-success"%></p>
+
 </div>
 
 </div>
