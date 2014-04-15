@@ -15,7 +15,6 @@ class CustosController < ApplicationController
 
   def show
     @custo = Custo.find(params[:id])
-
     respond_to do |format|
       format.html {}# show.html.erb
       format.json { render :json =>  @custo }
@@ -41,9 +40,9 @@ class CustosController < ApplicationController
     @custo = Custo.new(params[:custo])
 
     if @custo.save
-      redirect_to custos_path, :notice => "Custo criado com sucesso"
+      redirect_to :back, :notice => "Custo criado com sucesso"
     else
-      redirect_to custos_path, :alert => "Não foi possível criar o custo. Erro: #{@custo.errors.full_messages.to_s}"
+      redirect_to :back, :alert => "Não foi possível criar o custo. Erro: #{@custo.errors.full_messages.to_s}"
     end
   end
 
@@ -61,7 +60,7 @@ class CustosController < ApplicationController
   def destroy
     @custo = Custo.find(params[:id])
     @custo.destroy
-
+       .
     redirect_to custos_path, :notice => "Custo '#{@custo.id}' da fase '#{@custo.fase.descricao}' removido com sucesso."
   end
 

@@ -1,6 +1,6 @@
 # encoding: utf-8
 <%
-   @custo = f.object
+   @custo = f.object if @custo.nil?
 %>
 <fieldset>
   <div class="form-group">
@@ -59,7 +59,7 @@
       <p class="help-block" style="font-size: 11px;">Insira observações sobre o custo.</p>
     </div>
   </div>
-  </fieldset>
+</fieldset>
 <script type="text/javascript">
     $( document ).ready(function() {
         $("[id=custo_valor]").priceFormat({

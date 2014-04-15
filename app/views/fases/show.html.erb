@@ -25,12 +25,18 @@
   </br>
   <fieldset>
     <h2>Custos</h2>
+    <div class="row">
+      <div class="col-md-offset-10"> <a data-toggle="modal" class="label label-success" href="#new_custo" type="button">Novo Custo</a>
+
+      </div>
+    </div>
     <%if @custo_excedido%>
         <p><b>Orçamento:</b><span id="fase_orcamento_show"><%= @fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p>
     <%else%>
         <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span></p>
     <%end%>
     <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor*quantidade')%></span></p>
+
     <%if @fase.custos.any?%>
 
         <%#= high_chart("my_id2", @chart2) %>
@@ -73,15 +79,17 @@
         <h6>Esta fase do projeto ainda não possui custos associados.</h6>
     <%end%>
   </fieldset>
+
   </br>
   <div class="well well-sm">
     <%= link_to 'Voltar', :back, :class => 'btn btn-warning' %>
+
   </div>
 
 </div>
 </div>
 
-
+         <%= render "custos/new_custo"%>
 <script type="text/javascript">
 
 

@@ -45,7 +45,7 @@
             <%= f.fields_for :role, @user do |r| %>
                 <%= r.label "Grupo", :class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
                 <div class="col-sm-2 col-md-3">
-                  <%= r.select :role_id, options_for_select(Role.all.collect {|p| [ p.name, p.id ] }, :selected => @user.role_id),{:prompt => "Selecione um grupo"}, {:class => "form-control",:name => 'role[]' }%>
+                  <%= r.select :role_id, options_for_select(Role.all.collect {|p| [ p.name, p.id ] }, :selected => @user.roles.first.id),{:prompt => "Selecione um grupo"}, {:class => "form-control",:name => 'role[]' }%>
                   <p class="help-block" style="font-size: 11px;">Selecione o grupo do usuário.</p>
                 </div>
 

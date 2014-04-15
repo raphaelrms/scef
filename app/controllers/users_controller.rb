@@ -73,7 +73,10 @@ class UsersController < ApplicationController
         format.html { redirect_to users_path, :notice => "Usuário \"#{@user.name}\" criado com sucesso." }
         format.json { render json =>@user, status =>:created, location =>@user }
       else
-        format.html { render :action =>"novo_usuario_manual" }
+        format.html {
+          flash[:warning] = "Não foi possível criar o usuário. Erro: #{@user.errors.full_messages.join}"
+          render "novo_usuario_manual"
+        }
         format.json { render json =>@user.errors, status =>:unprocessable_entity }
       end
     end

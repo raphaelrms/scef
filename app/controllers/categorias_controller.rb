@@ -25,13 +25,12 @@ class CategoriasController < ApplicationController
   end
 
   def create
-    binding.pry
     @categoria = Categoria.new(params[:categoria])
 
     if @categoria.save
-      redirect_to categorias_path, :notice => "Categoria criada com sucesso"
+      redirect_to :back, :notice => "Categoria criada com sucesso"
     else
-      redirect_to categorias_path, :alert => "Não foi possível criar a categoria '#{@categoria.descricao}'. Erro: #{@categoria.errors.full_message.to_s}"
+      redirect_to :back, :alert => "Não foi possível criar a categoria '#{@categoria.descricao}'. Erro: #{@categoria.errors.full_message.to_s}"
     end
   end
 

@@ -8,7 +8,7 @@
           </div>
             <%= form_for @custo_novo, :html => {:class => 'form-horizontal' } do |f| %>
               <div class="modal-body">
-                <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+                <%= render :partial => 'custos/form',:locals => { :f => f, :role => @role } %>
                 <div class="modal-footer">
                   <div class="well well-sm">
                     <a class="btn" data-dismiss="modal" href="#">Fechar</a>
@@ -33,7 +33,6 @@
     });
 
     $('#new_custo').on('hidden.bs.modal', function () {
-        debugger;
         $(".ketchup-error").hide();
     });
 </script>

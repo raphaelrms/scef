@@ -23,6 +23,7 @@ class FasesController < ApplicationController
   def show
     @fase = Fase.find(params[:id])
     @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
+    @custo_novo = Custo.new
     @custo_total = @fase.custos.sum('valor*quantidade')
 #    carregarGraficos
     @custo_excedido = @custo_total.to_i > @fase.orcamento.to_i ? true : false
@@ -47,9 +48,9 @@ class FasesController < ApplicationController
     params[:fase][:orcamento] = params[:fase][:orcamento].split('.').join.split(',').join
     @fase = Fase.new(params[:fase])
     if @fase.save
-      redirect_to fases_path, :notice => "Fase criada com sucesso"
+      redirect_to :back, :notice => "Fase criada com sucesso"
     else
-      redirect_to fases_path, :alert => "Não foi possível criar a fase '#{@fase.descricao}'. Erro: #{@fase.errors.full_message.to_s}"
+      redirect_to :back, :alert => "Não foi possível criar a fase '#{@fase.descricao}'. Erro: #{@fase.errors.full_message.to_s}"
     end
   end
 
@@ -108,7 +109,6 @@ class FasesController < ApplicationController
     @chart2 = LazyHighCharts::HighChart.new('column') do |f|
       f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
       f.xAxis(:categories => [@categorias.collect{|c| p ("'" + (l c.dt_referencia.to_date).to_s + "'")}])
-      binding.pry
       @resultado = @fase.custos.select("categoria_id,count(1) as qtd").group("categoria_id")
       f.series(:name => @fase.custos.select("categoria_id,count(1) as qtd").group("categoria_id"), :data => @resultado)
 
