@@ -12,8 +12,6 @@ jQuery.ketchup
 
 .validation('select', 'Este campo é obrigatório', function (form, el, value, max) {
 return ($("option", el).index($("option:selected", el)) > 0) ? true : false;
-}, function (form, el) {
-this.bindBrothers(form, el);
 })
 
 .validation('minlength', 'Campo deve possuir o mínimo de {arg1} caracteres.', function(form, el, value, min) {

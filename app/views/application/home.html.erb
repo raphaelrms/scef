@@ -5,37 +5,33 @@
 <%= painel_titulo("Quadro de avisos").html_safe %>
 <div class="panel-body">
   <div class="row">
-    <div class="col-md-offset-10"> <%= link_to "Adicionar aviso", new_noticia_path, :class => "btn btn-success col-xs-9"%>
+    <div class="col-md-offset-10"> <%= link_to "Adicionar aviso", new_noticia_path, :class => "btn btn-success col-xs-9" if can? :new, Noticia %>
     </div>
   </div>
 
-<% if @noticias %>
-    <div class="noticia">
-      <ul class="list-unstyled">
-        <% @noticias.each do |noticia| %>
-            <p>
-            <li>
-            <div class="col-md-6">
-              <div class="box box-element">
-                <div class="view">
-                  <h2 contenteditable="false"><%=noticia.titulo%></h2>
-                  <small contenteditable="false">Postado em: <%= l noticia.created_at.to_date %></small>
-                  <p contenteditable="false"><%= noticia.corpo_resumido.html_safe %></p>
-                  <a class="btn" href="#" contenteditable="false"><%= link_to "[Saiba mais]", noticia %></a>
+  <% if @noticias %>
+      <div class="noticia">
+        <ul class="list-unstyled">
+          <% @noticias.each do |noticia| %>
+              <p>
+              <li>
+                <div class="col-md-6">
+                  <div class="box box-element">
+                    <div class="view">
+                      <h2 contenteditable="false"><%=noticia.titulo%></h2>
+                      <small contenteditable="false">Postado em: <%= l noticia.created_at.to_date %></small>
+                      <p contenteditable="false"><%= noticia.corpo_resumido.html_safe %></p>
+                      <a class="btn" href="#" contenteditable="false"><%= link_to "[Saiba mais]", noticia %></a>
+                    </div>
+                  </div>
                 </div>
-            </div>
-              </div>
-            </li>
-            </p>
-        <% end %>
-      </ul>
+              </li>
+              </p>
+          <% end %>
+        </ul>
 
-    </div>
-    <%= will_paginate @noticias %>
-<% else %>
-    <p>Nenhuma notícia postada até o momento.</p>
-<% end %>
-
-</div>
-
-</div>
+      </div>
+      <%= will_paginate @noticias %>
+  <% else %>
+      <p>Nenhuma notícia postada até o momento.</p>
+  <% end %>

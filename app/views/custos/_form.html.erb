@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)" ,:class => "form-control"} %>
+      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:prompt => "Selecione uma opção" }, {:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
     </div>
   </div>
@@ -31,7 +31,7 @@
   <div class="form-group">
     <%= f.label :dt_referencia, "Data de Referência:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(required,dateBR)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecida",:placeholder => "A data de referência do custo", :value =>  ( (l @custo.dt_referencia if @custo.dt_referencia) unless (@custo.new_record? && !@custo.dt_referencia.nil?) )%>
+      <%= f.text_field :dt_referencia, :class => "form-control","data-validate" => "validate(dateBR_required)", :style => "width: initial;",:title => "Data de referência do custo ocorrido deve ser fornecida",:placeholder => "A data de referência do custo", :value =>  ( (l @custo.dt_referencia if @custo.dt_referencia) unless (@custo.new_record? && !@custo.dt_referencia.nil?) )%>
       <p class="help-block" style="font-size: 11px;">Insira a data de referência do custo. Obrigatório.</p>
     </div>
   </div>
