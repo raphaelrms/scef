@@ -6,13 +6,12 @@
 <%= painel_titulo("Quadro de avisos").html_safe %>
 <div class="panel-body">
   <fieldset>
-    <h1>Notícia</h1><br/>
     <div class="noticia">
       <h2><%= @noticia.titulo %>
         <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_noticia_path(@noticia) %></h2>
-      <small>Autor: <span class="autor"><%= @noticia.autor %></span></small>
-      <small><%= l @noticia.created_at.to_date %></small>
-      <p><small>Tags: <%= @noticia.tags %></small></p>
+      <small>Autor: <span class="autor"><%= @noticia.autor %></span></small><br>
+      <small>Postado em: <%= l @noticia.created_at.to_date %></small>
+      <p><small></small></p>
 
       <div class="corpo">
         <%= @noticia.corpo.html_safe %>
@@ -23,4 +22,5 @@
       </div>
       </div>
   </fieldset>
+</div>
 </div>
