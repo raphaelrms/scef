@@ -7,24 +7,16 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-<div class="container">
-  <div class="row clearfix">
-    <div class="col-md-12 col-sm-1 column">
+<body id="home">
       <%= render 'layouts/navbar'%>
+
       <%- if devise_mapping.registerable? && controller_name != 'registrations' && !user_signed_in? %>
           <%= link_to "Cadastre-se", new_registration_path(resource_name) , :class => "registro"%><br />
       <% end -%>
       <%= flash_message.html_safe %>
       <%= yield %>
-    </div>
-  </div>
   <!--<div style="background-color: #f8f8f8; border: 1px solid #e7e7e7 !important;border-radius: 7px;margin-top: 20px;">-->
-  <div class="panel-footer" style="text-align:center;font-size:11px;">
-    <%= render 'layouts/footer'%>
-  </div>
-</div>
-<!--Fechando div do painel-body -->
+    <%#= render 'layouts/footer'%>
 
 </body>
 </html>
