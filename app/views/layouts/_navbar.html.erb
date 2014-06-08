@@ -1,55 +1,62 @@
-<header class="navbar navbar-inverse hero" role="banner">
-  <div class="container">
-    <!--######################################-->
-    <!--NÃO MEXA NO NAVBAR-HEADER. SE NÃO SOUBER O QUE ESTÁ FAZENDO, IRÁ FERRAR COM A VISUALIZACÃO EM DISPOSITIVOS MÓVEIS.-->
-    <!--######################################-->
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="index.html" class="navbar-brand">Principal</a>
-    </div>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Sobre a empresa
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Produtos<b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="index.html">Home 1 (Current)</a></li>
-            <li><a href="index2.html">Home 2 (Slider)</a></li>
-            <li><a href="index3.html">Home 3 (Off-canvas menu)</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Preços<b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="features.html">Features</a></li>
-            <li><a href="services.html">Services</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Contato<b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="pricing.html">Pricing charts</a></li>
-            <li><a href="charts.html">Comparison tables</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div><!-- /.navbar-collapse -->
+<nav class="navbar navbar-default"  role="navigation" style="background-color: #002F6D;">
+  
+  <!--######################################-->
+  <!--NÃO MEXA NO NAVBAR-HEADER. SE NÃO SOUBER O QUE ESTÁ FAZENDO, IRÁ FERRAR COM A VISUALIZACÃO EM DISPOSITIVOS MÓVEIS.-->
+  <!--######################################-->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navinho">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="<%= root_path %>"><span class="glyphicon glyphicon-home"></span></a>
   </div>
-</header>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="navinho">
+    <ul class="nav navbar-nav">
+      <li><a href="#">Sobre</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cursos<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= new_curso_path%>">Cadastrar curso</a></li>
+          <li><a href="<%= cursos_path%>">Lista de cursos</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Custos<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= new_custo_path%>">Lançar custo</a></li>
+          <li><a href="<%= custos_path%>">Lista de custos</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fases<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= new_fase_path%>">Cadastrar fase</a></li>
+          <li><a href="<%= fases_path%>">Lista de fases</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuracões<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= users_path%>">Usuários</a></li>
+          <li><a href="<%= roles_path%>">Grupos</a></li>
+          <li><a href="<%= permission_role_index_path%>">Permissões</a></li>
+          <li><a href="<%= categorias_path%>">Categorias de custos</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right col-xs-offset-1">
+        <li><%= render 'home/login'%></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
 
 

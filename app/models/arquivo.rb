@@ -1,5 +1,6 @@
 class Arquivo < ActiveRecord::Base
   attr_accessible :arquivos,:arquivo, :descricao
+  belongs_to :curso
   belongs_to :anexo, :polymorphic => true
 
   ATTACHMENT_SIZE_ERROR = ' O arquivo deve ter, no máximo, 3.0 MB. '
