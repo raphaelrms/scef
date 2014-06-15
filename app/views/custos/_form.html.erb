@@ -6,7 +6,7 @@
   <div class="form-group">
     <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
+      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
     </div>
   </div>
@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:prompt => "Selecione uma opção" }, {:class => "form-control"} %>
+      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
     </div>
   </div>
@@ -49,6 +49,14 @@
     <div class="col-md-7">
       <%= f.text_field :valor, :class => "form-control","data-validate" => "validate(required)", :style => "width: initial;",:title => "Valor do custo deve ser fornecido",:placeholder => "Insira o valor do custo", :value => (@custo.valor unless @custo.new_record?)%>
       <p class="help-block" style="font-size: 11px;">Insira o valor unitário do custo. Obrigatório.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :tributo, "INSS:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :tributo, :class => "form-control","data-validate" => "validate(number)", :style => "width: initial;",:title => "Porcentagem de tributação do INSS",:placeholder => "Insira a porcentagem do INSS", :value => (@custo.tributo unless @custo.new_record?)%>
+      <p class="help-block" style="font-size: 11px;">Insira a porcentagem do INSS. Opcional.</p>
     </div>
   </div>
 

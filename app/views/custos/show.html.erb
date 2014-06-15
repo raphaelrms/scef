@@ -15,8 +15,12 @@
       <p><b>Fase: </b><%= @custo.fase.descricao%></p>
       <p><b>Data de Referência: </b><%= @custo.dt_referencia%></p>
       <p><b>Quantidade: </b><%= @custo.quantidade%></p>
-      <b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></br></br>
-      <b>Valor Total:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></br></br>
+      <p><b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></p>
+      <p><b>Valor Total sem Tributação:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></p>
+      <p><b>INSS: </b><%= !@custo.tributo.nil? ? "#{@custo.tributo}%" : "-" %></p>
+      <%if !@custo.tributo.nil?%>
+         <p><b>Valor Total com Tributaçao: </b><span id="fase_orcamento_show"><%= @custo.valor_com_tributacao%></span></p>
+      <%end%>
       <p><b>Observações: </b><%= @custo.observacoes%></p>
     </div>
   </fieldset>
