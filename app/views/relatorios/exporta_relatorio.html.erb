@@ -1,0 +1,102 @@
+# encoding: utf-8
+<%= wicked_pdf_stylesheet_link_tag "documents" %>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%@fase.each do |fase|%>
+    <% custo_total_rel(fase)%>
+<%if @custo_excedido%>
+    <div class="alert alert-warning">Atenção! O orçamento previsto para esta fase do projeto foi ultrapassado.</div>
+<%end%>
+<%= painel_titulo("Fase - #{fase.descricao}").html_safe %>
+
+<div class="panel-body" id="form">
+
+  <fieldset>
+    <h2>Dados</h2>
+    <p><b>Descrição:</b> <%= fase.descricao %></p>
+    <p><b>Curso: </b><%= fase.curso.nome%></p>
+    <p><b>Data Início Prevista: </b><%= l fase.inicio_periodo.to_date if fase.inicio_periodo%></p>
+    <p><b>Data Fim Prevista: </b><%= l fase.fim_periodo.to_date if fase.inicio_periodo%></p>
+  </fieldset>
+  </br>
+  <fieldset>
+    <h2>Custos</h2>
+    <%if @custo_excedido%>
+        <p><b>Orçamento:</b><span id="fase_orcamento_show"><%= fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p>
+    <%else%>
+        <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= fase.orcamento %></span></p>
+    <%end%>
+    <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @custo_total%></span></p>
+
+    <%if fase.custos.any?%>
+
+        <%#= high_chart("my_id2", @chart2) %>
+        <%#= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count
+        Custo.where(:categoria_id => custo.categoria.id).order('dt_referencia asc').group("categoria_id,dt_referencia").count%>
+        <%= pie_chart fase.custos.joins(:categoria).group("categorias.descricao").count %>
+
+
+        <%= line_chart fase.custos.collect(&:categoria).uniq.map{|c|
+          {:name => c.descricao, :data => c.custos.group("to_char(dt_referencia,'DD/MM/YYYY')").count}
+        }
+        %>
+        <fieldset>
+          <h2>Lista de custos</h2>
+          <div class="table-responsive" >
+            <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
+              <thead>
+              <tr>
+                <th>Número</th>
+                <th>Data de Referência</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%fase.custos.each do |custo|%>
+                  <tr>
+                    <td><%=link_to custo.id, custo%></td>
+                    <td><%=l custo.dt_referencia.to_date%></td>
+                    <td><%=custo.categoria.descricao%></td>
+                    <td><div id="fase_orcamento_show"><%=(custo.valor * custo.quantidade) + (custo.valor * custo.quantidade* custo.tributo)/100%></div></td>
+                  </tr>
+              <%end%>
+
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+        <div align="right"><%= will_paginate @custos_associados,:remote => true,:renderer => BootstrapPagination::Rails %></div>
+    <%else%>
+        <h6>Esta fase do projeto ainda não possui custos associados.</h6>
+    <%end%>
+  </fieldset>
+
+</div>
+</div>
+<%end%>
+
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+        $("[id=fase_orcamento_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+        $(".tabela").tablesorter();
+
+
+        $("#fase_orcamento_show1").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+        $('#fase_orcamento_show1').popover('toggle')
+    });
+
+
+
+
+</script>
