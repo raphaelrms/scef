@@ -55,7 +55,7 @@
   <div class="form-group">
     <%= f.label :tributo, "Tributação:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.text_field :tributo, :class => "form-control","data-validate" => "validate(number)", :style => "width: initial;",:title => "Porcentagem de tributação do INSS",:placeholder => "Insira a porcentagem do INSS", :value => (@custo.new_record? ? 0 : @custo.tributo)%>
+      <%= f.text_field :tributo, :class => "form-control","data-validate" => "validate(number)", :style => "width: initial;",:title => "Porcentagem de tributação do INSS",:placeholder => "Insira a porcentagem do INSS", :value => @custo.tributo if !@custo.tributo.blank? %>
       <p class="help-block" style="font-size: 11px;">Insira a porcentagem do tributo incidente. Opcional.</p>
     </div>
   </div>
