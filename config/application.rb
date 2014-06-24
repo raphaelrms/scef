@@ -10,7 +10,7 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 require 'wicked_pdf'
-config.middleware.use WickedPdf::Middleware
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -24,7 +24,7 @@ module RailsPadrao
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+      config.middleware.use WickedPdf::Middleware
       g.test_framework :rspec, :fixture => true
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
       
