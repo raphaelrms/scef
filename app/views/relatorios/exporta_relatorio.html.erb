@@ -1,6 +1,6 @@
 # encoding: utf-8
-<%= wicked_pdf_stylesheet_link_tag "documents" %>
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
+<%= javascript_include_tag "exporting.js", "chartkick" %>
 <%@fase.each do |fase|%>
     <% custo_total_rel(fase)%>
 <%if @custo_excedido%>
@@ -32,12 +32,13 @@
         <%#= high_chart("my_id2", @chart2) %>
         <%#= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count
         Custo.where(:categoria_id => custo.categoria.id).order('dt_referencia asc').group("categoria_id,dt_referencia").count%>
+        <div id="exportar">EXPORTAR</div>
         <%= pie_chart fase.custos.joins(:categoria).group("categorias.descricao").count %>
 
 
         <%= line_chart fase.custos.collect(&:categoria).uniq.map{|c|
           {:name => c.descricao, :data => c.custos.group("to_char(dt_referencia,'DD/MM/YYYY')").count}
-        }
+        };
         %>
         <fieldset>
           <h2>Lista de custos</h2>
@@ -93,7 +94,13 @@
             centsSeparator: ",",
             thousandsSeparator: "."
         });
-        $('#fase_orcamento_show1').popover('toggle')
+        $('#fase_orcamento_show1').popover('toggle');
+
+        $("#exportar").click(function(){exportChart({
+            type: 'application/pdf',
+            filename: 'relatorio.pdf'
+        });
+        });
     });
 
 

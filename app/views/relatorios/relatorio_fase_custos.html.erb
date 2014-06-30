@@ -6,7 +6,7 @@
 <%= painel_titulo("Geração de Relatórios").html_safe %>
 <div class="panel-body">
 
-<%= form_tag exporta_relatorio_relatorios_path,:method => :post, :class => 'form-horizontal' , :format=> :pdf, :role => 'form' do |f| %>
+<%= form_tag exporta_relatorio_relatorios_path,{:method => :get,:format=> 'html', :class => 'form-horizontal' , :role => 'form'} do |f| %>
       <div class="form-group">
         <%= label_tag :fase_id, "Fase:",:class => "col-xs-3 control-label" %>
         <div class="col-xs-4">
@@ -21,4 +21,5 @@
          </div>
        </div>
 <%end%>
+</div>
 </div>

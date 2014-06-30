@@ -18,7 +18,7 @@ RailsPadrao::Application.routes.draw do
   resources :relatorios do
     collection do
       get :relatorio_fase_custos
-      post :exporta_relatorio
+      get :exporta_relatorio
     end
   end
 

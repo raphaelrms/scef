@@ -5,8 +5,6 @@ class RelatoriosController < ApplicationController
   end
 
   def exporta_relatorio
-
-
     respond_to do |format|
       format.html {
         if params[:fase_id]==""
@@ -17,7 +15,7 @@ class RelatoriosController < ApplicationController
         @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
       }
       format.pdf do
-        render :pdf => "relatorio.pdf"
+        render :pdf => "relatorio.pdf", :layout => 'exporta_relatorio'
       end
     end
 
