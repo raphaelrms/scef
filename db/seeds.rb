@@ -22,6 +22,8 @@ perm = Permission.find_or_create_by_action_and_subject_class(:action => 'manage'
 prole = PermissionRole.new :permission_id => perm.id, :role_id => user.roles.first.id
 prole.save!
 
+#Noticia
+Permission.find_or_create_by_action_and_subject_class_and_subject_id(:action => 'read', :subject_class => 'Noticia', :condition => 'NoticiaPermissao.select("noticia_id").where(:role_id => role.id).collect(&:noticia_id)')
 
 
 puts 'Criando categoria "SEM CATEGORIA"'
