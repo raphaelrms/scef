@@ -16,7 +16,7 @@
       <div class="form-group">
         <%= f.label :name, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.text_field :name, :class => "form-control",:required => true, :autofocus => true,:title => "Nome completo deve ser fornecido",:placeholder => "Insira o nome completo"%>
+          <%= f.text_field :name, :class => "form-control",:required => true, :autofocus => true,:title => "Nome completo deve ser fornecido",:placeholder => "Insira o nome completo", :value => (@user.name if !@user.name.blank?)%>
           <p class="help-block" style="font-size: 11px;">Insira seu nome. Obrigatório.</p>
         </div>
       </div>
@@ -24,7 +24,7 @@
       <div class="form-group">
         <%= f.label :email,  "E-mail*:", :class => "col-xs-6 col-sm-3 col-md-2 control-label",:placeholder => "Insira seu e-mail"%>
         <div class="col-sm-2 col-md-3">
-          <%= f.text_field :email, :class => "form-control", "data-validate" => "validate(required,email)"%>
+          <%= f.text_field :email, :class => "form-control", "data-validate" => "validate(required,email)",:value => (@user.email if !@user.email.blank?)%>
           <p class="help-block" style="font-size: 11px;">Insira seu e-mail. Obrigatório.</p>
         </div>
       </div>
