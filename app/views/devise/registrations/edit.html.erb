@@ -12,9 +12,7 @@
     <%= link_to "Cancelar minha conta", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "label label-danger col-md1-offset-5"%>
   </div>
   <p>
-
-    <%= form_for @user, :as => resource_name, :url => atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-horizontal' } do |f| %>
-
+    <%= form_for @user, :as => resource_name, :url => current_user == @user ? users_path(@user) : atualiza_usuario_com_senha_users_path(@user), :html => { :method => :post, :class => 'form-horizontal' } do |f| %>
       <div class="form-group">
         <%= f.label :name, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
@@ -52,7 +50,7 @@
       <div class="form-group">
         <%= f.label :current_password, "Senha atual*:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-2 col-md-3">
-          <%= f.password_field :current_password,:class => "form-control", "data-validate" => "validate(required,minlength(8))"%>
+          <%= f.password_field :current_password,:class => "form-control", "data-validate" =>  ("validate(required,minlength(8))" if @user == current_user) %>
           <p class="help-block" style="font-size: 11px;">Digite sua senha atual para confirmar as alteracões.</p>
         </div>
 

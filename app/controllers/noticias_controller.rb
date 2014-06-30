@@ -1,6 +1,7 @@
 # coding: UTF-8
 class NoticiasController < ApplicationController
 
+  authorize_resource
 
   def index
     if params[:tag].blank?

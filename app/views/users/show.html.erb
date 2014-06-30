@@ -11,6 +11,6 @@
     <p><b>Data de cadastro: </b><%= @user.created_at.to_date %></p>
     <p><b>Grupo: </b><%= @user.roles.first.name.titleize unless @user.roles.first.nil? %></p>
   </div>
-  <%= link_to 'Editar', edit_users_path(@user), :class => 'btn btn-success'  %>
+  <%= link_to 'Editar', edit_user_path(@user), :class => 'btn btn-success'  %>
 </div>
 </div>
