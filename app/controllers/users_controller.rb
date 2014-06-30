@@ -16,9 +16,9 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.roles.collect(&:name).include? Role::ADMIN
-      @user = User.find(params[:id])
-    else
       @user = current_user
+    else
+      @user = User.find(params[:id])
     end
 
     render "devise/registrations/edit"
