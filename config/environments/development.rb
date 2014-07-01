@@ -41,6 +41,10 @@ RailsPadrao::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  config.after_initialize do
+    WICKED_PDF[:exe_path] = Rails.root.join('bin/wkhtmltox/bin', 'wkhtmltopdf').to_s
+  end
+
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,

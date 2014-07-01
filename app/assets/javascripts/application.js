@@ -16,6 +16,8 @@
 //= require jquery.ketchup
 //= require jquery.nested-fields
 //= require jquery.maskedinput
+//= require highcharts
+//= require exporting
 //= require jquery-tablesorter
 //= require tinymce-jquery
 //= require jquery.tokeninput

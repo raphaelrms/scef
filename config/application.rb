@@ -27,8 +27,8 @@ module RailsPadrao
       config.middleware.use WickedPdf::Middleware
       g.test_framework :rspec, :fixture => true
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-      
-      
+
+
       g.view_specs false
       g.helper_specs false
     end
@@ -60,6 +60,7 @@ module RailsPadrao
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.assets.precompile += [ 'highcharts.js']
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
