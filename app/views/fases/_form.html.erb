@@ -31,7 +31,7 @@
 
       <div class="form-group">
         <%= f.label :inicio_periodo,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <%= f.text_field :inicio_periodo, :class => "form-control","data-validate" => "validate(dateBR_required)", :title => "O início do período da fase deve ser inserido", :value => (@fase.inicio_periodo if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira a data de início prevista da fase. Obrigatório.</p>
         </div>
@@ -39,7 +39,7 @@
 
       <div class="form-group">
         <%= f.label :fim_periodo,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <%= f.text_field :fim_periodo, :class => "form-control","data-validate" => "validate(dateBR_required)", :title => "O fim do período da fase deve ser inserido", :value => (@fase.fim_periodo if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira a data de fim prevista da fase. Obrigatório.</p>
         </div>

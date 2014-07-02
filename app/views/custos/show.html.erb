@@ -21,7 +21,7 @@
       <%if !@custo.tributo.nil?%>
          <p><b>Valor Total com tributaçao: </b><span id="fase_orcamento_show"><%= @custo.valor_com_tributacao%></span></p>
       <%end%>
-      <p><b>Observações: </b><%= @custo.observacoes if !@custo.observacoes.blank%></p>
+      <p><b>Observações: </b><%= @custo.observacoes if !@custo.observacoes.blank?%></p>
     </div>
   </fieldset>
   </br>

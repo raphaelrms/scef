@@ -42,6 +42,10 @@ return ($("option", el).index($("option:selected", el)) > 0) ? true : false;
   return this.isNumber(value);
 })
 
+.validation('number', 'Deve ser um número.', function(form, el, value) {
+      return this.isNumber(value) || value == "";
+})
+
 .validation('digits', 'Deve conter apenas dígitos.', function(form, el, value) {
   return /^\d+$/.test(value);
 })
