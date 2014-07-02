@@ -86,7 +86,7 @@
                         <td><%=link_to custo.id, custo%></td>
                         <td><%=l custo.dt_referencia.to_date%></td>
                         <td><%=custo.categoria.descricao%></td>
-                        <td><div id="fase_orcamento_show"><%=(custo.valor * custo.quantidade) + (custo.valor * custo.quantidade* custo.tributo)/100%></div></td>
+                        <td><div id="fase_orcamento_show"><%=(custo.valor * custo.quantidade) + (custo.valor * custo.quantidade* (custo.tributo.blank? ? 0 : custo.tributo))/100%></div></td>
                       </tr>
                   <%end%>
 
