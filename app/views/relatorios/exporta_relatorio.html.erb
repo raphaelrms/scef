@@ -2,7 +2,6 @@
 <script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
 <%= javascript_include_tag "highcharts.js", "chartkick" if request.format == "html"%>
 
-<%= wicked_pdf_javascript_include_tag 'jquery.js' if request.format == "pdf"%>
 <%= wicked_pdf_javascript_include_tag 'highcharts.js', 'chartkick' if request.format == "pdf"%>
 <%= wicked_pdf_javascript_include_tag 'jquery.price_format.2.0.js'if request.format == "pdf"%>
 <%@fase.each do |fase|%>
