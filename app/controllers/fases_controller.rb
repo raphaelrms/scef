@@ -21,6 +21,7 @@ class FasesController < ApplicationController
   end
 
   def show
+    @categoria_nova = Categoria.new
     @fase = Fase.find(params[:id])
     @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
     @custo_novo = Custo.new

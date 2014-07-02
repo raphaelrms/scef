@@ -136,7 +136,7 @@
             plotShadow: false
         },
         title: {
-            text: 'Browser market shares at a specific website, 2014'
+            text: 'Porcentagem de custos em uma fase'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -145,6 +145,7 @@
             pie: {
                 size:'100%',
                 allowPointSelect: true,
+                center: [360,120],
                 cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
@@ -157,19 +158,12 @@
         },
         series: [{
             type: 'pie',
-            name: 'Browser share',
+            name: 'Custos por fase',
+            animation: false,
+            enableMouseTracking: false,
+            shadow: false,
             data: [
-                ['Firefox',   45.0],
-                ['IE',       26.8],
-                {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Safari',    8.5],
-                ['Opera',     6.2],
-                ['Others',   0.7]
+              <%=@fase.collect { |c| c.custos.joins(:categoria).group("categorias.descricao").count.collect {|d| '[\'' + d.split("=>").first.first + '\',' + d.split("=>").first.second.to_s + ']' }}.first.first.html_safe%>
             ]
         }]
     });

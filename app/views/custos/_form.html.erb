@@ -1,5 +1,6 @@
 # encoding: utf-8
 <%
+
    @custo = f.object if @custo.nil?
 %>
 <fieldset>
@@ -12,11 +13,12 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
-    <div class="col-md-7">
-      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
-      <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
-    </div>
+      <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
+      <div class="col-md-5">
+        <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
+        <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+      </div>
+    <a data-toggle="modal" class="btn btn-success" href="#new-categoria"  type="button"><i class="glyphicon glyphicon-plus"></i></a>
   </div>
 
 
@@ -68,6 +70,9 @@
     </div>
   </div>
 </fieldset>
+
+
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $("[id=custo_valor]").priceFormat({
