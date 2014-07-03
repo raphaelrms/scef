@@ -17,8 +17,8 @@
       <p><b>Quantidade: </b><%= @custo.quantidade%></p>
       <p><b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></p>
       <p><b>Valor Total sem tributação:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></p>
-      <p><b>Tributação: </b><%= !@custo.tributo.nil? ? "#{@custo.tributo}%" : "-" %></p>
-      <%if !@custo.tributo.nil?%>
+      <p><b>Tributação: </b><%= !@custo.tributo == 0 ? "#{@custo.tributo}%" : "-" %></p>
+      <%if !@custo.tributo == 0%>
          <p><b>Valor Total com tributaçao: </b><span id="fase_orcamento_show"><%= @custo.valor_com_tributacao%></span></p>
       <%end%>
       <p><b>Observações: </b><%= @custo.observacoes if !@custo.observacoes.blank?%></p>

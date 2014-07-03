@@ -37,6 +37,7 @@ class CustosController < ApplicationController
 
   def create
     params[:custo][:valor] = normaliza_valor(params[:custo][:valor])
+    params[:custo][:tributo] = 0 if params[:custo][:tributo] == ""
     @custo = Custo.new(params[:custo])
 
     if @custo.save
@@ -49,6 +50,7 @@ class CustosController < ApplicationController
   def update
     @custo = Custo.find(params[:id])
     params[:custo][:valor] = normaliza_valor(params[:custo][:valor])
+    params[:custo][:tributo] = 0 if params[:custo][:tributo] == ""
     if @custo.update_attributes(params[:custo])
       redirect_to custos_path, :notice => "Custo atualizado com sucesso"
     else

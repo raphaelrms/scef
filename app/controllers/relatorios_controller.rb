@@ -16,7 +16,7 @@ class RelatoriosController < ApplicationController
       format.html {
       }
       format.pdf do
-        render :pdf => "relatorio", :template => template,:handlers => [:erb],:encoding => "utf8",:show_as_html => false,:disposition => 'attachment'
+        render :pdf => "relatorio", :template => template,:handlers => [:erb],:encoding => "utf8",:show_as_html => false,:disposition => 'attachment', :footer => { :right => '[page] de [topage]' }
       end
     end
 

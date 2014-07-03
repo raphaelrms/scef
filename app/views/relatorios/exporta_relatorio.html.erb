@@ -1,10 +1,5 @@
 #coding:utf-8
 <script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
-
-<%= wicked_pdf_javascript_include_tag 'jquery.js' if request.format == "pdf"%>
-<%= wicked_pdf_javascript_include_tag 'jquery.price_format.2.0.js'if request.format == "pdf"%>
-<%= wicked_pdf_stylesheet_link_tag "bootstrap" if request.format == "pdf"%>
-<%= wicked_pdf_stylesheet_link_tag "application" if request.format == "pdf"%>
 <%@fase.each do |fase|%>
     <% custo_total_rel(fase)%>
     <fieldset>
@@ -14,17 +9,28 @@
       <%= painel_titulo("Fase - #{fase.descricao}").html_safe %>
 
       <div class="panel-body" id="form">
+
         <fieldset>
+          <h2>Dados</h2>
+          <p><b>Descrição:</b> <%= fase.descricao %></p>
+          <p><b>Curso: </b><%= fase.curso.nome%></p>
+          <p><b>Data Início Prevista: </b><%= l fase.inicio_periodo.to_date if fase.inicio_periodo%></p>
+          <p><b>Data Fim Prevista: </b><%= l fase.fim_periodo.to_date if fase.inicio_periodo%></p>
+        </fieldset>
+        </br>
+        <fieldset>
+          <h2>Custos</h2>
           <%if @custo_excedido%>
-              <h4><p><b>Orçamento:</b><span id="fase_orcamento_show"><%= fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p></h4>
+              <p><b>Orçamento:</b><span id="fase_orcamento_show"><%= fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p>
           <%else%>
-              <h4><p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= fase.orcamento %></span></p></h4>
+              <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= fase.orcamento %></span></p>
           <%end%>
-          </br>
+
           <%if fase.custos.any?%>
 
               <fieldset>
                 <h2>Lista de custos</h2>
+                <div class="table-responsive" >
                   <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
                     <thead>
                     <tr>
@@ -49,7 +55,8 @@
                     <%end%>
                     </tbody>
                   </table>
-                <h4><b>Custo total: <span id="fase_orcamento_show"><%= @custo_total%></span></b></h4>
+                  <h4>Custo total: <span id="fase_orcamento_show"><%= @custo_total%></span></h4>
+                </div>
               </fieldset>
           <%else%>
               <h6>Esta fase do projeto ainda não possui custos associados.</h6>
@@ -60,6 +67,7 @@
       </div>
     </fieldset>
 <%end%>
+
 
 <script type="text/javascript">
 

@@ -5,6 +5,8 @@
 <%= wicked_pdf_javascript_include_tag 'jquery.js' if request.format == "pdf"%>
 <%= wicked_pdf_javascript_include_tag 'highcharts.js', 'chartkick' if request.format == "pdf"%>
 <%= wicked_pdf_javascript_include_tag 'jquery.price_format.2.0.js'if request.format == "pdf"%>
+<%= wicked_pdf_stylesheet_link_tag "bootstrap" if request.format == "pdf"%>
+<%= wicked_pdf_stylesheet_link_tag "application" if request.format == "pdf"%>
 <%@fase.each do |fase|%>
     <% custo_total_rel(fase)%>
     <fieldset>
@@ -30,14 +32,12 @@
         <%else%>
             <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= fase.orcamento %></span></p>
         <%end%>
-        <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @custo_total%></span></p>
 
         <%if fase.custos.any?%>
 
             <div id="pie" style="width: 750px;margin-left: 30px;position: relative;"></div>
             <fieldset>
               <h2>Lista de custos</h2>
-              <div class="table-responsive" >
                 <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
                   <thead>
                   <tr>
@@ -50,7 +50,7 @@
                   <tbody>
                   <%fase.custos.each do |custo|%>
                       <tr>
-                        <td><%=link_to custo.id, custo%></td>
+                        <td><%=custo.id%></td>
                         <td><%=l custo.dt_referencia.to_date%></td>
                         <td><%=custo.categoria.descricao%></td>
                         <td><div id="fase_orcamento_show"><%=(custo.valor * custo.quantidade) + (custo.valor * custo.quantidade* (custo.tributo.blank? ? 0 : custo.tributo))/100%></div></td>
@@ -59,7 +59,7 @@
 
                   </tbody>
                 </table>
-              </div>
+                <h4>Custo total: <span id="fase_orcamento_show"><%= @custo_total%></span></h4>
             </fieldset>
         <%else%>
             <h6>Esta fase do projeto ainda não possui custos associados.</h6>
