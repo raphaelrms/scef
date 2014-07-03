@@ -7,6 +7,7 @@
 <%= wicked_pdf_javascript_include_tag 'jquery.price_format.2.0.js'if request.format == "pdf"%>
 <%@fase.each do |fase|%>
     <% custo_total_rel(fase)%>
+    <fieldset>
     <%if @custo_excedido%>
         <div class="alert alert-warning">Atenção! O orçamento previsto para esta fase do projeto foi ultrapassado.</div>
     <%end%>
@@ -33,41 +34,7 @@
 
         <%if fase.custos.any?%>
 
-            <%#= high_chart("my_id2", @chart2) %>
-            <%#= pie_chart @fase.custos.joins(:categoria).group("categorias.descricao").count
-        Custo.where(:categoria_id => custo.categoria.id).order('dt_referencia asc').group("categoria_id,dt_referencia").count%>
-            <div id="pie" style="width: 750px;margin-left: 30px;position: relative;">
-              <%#= pie_chart fase.custos.joins(:categoria).group("categorias.descricao").count,library: {
-                      plotOptions: {
-                              pie: {
-                                      size:'70%',
-                                      center: [420,80]
-                              },
-
-                              series: {
-                                      dataLabels: {
-                                      },
-                                      animation: false,
-                                      enableMouseTracking: false,
-                                      shadow: false} }}%>
-
-
-            </div>
-            <div style="width: 750px;margin-left: 40px;">
-              <%#= line_chart fase.custos.collect(&:categoria).uniq.map{|c|
-                {:name => c.descricao, :data => c.custos.group("to_char(dt_referencia,'DD/MM/YYYY')").count}
-              },library: {
-                      plotOptions: {
-                              line: {
-                                      dashStyle: 'short'
-                              },
-
-                              series: {
-                                      animation: false,
-                                      enableMouseTracking: false,
-                                      shadow: false} }};
-              %>
-            </div>
+            <div id="pie" style="width: 750px;margin-left: 30px;position: relative;"></div>
             <fieldset>
               <h2>Lista de custos</h2>
               <div class="table-responsive" >
@@ -94,7 +61,6 @@
                 </table>
               </div>
             </fieldset>
-            <div align="right"><%= will_paginate @custos_associados,:remote => true,:renderer => BootstrapPagination::Rails %></div>
         <%else%>
             <h6>Esta fase do projeto ainda não possui custos associados.</h6>
         <%end%>
@@ -102,6 +68,7 @@
 
     </div>
     </div>
+    </fieldset>
 <%end%>
 
 <script type="text/javascript">

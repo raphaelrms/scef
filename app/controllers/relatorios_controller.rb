@@ -7,15 +7,16 @@ class RelatoriosController < ApplicationController
   def exporta_relatorio
     if params[:fase_id]==""
       @fase = Fase.all
+      template = 'relatorios/exporta_relatorio_fases.html.erb'
     else
       @fase = Fase.where(:id=>params[:fase_id])
+      template = 'relatorios/exporta_relatorio_fase_especifica.html.erb'
     end
-    @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
     respond_to do |format|
       format.html {
       }
       format.pdf do
-        render :pdf => "relatorio", :template => 'relatorios/exporta_relatorio.html.erb',:handlers => [:erb],:encoding => "utf8",:show_as_html => false,:disposition => 'attachment'
+        render :pdf => "relatorio", :template => template,:handlers => [:erb],:encoding => "utf8",:show_as_html => false,:disposition => 'attachment'
       end
     end
 
