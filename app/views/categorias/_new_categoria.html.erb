@@ -8,12 +8,12 @@
         <h3 class="modal-title" id="meuModal_nova">Novo categoria</h3>
       </div>
       <div class="modal-body">
-        <%= form_for @categoria_nova, :html => {:class => 'form-horizontal' } do |g| %>
-            <%= render :partial => 'categorias/form',:locals => { :g => g, :role => @role } %>
+        <%= form_for @categoria_nova, :html => {:class => 'form-horizontal' } do |f| %>
+            <%= render :partial => 'categorias/form',:locals => { :f => f, :role => @role } %>
             <div class="modal-footer">
             <div class="well well-sm">
                 <a class="btn" data-dismiss="modal" href="#" id="fecha_modal">Fechar</a>
-                <%= g.submit 'Cadastrar', :class => 'btn btn-primary' %>
+                <%= f.submit 'Cadastrar', :class => 'btn btn-primary' %>
               </div>
             </div>
         <% end %>

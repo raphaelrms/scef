@@ -2,15 +2,15 @@
 <%@categoria_nova = f.object if @categoria_nova.nil?%>
 <fieldset>
 <div class="form-group">
-  <%= g.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <%= f.label :descricao, "Descrição:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
   <div class="col-sm-9">
-    <%= g.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a nova descrição", :value => (g.object.descricao if (g.object && !g.object.new_record?))%>
+    <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required)", :autofocus => true,:title => "Descrição",:placeholder => "Insira a nova descrição", :value => (f.object.descricao if (f.object && !f.object.new_record?))%>
   </div>
 </div>
 <div class="form-group">
-  <%= g.label :observacoes, "Observações:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+  <%= f.label :observacoes, "Observações:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
   <div class="col-sm-9">
-    <%= g.text_field :observacoes, :class => "form-control",:title => "Observações",:placeholder => "Observações adicionais desta categoria.", :value => (g.object.observacoes if (g.object && !g.object.new_record?))%>
+    <%= f.text_field :observacoes, :class => "form-control",:title => "Observações",:placeholder => "Observações adicionais desta categoria.", :value => (f.object.observacoes if (f.object && !f.object.new_record?))%>
   </div>
 </div>
 </fieldset>
