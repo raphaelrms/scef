@@ -98,7 +98,7 @@ def nome_acao(acao)
     when "create"
     then "Criar"
     when "show"
-    then "Visualizar dados"
+    then "Visualizar"
     else
       acao.to_s
   end

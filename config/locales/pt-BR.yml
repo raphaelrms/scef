@@ -219,6 +219,10 @@ pt-BR:
       <<: *errors
   activerecord:
     attributes:
+      fase:
+        orcamento: "Orçamento"
+        inicio_periodo: "Início de período"
+        fim_periodo: "Fim de período"
       user:
         password: "Senha nova"
         current_password: "Senha atual"

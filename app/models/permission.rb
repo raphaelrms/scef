@@ -8,7 +8,7 @@ class Permission < ActiveRecord::Base
   before_create :titlecasear_classe
   before_create :acoes_possiveis
 
-  attr_accessible :action, :subject_class, :subject_id
+  attr_accessible :action, :subject_class, :subject_id,:condition
 
   def unicidade_acao_classe
     if Permission.where(:action => self.action, :subject_class => self.subject_class).any?

@@ -82,6 +82,12 @@
         });
         $("[id=custo_dt_referencia]").mask("99/99/9999");
 
+
+        $("#custo_tributo").keyup(function(){
+            $("#custo_tributo").val($("#custo_tributo").val().replace("%",''));
+        });
+
+
         $("[id=custo_valor_show]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",
