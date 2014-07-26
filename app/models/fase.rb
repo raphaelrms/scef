@@ -26,4 +26,8 @@ class Fase < ActiveRecord::Base
     Custo.select("sum(valor*quantidade) as total").where(:fase_id=>fase_id)
   end
 
+  def custo_total
+    self.custos.collect { |c| c.valor }.sum
+  end
+
 end
