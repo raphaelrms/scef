@@ -2,7 +2,7 @@ class Curso < ActiveRecord::Base
 
   has_many :arquivos, :as => :anexo, :dependent => :destroy
 
-  has_many :fases
+  has_many :fases, :dependent => :destroy
 
   attr_accessible :nome, :descricao, :ano, :descricao, :anexo_attributes,:arquivos_attributes,:fases_attributes
 
