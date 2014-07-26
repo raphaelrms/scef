@@ -5,6 +5,10 @@ module CustoHelper
     return valor.to_i * quant.to_i
   end
 
+  def custo_calculado(custo)
+
+  end
+
 end
 
 

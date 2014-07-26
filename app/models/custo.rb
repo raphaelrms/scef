@@ -13,7 +13,8 @@ class Custo < ActiveRecord::Base
 
   def valor_com_tributacao
     valor_total = self.valor*self.quantidade
-    return valor_total + (valor_total*self.tributo)/100 unless self.tributo.nil?
+    return !tributo.nil? ? valor_total + (valor_total*self.tributo)/100 : valor_total
+
   end
 
 end

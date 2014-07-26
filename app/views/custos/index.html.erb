@@ -13,7 +13,7 @@
           <th>Número</th>
           <th>Fase</th>
           <th>Categoria</th>
-          <th>Valor</th>
+          <th>Valor total*</th>
           <th>Data de Referência</th>
           <th>Descrição</th>
           <th></th>
@@ -25,9 +25,9 @@
               <td><%= link_to custo.id, custo %></td>
               <td><%= link_to custo.fase.descricao, custo.fase %></td>
               <td><%= custo.categoria.descricao %></td>
-              <td><div id="custo_valor"><%=custo.valor_com_tributacao%></div></td>
+              <td><div id="custo_valor"><%= custo.valor_com_tributacao%></div></td>
               <td><div id="custo_referencia"><%=l custo.dt_referencia if custo.dt_referencia%></div></td>
-              <td><%= custo.descricao if !custo.descricao.blank?%></td>
+              <td><%= (custo.descricao.length > 10 ? custo.descricao[0...10] + "..." : custo.descricao) if !custo.descricao.blank?%></td>
               <td><%= link_to("Detalhar", custo_path(custo), :class => 'btn btn-xs btn-default')%>
                 <!--<a data-toggle="modal" class="btn btn-xs btn-primary" href="#edit-custo-<%#= custo.id %>"  type="button">Editar</a>-->
                 <%= link_to "Editar", edit_custo_path(custo), :class => "btn btn-xs btn-primary ", :style => "margin-left:7px;"%>
@@ -36,6 +36,9 @@
         <% end %>
         </tbody>
       </table>
+      <tfooter>
+        * Valor já calculado com tributos, se houver.
+      </tfooter>
       <div align="right"><%= will_paginate @custos,:remote => true,:renderer => BootstrapPagination::Rails %></div>
       <a data-toggle="modal" class="btn btn-success" href="#new_custo"  type="button">Novo Custo</a>
       <%= render "custos/new_custo"%>
