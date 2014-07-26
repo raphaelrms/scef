@@ -34,7 +34,7 @@
               <tbody>
               <% @curso.arquivos.each do |arquivo| %>
                   <tr>
-                    <td><%= arquivo.arquivo_file_name %></td>
+                    <td><%= link_to arquivo.arquivo_file_name,arquivo%></td>
                     <td><%= arquivo.descricao %></td>
                     <td><%=I18n.l arquivo.created_at, :format => "%m/%d/%Y" %></td>
                     <td><%= link_to "Download", download_curso_path(arquivo), :title => arquivo.arquivo_file_name, :target => :_blank , :class => "btn-xs btn-primary"%>

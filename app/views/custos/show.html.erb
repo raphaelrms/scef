@@ -2,8 +2,9 @@
 <ol class="breadcrumb">
   <li><a href="<%= root_path%>">Principal</a></li>
   <li><%= link_to "Custos", custos_path%></li>
+  <li><%= @custo.id%></li>
 </ol>
-<%= painel_titulo("Custo - #{@custo.id}").html_safe %>
+<%= painel_titulo("Custo #{@custo.id}").html_safe %>
 <div class="panel-body" id="form">
   <div class="row">
     <div class="col-md-offset-10"> <%= link_to "Editar", edit_custo_path(@custo), :class => "label label-primary "%>
@@ -11,17 +12,25 @@
   </div>
   <fieldset>
     <div class="form-group">
-      <p><b>Categoria::</b> <%= @custo.categoria.descricao %></p>
-      <p><b>Fase: </b><%= @custo.fase.descricao%></p>
-      <p><b>Data de Referência: </b><%= @custo.dt_referencia%></p>
-      <p><b>Quantidade: </b><%= @custo.quantidade%></p>
+      <fieldset>
+        <h2>Dados principais</h2>
+      <p><b>Categoria:</b> <%= @custo.categoria.descricao %></p>
+      <p><b>Fase: </b><%= link_to @custo.fase.descricao,@custo.fase%></p>
+      <p><b>Data de Referência: </b><%= l @custo.dt_referencia%></p>
+      <br>
+      <h2>Valores</h2>
       <p><b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></p>
+      <p><b>Quantidade: </b><%= @custo.quantidade%></p>
       <p><b>Valor Total sem tributação:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></p>
-      <p><b>Tributação: </b><%= !@custo.tributo == 0 ? "#{@custo.tributo}%" : "-" %></p>
+      <p><b>Tributação: </b><%= !@custo.tributo == 0 ? "#{@custo.tributo}%" : "Não informado" %></p>
       <%if !@custo.tributo == 0%>
          <p><b>Valor Total com tributaçao: </b><span id="fase_orcamento_show"><%= @custo.valor_com_tributacao%></span></p>
       <%end%>
+
+        <br>
+      <h2>Outros</h2>
       <p><b>Observações: </b><%= @custo.observacoes if !@custo.observacoes.blank?%></p>
+      </fieldset>
     </div>
   </fieldset>
   </br>
