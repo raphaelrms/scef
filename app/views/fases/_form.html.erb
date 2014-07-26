@@ -7,20 +7,20 @@
       <div class="form-group">
         <%= f.label :descricao, "Nome:",:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-7">
-          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required) on(submit)", :title => "Descrição do custo deve ser fornecido",:placeholder => "Insira a descrição do custo", :value => (@fase.descricao if (!@fase.nil? && !@fase.new_record?))%>
+          <%= f.text_field :descricao, :class => "form-control","data-validate" => "validate(required) on(submit)", :title => "Nome da fase deve ser fornecida",:placeholder => "Insira o nome da fase", :value => (@fase.descricao if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira o nome da fase. Obrigatório.</p>
         </div>
       </div>
 
-      <%= f.fields_for :curso do |f| %>
+      <%#= f.fields_for :curso do |f| %>
       <div class="form-group">
-        <%= f.label :curso,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
+        <%= f.label :curso_id,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-7">
-          <%= f.collection_select :curso_id,Curso.all,:id,:nome,{ :prompt => true },{:class => "form-control"} %>
+          <%= f.collection_select :curso_id,Curso.all,:id,:nome,{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
           <p class="help-block" style="font-size: 11px;">Insira o curso do custo. Obrigatório.</p>
         </div>
       </div>
-      <%end%>
+      <%#end%>
       <div class="form-group">
         <%= f.label :orcamento,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
         <div class="col-sm-7">
@@ -31,7 +31,7 @@
 
       <div class="form-group">
         <%= f.label :inicio_periodo,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <%= f.text_field :inicio_periodo, :class => "form-control","data-validate" => "validate(dateBR_required)", :title => "O início do período da fase deve ser inserido", :value => (@fase.inicio_periodo if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira a data de início prevista da fase. Obrigatório.</p>
         </div>
@@ -39,7 +39,7 @@
 
       <div class="form-group">
         <%= f.label :fim_periodo,:class => "col-xs-6 col-sm-3 col-md-2 control-label" %>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <%= f.text_field :fim_periodo, :class => "form-control","data-validate" => "validate(dateBR_required)", :title => "O fim do período da fase deve ser inserido", :value => (@fase.fim_periodo if (!@fase.nil? && !@fase.new_record?))%>
           <p class="help-block" style="font-size: 11px;">Insira a data de fim prevista da fase. Obrigatório.</p>
         </div>
@@ -70,6 +70,10 @@
             thousandsSeparator: ".",
             clearPrefix: true
         });
+
+        $("[id*=_periodo]").mask("99/99/9999");
+
+
         $("[id=fase_orcamento_show]").priceFormat({
             prefix: "R$ ",
             centsSeparator: ",",

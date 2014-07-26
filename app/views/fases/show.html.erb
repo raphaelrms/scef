@@ -9,7 +9,7 @@
     <div class="alert alert-warning">Atenção! O orçamento previsto para esta fase do projeto foi ultrapassado.</div>
 <%end%>
 <%= painel_titulo("Fase - #{@fase.descricao}").html_safe %>
-
+<%= render "categorias/new_categoria"%>
 <div class="panel-body" id="form">
   <div class="row">
     <div class="col-md-offset-10"> <%= link_to "Editar", edit_fase_path(@fase), :class => "label label-primary "%>
@@ -35,7 +35,7 @@
     <%else%>
         <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= @fase.orcamento %></span></p>
     <%end%>
-    <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('valor*quantidade')%></span></p>
+    <p><b>Custo total: </b><span id="fase_orcamento_show"><%= @fase.custos.sum('(valor*quantidade)+(valor*quantidade*tributo)/100')%></span></p>
 
     <%if @fase.custos.any?%>
 
@@ -66,8 +66,8 @@
                 <tr>
                   <td><%=link_to custo.id, custo%></td>
                   <td><%=l custo.dt_referencia.to_date%></td>
-                  <td><%=link_to custo.categoria.descricao, custo.categoria%></td>
-                  <td><div id="fase_orcamento_show"><%=custo.valor * custo.quantidade%></div></td>
+                  <td><%=custo.categoria.descricao%></td>
+                  <td><div id="fase_orcamento_show"><%=custo.tributo.nil? ? (custo.valor * custo.quantidade) : ((custo.valor * custo.quantidade)+(custo.valor * custo.quantidade * custo.tributo)/100)%></div></td>
                 </tr>
             <%end%>
 
@@ -110,6 +110,15 @@
             thousandsSeparator: "."
         });
         $('#fase_orcamento_show1').popover('toggle')
+        $('#new-categoria')
+                .on('hidden.bs.modal', function() {
+            $('#new_custo').css('opacity', 1);})
+                .on('show.bs.modal', function() {
+                $('#new-categoria').css('z-index','9999');
+                $('#new_custo').css('opacity',.5);
+        });
+
+
     });
 
 

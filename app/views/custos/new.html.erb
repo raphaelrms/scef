@@ -11,6 +11,7 @@
     <div class="col-md-10"> <%= exibe_erros(@custo).html_safe if @custo.errors.any?%></div>
   </div>
   <p>
+    <%= render "categorias/new_categoria"%>
     <%= form_for @custo, :html => {:class => 'form-horizontal' } do |f| %>
 
         <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>

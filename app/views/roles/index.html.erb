@@ -21,7 +21,7 @@
         <% @roles.each do |role| %>
             <tr>
               <td><%= link_to role.name, role %></td>
-              <td><%= role.created_at.to_date %></td>
+              <td><%= role.created_at.to_date if !role.created_at.blank?%></td>
               <td><%= link_to role.users.count.to_s, users_path%></td>
               <td><%= link_to("Editar", edit_role_path(role), :style => "margin-top:-7px;", :class => 'btn btn-xs btn-default')%></td>
               <td><%= link_to("Remover", role_path(role), :style => "margin-top:-7px;", :data => { :confirm => "Você tem certeza?\nSe houver algum usuário associado a este grupo, o mesmo será associado ao grupo Visitante automaticamente." }, :method => :delete, :class => 'btn btn-xs btn-danger')%></td>

@@ -21,10 +21,11 @@ class FasesController < ApplicationController
   end
 
   def show
+    @categoria_nova = Categoria.new
     @fase = Fase.find(params[:id])
     @custos_associados = Custo.paginate(:page => params[:page], :per_page => 5)
     @custo_novo = Custo.new
-    @custo_total = @fase.custos.sum('valor*quantidade')
+    @custo_total = @fase.custos.sum('(valor*quantidade)+(valor*quantidade*tributo)/100')
 #    carregarGraficos
     @custo_excedido = @custo_total.to_i > @fase.orcamento.to_i ? true : false
     @valor_excedido = @custo_total.to_i - @fase.orcamento.to_i

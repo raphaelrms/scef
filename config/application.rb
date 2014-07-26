@@ -1,3 +1,4 @@
+
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
@@ -7,6 +8,9 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+
+require 'wicked_pdf'
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -20,11 +24,11 @@ module RailsPadrao
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+      config.middleware.use WickedPdf::Middleware
       g.test_framework :rspec, :fixture => true
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-      
-      
+
+
       g.view_specs false
       g.helper_specs false
     end
@@ -56,6 +60,7 @@ module RailsPadrao
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.assets.precompile += [ 'highcharts.js','jquery.price_format.2.0.js','jquery.js']
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

@@ -1,0 +1,141 @@
+#coding:utf-8
+<script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
+<%= javascript_include_tag "highcharts.js", "chartkick" if request.format == "html"%>
+
+<%= wicked_pdf_javascript_include_tag 'jquery.js' if request.format == "pdf"%>
+<%= wicked_pdf_javascript_include_tag 'highcharts.js', 'chartkick' if request.format == "pdf"%>
+<%= wicked_pdf_javascript_include_tag 'jquery.price_format.2.0.js'if request.format == "pdf"%>
+<%= wicked_pdf_stylesheet_link_tag "bootstrap" if request.format == "pdf"%>
+<%= wicked_pdf_stylesheet_link_tag "application" if request.format == "pdf"%>
+<%@fase.each do |fase|%>
+    <% custo_total_rel(fase)%>
+    <fieldset>
+    <%if @custo_excedido%>
+        <div class="alert alert-warning">Atenção! O orçamento previsto para esta fase do projeto foi ultrapassado.</div>
+    <%end%>
+    <%= painel_titulo("Fase - #{fase.descricao}").html_safe %>
+
+    <div class="panel-body" id="form">
+
+      <fieldset>
+        <h2>Dados</h2>
+        <p><b>Descrição:</b> <%= fase.descricao %></p>
+        <p><b>Curso: </b><%= fase.curso.nome%></p>
+        <p><b>Data Início Prevista: </b><%= l fase.inicio_periodo.to_date if fase.inicio_periodo%></p>
+        <p><b>Data Fim Prevista: </b><%= l fase.fim_periodo.to_date if fase.inicio_periodo%></p>
+      </fieldset>
+      </br>
+      <fieldset>
+        <h2>Custos</h2>
+        <%if @custo_excedido%>
+            <p><b>Orçamento:</b><span id="fase_orcamento_show"><%= fase.orcamento%></span> <span span id="fase_orcamento_show1" style="color: #ff0000" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Orçamento excedido em <%= number_to_currency(@valor_excedido.to_s[0,@valor_excedido.to_s.length-2]+","+@valor_excedido.to_s[@valor_excedido.to_s.length-2,2])%>" class='glyphicon glyphicon-warning-sign'></span></p>
+        <%else%>
+            <p><b>Orçamento:</b> <span id="fase_orcamento_show"><%= fase.orcamento %></span></p>
+        <%end%>
+
+        <%if fase.custos.any?%>
+
+            <div id="pie" style="width: 750px;margin-left: 30px;position: relative;"></div>
+            <fieldset>
+              <h2>Lista de custos</h2>
+                <table class="table table-condensed table-striped table-hover tabela" data-sortlist="[[0,0],[2,0]]">
+                  <thead>
+                  <tr>
+                    <th>Número</th>
+                    <th>Data de Referência</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <%fase.custos.each do |custo|%>
+                      <tr>
+                        <td><%=custo.id%></td>
+                        <td><%=l custo.dt_referencia.to_date%></td>
+                        <td><%=custo.categoria.descricao%></td>
+                        <td><div id="fase_orcamento_show"><%=(custo.valor * custo.quantidade) + (custo.valor * custo.quantidade* (custo.tributo.blank? ? 0 : custo.tributo))/100%></div></td>
+                      </tr>
+                  <%end%>
+
+                  </tbody>
+                </table>
+                <h4>Custo total: <span id="fase_orcamento_show"><%= @custo_total%></span></h4>
+            </fieldset>
+        <%else%>
+            <h6>Esta fase do projeto ainda não possui custos associados.</h6>
+        <%end%>
+      </fieldset>
+
+    </div>
+    </div>
+    </fieldset>
+<%end%>
+
+<script type="text/javascript">
+
+
+
+    $( document ).ready(function() {
+        $("[id=fase_orcamento_show]").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+        $(".tabela").tablesorter();
+
+
+        $("#fase_orcamento_show1").priceFormat({
+            prefix: "R$ ",
+            centsSeparator: ",",
+            thousandsSeparator: "."
+        });
+        $('#fase_orcamento_show1').popover('toggle');
+
+
+    });
+
+
+
+    $('#pie').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Porcentagem de custos em uma fase'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                size:'100%',
+                allowPointSelect: true,
+                center: [360,120],
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                        return Math.round(this.percentage*100)/100 + ' %';
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Custos por fase',
+            animation: false,
+            enableMouseTracking: false,
+            shadow: false,
+            data: [
+              <%=@fase.collect { |c| c.custos.joins(:categoria).group("categorias.descricao").count.collect {|d| '[\'' + d.split("=>").first.first + '\',' + d.split("=>").first.second.to_s + ']' }}.first.first.html_safe%>
+            ]
+        }]
+    });
+
+
+
+
+</script>

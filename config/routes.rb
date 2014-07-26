@@ -15,6 +15,13 @@ RailsPadrao::Application.routes.draw do
     end
   end
 
+  resources :relatorios do
+    collection do
+      get :relatorio_fase_custos
+      post :exporta_relatorio
+    end
+  end
+
 
   root :to => 'application#home'
   authenticated :user do

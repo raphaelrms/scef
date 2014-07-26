@@ -8,7 +8,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'pg'
+#gem 'pg'
+gem 'mysql2'
 gem 'jquery-rails','3.0.4'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem "awesome_nested_fields"
@@ -17,6 +18,7 @@ gem 'acts_as_votable'
 gem 'paperclip'
 gem 'money-rails'
 gem 'jquery-tablesorter'
+#gem 'wkhtmltopdf-heroku'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 #gem 'lazy_high_charts'

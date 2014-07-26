@@ -12,10 +12,12 @@
   <% if @noticias %>
       <div class="noticia">
         <ul class="list-unstyled">
+          <%= @noticias.size == 0 ? "Nenhum aviso foi postado" : ""%>
           <% @noticias.each do |noticia| %>
               <p>
               <li>
                 <div class="col-md-6">
+
                   <div class="box box-element">
                     <div class="view">
                       <h2 contenteditable="false"><%=noticia.titulo%></h2>

@@ -1,22 +1,24 @@
 # encoding: utf-8
 <%
+
    @custo = f.object if @custo.nil?
 %>
 <fieldset>
   <div class="form-group">
     <%= f.label :fase_id, "Fase:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
-      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:prompt => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
+      <%= f.select :fase_id, options_for_select(Fase.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.fase_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
       <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
-    <div class="col-md-7">
-      <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:prompt => "Selecione uma opção" }, {:class => "form-control"} %>
-      <p class="help-block" style="font-size: 11px;">Selecione a categoria do custo. Obrigatório.</p>
-    </div>
+      <%= f.label :categoria_id, "Categoria:",:class => "col-md-3 control-label" %>
+      <div class="col-md-5">
+        <%= f.select :categoria_id, options_for_select(Categoria.all.collect {|p| [ p.descricao, p.id ] },:selected => (@custo.categoria_id if @custo)),{:include_blank => "Selecione uma opção" }, {"data-validate" => "validate(select)",:class => "form-control"} %>
+        <p class="help-block" style="font-size: 11px;">Selecione a fase do custo. Obrigatório.</p>
+      </div>
+    <a data-toggle="modal" class="btn btn-success" href="#new-categoria"  type="button"><i class="glyphicon glyphicon-plus"></i></a>
   </div>
 
 
@@ -53,13 +55,24 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :tributo, "Tributação:",:class => "col-md-3 control-label" %>
+    <div class="col-md-7">
+      <%= f.text_field :tributo, :class => "form-control","data-validate" => "validate(number)", :style => "width: initial;",:title => "Porcentagem de tributação incidente",:placeholder => "Insira a porcentagem de tributação incidente", :value => (@custo.tributo if !@custo.tributo.blank?) %>
+      <p class="help-block" style="font-size: 11px;">Insira a porcentagem do tributo incidente. Opcional.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :observacoes, "Observações:",:class => "col-md-3 control-label" %>
     <div class="col-md-7">
       <%= f.text_field :observacoes, :class => "form-control",:style => "width: initial;",:placeholder => "Observações do custo", :value => (@custo.observacoes unless @custo.new_record?)%>
-      <p class="help-block" style="font-size: 11px;">Insira observações sobre o custo.</p>
+      <p class="help-block" style="font-size: 11px;">Insira observações/detalhes adicionais sobre o custo.</p>
     </div>
   </div>
 </fieldset>
+
+
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $("[id=custo_valor]").priceFormat({
@@ -68,6 +81,12 @@
             thousandsSeparator: "."
         });
         $("[id=custo_dt_referencia]").mask("99/99/9999");
+
+
+        $("#custo_tributo").keyup(function(){
+            $("#custo_tributo").val($("#custo_tributo").val().replace("%",''));
+        });
+
 
         $("[id=custo_valor_show]").priceFormat({
             prefix: "R$ ",

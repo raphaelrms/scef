@@ -15,9 +15,13 @@
       <p><b>Fase: </b><%= @custo.fase.descricao%></p>
       <p><b>Data de Referência: </b><%= @custo.dt_referencia%></p>
       <p><b>Quantidade: </b><%= @custo.quantidade%></p>
-      <b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></br></br>
-      <b>Valor Total:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></br></br>
-      <p><b>Observações: </b><%= @custo.observacoes%></p>
+      <p><b>Valor Unitário:</b> <span id="fase_orcamento_show"><%= @custo.valor %></span></p>
+      <p><b>Valor Total sem tributação:</b> <span id="fase_orcamento_show"><%= custo_total(@custo.valor,@custo.quantidade) %></span></p>
+      <p><b>Tributação: </b><%= !@custo.tributo == 0 ? "#{@custo.tributo}%" : "-" %></p>
+      <%if !@custo.tributo == 0%>
+         <p><b>Valor Total com tributaçao: </b><span id="fase_orcamento_show"><%= @custo.valor_com_tributacao%></span></p>
+      <%end%>
+      <p><b>Observações: </b><%= @custo.observacoes if !@custo.observacoes.blank?%></p>
     </div>
   </fieldset>
   </br>

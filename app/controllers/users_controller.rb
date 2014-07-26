@@ -15,10 +15,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.role.overpower?
-      @user = User.find(params[:id])
-    else
+    if current_user.roles.collect(&:name).include? Role::ADMIN
       @user = current_user
+    else
+      @user = User.find(params[:id])
     end
 
     render "devise/registrations/edit"
@@ -26,25 +26,24 @@ class UsersController < ApplicationController
 
   def atualiza_usuario_com_senha
     @user = User.find(params[:id])
-    if @user.update_with_password(params[:user])
-      sign_in @user, :bypass => true
+    if @user.update_attributes(params[:user])
       flash.now[:notice] = "Seus dados foram alterados com sucesso."
       render "show"
     else
       render "devise/registrations/edit"
     end
   end
-  
+
   def update
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user], :as => :admin)
+    if @user.update_attributes(params[:user])
       redirect_to users_path, :notice => "Usuário #{@user.name} atualizado."
     else
       redirect_to users_path, :alert => "Não foi possível atualizar o usuário #{@user.name}. Erro: #{@user.errors.full_message.to_s}"
     end
   end
-    
+
   def destroy
     authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     user = User.find(params[:id])

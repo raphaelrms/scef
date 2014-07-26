@@ -1,0 +1,32 @@
+#encoding: utf-8
+<ol class="breadcrumb">
+  <li><a href="<%= root_path%>">Principal</a></li>
+  <li>Relatorios</li>
+</ol>
+<%= painel_titulo("Geração de Relatórios").html_safe %>
+<div class="panel-body">
+
+  <%= form_tag exporta_relatorio_relatorios_path,{:method => :post,:format=> :pdf, :class => 'form-horizontal' , :role => 'form'} do |f| %>
+      <div class="form-group">
+        <%= label_tag :fase_id, "Fase:",:class => "col-xs-3 control-label" %>
+        <div class="col-xs-4">
+          <%= select_tag :fase_id,options_from_collection_for_select(Fase.all, "id", "descricao"),{:prompt=>"Todas",:class => "form-control"}%>
+          <p class="help-block" style="font-size: 11px;">Selecione a fase. Obrigatório.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= label_tag :format, "Tipo de relatório:",:class => "col-xs-3 control-label" %>
+        <div class="col-xs-4">
+          <%=select_tag :format, options_for_select([["Em tela", "html"], ["PDF", "pdf"]], "html"),:prompt=>"Selecione tipo de relatório",:class => "form-control"%>
+          <p class="help-block" style="font-size: 11px;">Selecione o tipo de relatório. Obrigatório.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-2 col-md-11">
+        <div class="well well-sm">
+          <%= submit_tag 'Gerar Relatório', :class => 'btn btn-primary'%>
+        </div>
+      </div>
+  <%end%>
+</div>
+</div>

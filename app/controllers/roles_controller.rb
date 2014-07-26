@@ -74,6 +74,7 @@ class RolesController < ApplicationController
   def destroy
     @role = Role.find(params[:id])
     nome = @role.name
+    binding.pry
     respond_to do |format|
       if @role.destroy
         format.html { redirect_to roles_path, :notice => "Grupo #{nome} removido com sucesso." }

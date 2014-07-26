@@ -9,8 +9,8 @@
     <p><b>Nome:</b> <%= @user.name %></p>
     <p><b>Email: </b><%= @user.email if @user.email %></p>
     <p><b>Data de cadastro: </b><%= @user.created_at.to_date %></p>
-    <p><b>Grupo: </b><%= @user.roles.first.name.titleize unless @user.roles.first.nil? %></p>
+    <b>Grupo(s):</b><span style="display:inline-table;"><ul><% @user.roles.each do |r| %><li><%= r.name.titleize%></li> <%end%></ul></span>
   </div>
-  <%= link_to 'Editar', edit_users_path(@user), :class => 'btn btn-success'  %>
+  <%= link_to 'Editar', edit_user_path(@user), :class => 'btn btn-success'  %>
 </div>
 </div>

@@ -15,6 +15,7 @@
           <th>Categoria</th>
           <th>Valor</th>
           <th>Data de Referência</th>
+          <th>Descrição</th>
           <th></th>
         </tr>
         </thead>
@@ -24,8 +25,9 @@
               <td><%= link_to custo.id, custo %></td>
               <td><%= link_to custo.fase.descricao, custo.fase %></td>
               <td><%= custo.categoria.descricao %></td>
-              <td><div id="custo_valor"><%=custo.valor%></div></td>
+              <td><div id="custo_valor"><%=custo.valor_com_tributacao%></div></td>
               <td><div id="custo_referencia"><%=l custo.dt_referencia if custo.dt_referencia%></div></td>
+              <td><%= custo.descricao if !custo.descricao.blank?%></td>
               <td><%= link_to("Detalhar", custo_path(custo), :class => 'btn btn-xs btn-default')%>
                 <!--<a data-toggle="modal" class="btn btn-xs btn-primary" href="#edit-custo-<%#= custo.id %>"  type="button">Editar</a>-->
                 <%= link_to "Editar", edit_custo_path(custo), :class => "btn btn-xs btn-primary ", :style => "margin-left:7px;"%>

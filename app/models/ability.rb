@@ -5,8 +5,12 @@ class Ability
       if !user.nil?
         user.roles.each do |role|
           role.permissions.each do |permission|
-          if permission.subject_id.nil?
-            can permission.action.to_sym, (permission.subject_class.mb_chars.downcase.to_s== "all") ? :all : permission.subject_class.constantize
+          if permission.subject_id.nil? || permission.subject_id != 0
+            if permission.condition.nil?
+              can permission.action.to_sym, (permission.subject_class.mb_chars.downcase.to_s== "all") ? :all : permission.subject_class.constantize
+            else
+              can permission.action.to_sym, permission.subject_class.constantize, :id => eval(permission.condition)
+            end
           else
             can permission.action.to_sym, permission.subject_class.constantize, :id => (permission.subject_id == 0 ? user.id : permission.subject_id )
           end
@@ -16,6 +20,8 @@ class Ability
         user ||= User.new # guest user (not logged in)
       end
     end
+
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
