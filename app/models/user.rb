@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessor :current_password
-  attr_accessible :role_ids, :as => :admin
+  attr_accessible :role_ids
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role_id,:roles_attributes  ,:user_roles_attributes, :user_roles, :current_password
 
   def grupo_padrao
