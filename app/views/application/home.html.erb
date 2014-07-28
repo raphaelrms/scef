@@ -24,7 +24,7 @@
                       <small contenteditable="false">Autor: <span class="autor"><%= noticia.autor %></span></small><br>
                       <small contenteditable="false">Postado em: <%= l noticia.created_at.to_date %></small>
                       <p><small></small></p>
-                      <p contenteditable="false"><%= noticia.corpo_resumido.html_safe %></p>
+                      <p contenteditable="false" class="col-md-3"><%= noticia.corpo_resumido.html_safe %></p>
                       <a class="btn" href="#" contenteditable="false"><%= link_to "[Saiba mais]", noticia %></a>
                     </div>
                   </div>

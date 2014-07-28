@@ -1,7 +1,27 @@
-<fieldset>
-  <%= tinymce %>
-  <h1>Editar Notícia</h1><br/>
-  <%= link_to "Apagar Notícia", @noticia,:method => :delete, :confirm => "Você tem certeza?",:class => "red botaoSimples" %>
-  <br>
-  <%= render "form" %>
+#encoding:utf-8
+  <%= tinymce%>
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path%>">Principal</a></li>
+    <li><%= link_to "NotÃ­cias", noticias_path%></li>
+    <li>Nova notÃ­cia</li>
+  </ol>
+  <%= painel_titulo("Cadastro de NotÃ­cia").html_safe %>
+  <div class="panel-body">
+    <%= link_to "Apagar NotÃ­cia", @noticia,:method => :delete, :confirm => "VocÃª tem certeza?",:class => "red botaoSimples" %>
+    <div class="row">
+      <div class="col-md-10"> <%= exibe_erros(@noticia).html_safe if @noticia.errors.any?%></div>
+    </div>
+    <p>
+  <%= form_for @noticia, :html => {:class => 'form-horizontal' } do |f| %>
+
+      <%= render :partial => 'form',:locals => { :f => f, :role => @role } %>
+
+      <div class="form-group">
+        <div class="col-sm-2 col-md-offset-3">
+          <%= f.submit 'Salvar', :class => 'btn-primary' %>
+        </div>
+      </div>
+  <% end %>
+</div>
 </fieldset>
+

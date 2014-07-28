@@ -54,11 +54,15 @@ class NoticiasController < ApplicationController
   end
 
   def edit
+    @noticia = Noticia.find(params[:id])
+    @roles = Role.all
+
   end
 
   def update
-    if @noticia.update_attributes(params[:noticias])
-      redirect_to root_path, :notice => "NotÃ­cia salva."
+    @noticia = Noticia.find(params[:id])
+    if @noticia.update_attributes(params[:noticia])
+      redirect_to root_path, :notice => "Notícia atualizada."
     else
       flash[:error] = @noticia.errors
       render :edit

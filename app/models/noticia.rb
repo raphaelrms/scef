@@ -30,10 +30,10 @@ class Noticia < ActiveRecord::Base
   def corpo_resumido
     corpo_texto = ActionView::Base.full_sanitizer.sanitize(corpo)
     #corpo_texto = CGI.unescapeHTML(corpo_texto)
-    if corpo_texto.size <= 50
+    if corpo_texto.size <= 10
       return corpo_texto.html_safe
     else
-      return "#{corpo_texto[0, 50]} [...]".html_safe
+      return "#{corpo_texto[0, 10]} [...]".html_safe
     end
   end
 
