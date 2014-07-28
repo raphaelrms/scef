@@ -1,7 +1,7 @@
 # coding: UTF-8
 class NoticiasController < ApplicationController
 
-  authorize_resource
+  load_and_authorize_resource
 
   def index
     if params[:tag].blank?
@@ -96,7 +96,7 @@ class NoticiasController < ApplicationController
 
   def destroy
     @noticia.destroy
-    redirect_to root_path, :notice => "NotÃ­cia apagada."
+    redirect_to root_path, :notice => "Notícia removida."
   end
 
   def criar_comentario

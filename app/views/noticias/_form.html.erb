@@ -21,7 +21,7 @@
           <div class="col-md-7">
             <%@roles.each do |role|%>
                 <%= label_tag :role_ids, role.name,:class => "col-md-1 control-label" %>
-                <%= check_box_tag :role_ids, role.id, @noticia.noticia_permissoes.include?(role) , :name => 'noticia[noticia_permissoes_attributes][][role_id]',:class => "form-control" %>
+                <%= check_box_tag :role_ids, role.id, @noticia.noticia_permissoes.collect { |r| r.role == role}.any? , :name => 'noticia[noticia_permissoes_attributes][][role_id]',:class => "form-control" %>
             <%end%>
 
           </div>
@@ -36,8 +36,6 @@
       <p class="help-block" style="font-size: 11px;">Insira uma descrição do custo. Obrigatório.</p>
     </div>
     </div>
-      </div>
-      </div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#new_noticia").ketchup();
