@@ -1,10 +1,16 @@
+#encoding: utf-8
 class ArquivosController < ApplicationController
 
   load_and_authorize_resource
 
   def show
     @arquivo = Arquivo.find params[:id]
-    send_file @arquivo.arquivo.path, :type=>@arquivo.arquivo.content_type, :x_sendfile=>true, :disposition => 'inline',:stream => false
+    if File.exist?(@arquivo.arquivo.path)
+      send_file @arquivo.arquivo.path, :type=>@arquivo.arquivo.content_type, :x_sendfile=>true, :disposition => 'inline',:stream => false
+    else
+      flash[:error] = "Ops! Arquivo não encontrado."
+      redirect_to(:back)
+    end
   end
 
   def destroy
